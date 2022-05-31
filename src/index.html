@@ -1,16 +1,18 @@
 ---
 layout: default
-badge: Bootstrap 5
-title: Bridgetown Theme Bootstrap Blog
+title: Cody Norman
 features:
   - name: easy
-    title: Easy to customize
+    title: Software guy
     description: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis expedita animi.
   - name: flexible
-    title: Flexible software
+    title: Fly Fishing guy
     description: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis expedita animi.
   - name: modern
-    title: Modern & Up to Date
+    title: BBQ Guy
+    description: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis expedita animi.
+  - name: personal_finance
+    title: Likes Personal Finance & Self Development
     description: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis expedita animi.
 ---
 
@@ -80,6 +82,31 @@ features:
                 </p>
               </div>
             </div>
+            <div class="d-flex mb-4 pb-1">
+              <span class="mr-4 text-primary">
+                <svg
+                  fill="none"
+                  height="32"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                  width="32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+              </span>
+              <div>
+                <h5>{{ page.features[2].title }}</h5>
+                <p class="mb-0 text-muted lh-lg">
+                  {{ page.features[2].description }}
+                </p>
+              </div>
+            </div>
             <div class="d-flex">
               <span class="mr-4 text-primary">
                 <svg
@@ -99,9 +126,9 @@ features:
                 </svg>
               </span>
               <div>
-                <h5>{{ page.features[2].title }}</h5>
+                <h5>{{ page.features[3].title }}</h5>
                 <p class="mb-0 text-muted lh-lg">
-                  {{ page.features[2].description }}
+                  {{ page.features[3].description }}
                 </p>
               </div>
             </div>
