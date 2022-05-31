@@ -1,0 +1,14 @@
+---
+title: "This Aint No Vacation"
+date: "2014-07-09T22:56:49.169Z"
+template: post
+draft: false
+categories: "Bootcamp"
+tags:
+  - "Bootcamp"
+  - "Career Change"
+description: "Dealing with hitting the wall for the first time after starting my bootcamp"
+---
+I know, I know…having a double negative for my post title isn’t exactly good form.  Maybe it’s a remnant of my southern upbringing, but that’s been a bit of a motto for my stay out here.  I’m not on a vacation, I’m not at a summer camp, it’s a bootcamp.  That was more than apparent this past week. <!--more--> Coming into the end of my second week I had covered an enormous amount of information, pulling 12 plus hour days and still taking in new information everyday.  My first big challenge was when we started writing MySQL queries.  Don’t get me wrong, everything else I had done up to that point was extremely challenging, but I had at least some experience with.  This was completely new territory for me.  The first couple of days were pretty rough, but I kept reminding myself of one thing.  This was the reason I had left my entire life behind, packed my things and headed for the west coast…to be challenged.  I didn’t come out here to be patted on the back, I came here to push myself.  A few extra sessions over the long weekend and everything started to click.  I was back on track with renewed confidence, something I’ll definitely need. I know this won’t be the last I’ll really be pushed with fully grasping a new topic and things won’t be slowing down anytime soon.
+
+On top of all of that, our first exam/certification was this weekend.  Keeping with the Dojo theme, it’s referred to as the Yellow Belt.  It may not sound very intimidating, but don’t let the title fool you.  The challenge is to recreate a website of their choosing from a screen shot…in 4 hours.  It wasn’t exactly a geocities, or angel fire page (for the youngsters out there, they were some of the first user created websites on the web back in the AOL and dial-up days.).  This was an actual business’s website.  A few weeks ago, this would’ve been a huge task for me to accomplish in any amount of time, much less 4 hours.  Nonetheless, I was able to get everything done with about 3 minutes to spare.  When I received my results back late last night, I got a 9.5 out of 10 “near perfect” on their grading scale.  I took about 30 seconds to revel in my score and started pounding away at the keys again, like I said this aint no vacation.
