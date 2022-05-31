@@ -3,6 +3,7 @@ layout: post
 title: Creating Rails Application Templates
 date:   2015-08-17 16:54:46 -0500
 category: ruby
+excerpt: "Why choose a template over just having a full application you can clone from github as a fresh starting point? I think Rails templates are a much more powerful and versatile option.  Rails templates are built on Thor which is probably the best feature in Rails you’ve never heard about."
 author: cody
 ---
 Programmers are lazy.  This is probably one of the greatest things about us.  Anything that takes slightly longer than we think it should, and you start thinking “Hmmmmm……I wonder if I could fix that” or “I bet I could make that better".

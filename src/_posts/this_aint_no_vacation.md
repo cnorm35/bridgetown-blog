@@ -3,6 +3,7 @@ layout: post
 title:  This Aint No Vacation
 date:   2014-07-09 16:54:46 -0500
 category: bootcamp
+excerpt: "About two weeks into the bootcamp, things are starting to get real."
 author: cody
 ---
 I know, I know…having a double negative for my post title isn’t exactly good form.  Maybe it’s a remnant of my southern upbringing, but that’s been a bit of a motto for my stay out here.  I’m not on a vacation, I’m not at a summer camp, it’s a bootcamp.  That was more than apparent this past week. <!--more--> Coming into the end of my second week I had covered an enormous amount of information, pulling 12 plus hour days and still taking in new information everyday.  My first big challenge was when we started writing MySQL queries.  Don’t get me wrong, everything else I had done up to that point was extremely challenging, but I had at least some experience with.  This was completely new territory for me.  The first couple of days were pretty rough, but I kept reminding myself of one thing.  This was the reason I had left my entire life behind, packed my things and headed for the west coast…to be challenged.  I didn’t come out here to be patted on the back, I came here to push myself.  A few extra sessions over the long weekend and everything started to click.  I was back on track with renewed confidence, something I’ll definitely need. I know this won’t be the last I’ll really be pushed with fully grasping a new topic and things won’t be slowing down anytime soon.

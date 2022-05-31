@@ -3,6 +3,7 @@ layout: post
 title:  How You're Sabotaging Your Productivity
 date:   2020-10-13 16:54:46 -0500
 category: personal development
+excerpt: "Time is a ruthless beast that no amount of money can tame or console."
 author: cody
 ---
 Time is a ruthless beast that no amount of money can tame or console.

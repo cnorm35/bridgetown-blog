@@ -3,6 +3,7 @@ layout: post
 title:  The goal setting system used by the most successful people
 date:   2020-10-20 16:54:46 -0500
 category: personal development
+excerpt: "You set out to accomplish something with the best intentions and slowly drift away and lose focus. More times than not, you’ll revisit and wish you hadn’t stopped and think about where you’d be if you had kept up. You’re not alone."
 author: cody
 ---
 If you’re reading this, I almost guarantee you’ve heard or read this quote before

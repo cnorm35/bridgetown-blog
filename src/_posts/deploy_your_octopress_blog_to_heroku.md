@@ -2,7 +2,8 @@
 layout: post
 title: Deploy Your Octopress Blog To Heroku
 date:   2015-01-13 16:54:46 -0500
-category: bootcamp
+category: ruby
+excerpt: "So first off, what exactly _is_ Octopress.  Octopress is billed as a blogging framework for hackers.  It's a little different that some of the other blogging frameworks you may have had some experience with."
 author: cody
 ---
 You may have noticed that my site's name is codebycodes, but I have yet to post any code on here.  Good job on calling me out.  So here it is.  This post will walk you through setting up a new blog with the Octopress blogging framework and deploy to Heroku.  This is the same setup that this blog is currently running on.

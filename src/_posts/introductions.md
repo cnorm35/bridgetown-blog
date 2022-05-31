@@ -3,6 +3,9 @@ layout: post
 title:  Introductions
 date:   2014-06-17 16:54:46 -0500
 category: bootcamp
+excerpt: "Hello everyone!  I started this blog to chronicle my journey through
+the Coding Dojo bootcamp in Mountain View, CA this summer.  First things first,
+a bit of background about myself."
 author: cody
 ---
 Hello everyone!  I started this blog to chronicle my journey through the Coding Dojo bootcamp in Mountain View, CA this summer.  First things first, a bit of background about myself.<!--more-->

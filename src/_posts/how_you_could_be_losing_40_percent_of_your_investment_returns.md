@@ -3,6 +3,8 @@ layout: post
 title:  How You Could Be Losing 40% of Your Investment Returns
 date:   2021-05-02 16:54:46 -0500
 category: personal finance
+excerpt: "If I were to ask you to name your investment returns and the fees you paid, which do you think you’d have a better chance of answering?
+Most people would rather lovingly gaze upon their beefy returns instead of thinking about how much of their returns they sacrificed to fees."
 author: cody
 ---
 If I were to ask you to name your investment returns and the fees you paid, which do you think you’d have a better chance of answering?

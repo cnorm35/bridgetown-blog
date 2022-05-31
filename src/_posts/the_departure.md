@@ -4,6 +4,12 @@ layout: post
 title:  The Departure
 date:   2014-06-29 16:54:46 -0500
 category: bootcamp
+excerpt: "First off, this is the first time I have ever bought a one-way ticket,
+not going to lie, felt a little weird.  The reason I didn’t purchase a round
+trip ticket is I wanted to leave the possibility of doing some interviews open.
+Also, hitting the exact day I would need to fly back (and stick to since I’m
+stubborn and would refuse to pay change fees) 5-6 months down the road really
+seemed like hitting a moving target."
 author: cody
 
 ---

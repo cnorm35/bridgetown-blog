@@ -3,6 +3,7 @@ layout: post
 title: Creating A Simple Twitter Bot with Ruby
 date:   2015-08-31 16:54:46 -0500
 category: ruby
+excerpt: "Let me preface this by saying I'm not always the biggest fan of Twitter bots.  With that said, they can be useful and fun to build.  Here is a quick rundown of creating a simple Twitter bot in Ruby."
 author: cody
 ---
 Let me preface this by saying I'm not always the biggest fan of Twitter bots.  With that said, they can be useful and fun to build.  Here is a quick rundown of creating a simple Twitter bot in Ruby.

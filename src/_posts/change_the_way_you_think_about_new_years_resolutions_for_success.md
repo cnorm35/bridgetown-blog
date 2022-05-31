@@ -3,6 +3,7 @@ layout: post
 title:  Change the way you think about New Year's resolutions for success
 date:   2020-10-11 16:54:46 -0500
 category: personal development
+excerpt: "Millions of us set out each January with the best intentions of forging a new self. Usually by mid-February you’re throwing out spoiled uneaten vegetables or have that pair of running shoes collecting dust and mocking you from the corner of your closet. I know, I’ve been there…a lot. But there’s hope for us all."
 author: cody
 ---
 Millions of us set out each January with the best intentions of forging a new self. Usually by mid-February you’re throwing out spoiled uneaten vegetables or have that pair of running shoes collecting dust and mocking you from the corner of your closet. I know, I’ve been there…a lot. But there’s hope for us all. Over the past couple of years I’ve revamped my resolution process and have finally started. The change? I start my resolutions sometime between Halloween and Thanksgiving each year and it’s done wonders for my success rate. I’ve pulled out the reasons why I think it has helped me and why you should consider ditching ‘New Years resolutions’ for Halloween / Thanksgiving/ Harvest Moon / Veteran’s Day or whatever works for you. From my experience, the only real requirements is you start between Halloween and Thanksgiving. Here are some of the reasons I’ve found that really make these resolutions and goals stick.

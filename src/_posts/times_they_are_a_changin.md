@@ -3,6 +3,7 @@ layout: post
 title:  Times They Are A Changin
 date:   2014-07-03 16:54:46 -0500
 category: bootcamp
+excerpt: "Noticing big changes on how I'm thinking about my time each day."
 author: cody
 ---
 Today, I had a bit of a realization.  It was something that really made me realize how my mindset is changing.  I was plugging along at the dojo, and looked at the clock.  Something I do dozens of times a day.  The difference was what I thought afterwards.  It was around 3:30 or so and normally, I would be counting down the hours until I could go home and unwind.  Instead of wishing the time would pass faster, I was wishing it would move slower, wishing I could cram more hours into the day.  This is day 8 of the bootcamp and I’m usually there for about 12 hours a day, ride home and try to knock out another 2-3 hours when I get back to the hacker house.  It reminded me a a really good quote/parable about time a manager of mine sent out a while back.  I think it really speaks for itself so i’ll just end with that.  (I tried to find the source of the quote, and the only name I could find attached was Marc Levy)

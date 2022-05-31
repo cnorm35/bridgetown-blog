@@ -2,6 +2,7 @@
 layout: post
 title:  Week One
 date:   2014-06-30 16:54:46 -0500
+excerpt: "Updates from my first week at bootcamp"
 category: bootcamp
 author: cody
 ---

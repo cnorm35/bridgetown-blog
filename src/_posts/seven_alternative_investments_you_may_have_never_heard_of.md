@@ -3,6 +3,9 @@ layout: post
 title:  7 Alternative Investments You May Have Never Heard Of
 date:   2021-01-29 16:54:46 -0500
 category: personal finance
+excerpt: "With stocks jumping 90% or more in a single day, it’s hard to imagine
+why you wouldn’t want to get on that rocket ship with everyone else. When the
+gravy train with biscuit wheels is rolling through town, you get on board."
 author: cody
 ---
 With stocks jumping 90% or more in a single day, it’s hard to imagine why you wouldn’t want to get on that rocket ship with everyone else. When the gravy train with biscuit wheels is rolling through town, you get on board.
