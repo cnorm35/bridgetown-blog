@@ -43,7 +43,7 @@ $ rake preview
 ```
 will generate the required files for you site and start a simple web server.  Check out localhost:4000 to see if your site is up and running.  It should look something like this
 
-{% img left /images/Octopress_Screenshot.png 800 350 'image' 'images' %}
+img went here
 
 Now we need to remove `public` and `Gemfile.lock` from our `.gitignore` file.  We'll need this to add generated content to Heroku.
 

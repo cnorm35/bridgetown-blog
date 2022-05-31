@@ -15,7 +15,7 @@ It requires the app's Name, Description, and URL.  Fill out the info.  You can u
 
 Fill out the required info and create your new app.  Once that's done, you'll be taken to the Application details page.  Head over to the "Key and Access Tokens" section next.  This is where you'll find your Consumer Key and Consumer Secret Keys.  There's one more step that we need to do before we're going to be ready to go.  Scroll down to the bottom to "Token Actions" and create a new access token.  This will create the new "Access Token" and "Access Token Secret" needed to connect out bot to Twitter's API.
 
-{% img center https://s3.amazonaws.com/codebycodes-blog-images/images/Screen+Shot+2015-08-31+at+8.47.05+AM.png 700 450 'image' 'images' %}
+img here
 
 Now that we have all of keys and tokens situated, we're ready to write some code.
 
