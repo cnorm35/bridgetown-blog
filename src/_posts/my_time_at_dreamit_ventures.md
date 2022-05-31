@@ -1,13 +1,9 @@
 ---
-title: "My Time At Dreamit Ventures"
-date: "2014-12-10T22:56:49.169Z"
-template: post
-draft: false
-categories: "Startup Accelerator"
-tags:
-  - "Accelerator"
-  - "Career Change"
-description: "Some thoughts on my first developer role and having the opportunity to go through a start up acclerator right after completing my bootcamp"
+layout: post
+title:  My Time At Dreamit Ventures
+date:   2014-12-10 16:54:46 -0500
+category: accelerator
+author: cody
 ---
 On June 20th of this year, I boarded a flight bound for San Francisco.  Armed with only a suitcase and a laptop, I was heading to a coding bootcamp to follow a crazy dream of switching careers and becoming a developer.  I had no idea what the next 3 months would bring.  My first two weeks were spent on the top bunk at a hacker house.  My "room" was really the living room.  I didn't even have a chance to fall asleep with the light off and not have people working around me until week 3.
 

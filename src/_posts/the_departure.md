@@ -1,13 +1,11 @@
 ---
-title: "The Departure"
-date: "2014-06-29T22:56:49.169Z"
-template: post
-draft: false
-categories: "Bootcamp"
-tags:
-  - "Bootcamp"
-  - "Career Change"
-description: "My first update after heading out to the west coast for my coding bootcamp"
+
+layout: post
+title:  The Departure
+date:   2014-06-29 16:54:46 -0500
+category: bootcamp
+author: cody
+
 ---
 Before I get into what the application process was like for Coding Dojo, I thought I would go into some of the preparations for flying out and making arrangements, etc.
 

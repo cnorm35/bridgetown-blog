@@ -1,13 +1,9 @@
 ---
-title: "New Site, New Job"
-date: "2014-12-03T22:56:49.169Z"
-template: post
-draft: false
-categories: "Bootcamp"
-tags:
-  - "Bootcamp"
-  - "Career Change"
-description: "Experience moving my first wordpress site to octopress and what it was like spending my first few months working as a developer"
+layout: post
+title: New Site, New Job
+date:   2014-12-03 16:54:46 -0500
+category: bootcamp
+author: cody
 ---
 Hello all!  My last post was on a different blog and a few months back. I decided to set up a new blog once I came across the [Octopress](http://octopress.org/) blogging framework.  It's billed as "A blogging framework for hackers" making it much easier to share code snippets.  It's also built in Ruby so it seemed like a great project for me to tinker with.
 This will be a place where I can share what I'm working on, tips and tricks I pick up, and the occasional rant.

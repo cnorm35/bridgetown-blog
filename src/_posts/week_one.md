@@ -1,13 +1,9 @@
 ---
-title: "Week One"
-date: "2014-06-30T22:56:49.169Z"
-template: post
-draft: false
-categories: "Bootcamp"
-tags:
-  - "Bootcamp"
-  - "Career Change"
-description: "Thoughts and observations on my first week at coding bootcamp"
+layout: post
+title:  Week One
+date:   2014-06-30 16:54:46 -0500
+category: bootcamp
+author: cody
 ---
 I haven’t been able to keep up with my blog post as much as I would have liked so far, but that’s with good reason.  With week one behind me at Coding Dojo, I’ve put in close to 70 hours of work between writing code, reading code, lectures, debugging, and working on assignments.  That figure would have terrified me before, but what I quickly realized is how much I love diving into these problems and assignments. <!--more--> It turns out I actually really enjoy the amount of time we’re putting in and the rate at which I’m writing better code in a shorter amount of time is phenomenal.  This weeks assignments were getting a solid base with writing HTML and CSS, then adding in Twitter’s Bootstrap framework and LESS.  Bootstrap and LESS have been invaluable additions to my budding development arsenal.
 
