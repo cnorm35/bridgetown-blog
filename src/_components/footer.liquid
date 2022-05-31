@@ -1,5 +1,5 @@
 ---
-name: Footer
+nSome thoughts and updates after my first week of bootcampame: Footer
 description: The website footer component.
 variables:
   author: [hash, Pass an author in if you do not want to hardcode.]
@@ -28,7 +28,7 @@ variables:
           <a class="mr-3" href="https://twitter.com/{{ author.twitter }}" rel="noopener noreferrer" target="_blank">
             {% svg images/logo-twitter.svg width=24 %}
           </a>
-          <a class="mr-3" href="https://github.com/{{ metadata.repo }}" rel="noopener noreferrer" target="_blank">
+          <a class="mr-3" href="https://github.com/{{ author.github }}" rel="noopener noreferrer" target="_blank">
             {% svg images/logo-github.svg width=24 %}
           </a>
         </div>
