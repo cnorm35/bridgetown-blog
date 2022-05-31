@@ -3,25 +3,18 @@ layout: page
 title: About
 permalink: /about/
 ---
+Born and raised in North Carolina which is probably why I have serious BBQ opinions.
 
-This is the basic Bridgetown site theme. You can find out more info about customizing your Bridgetown site, as well as basic Bridgetown usage documentation at [bridgetownrb.com](https://bridgetownrb.com/)
+Spent the first few years of my career working in Philadelphaia, doing mainly retail and consumer lending before my starting a bootcamp in 2014.
 
-You can find the source code for Bridgetown at GitHub:
-[bridgetownrb](https://github.com/bridgetownrb) /
-[bridgetown](https://github.com/bridgetownrb/bridgetown)
+Since then, I’ve been doing mostly backend development with ruby on rails.
 
-Here is a code snippet:
+Most of my experience is with early stage startups both as a full time employee and contractor.
 
-```ruby
-require 'async'
-require 'net/http'
-require 'uri'
+Some of the most enjoyable parts of my job the past few years has been hiring, onboarding and mentoring new developers.
 
-Async do
-  ["ruby", "rails", "async"].each do |topic|
-    Async do
-      Net::HTTP.get(URI "https://www.google.com/search?q=#{topic}")
-    end
-  end
-end
-```
+I’ve been living in Colorado for a few years now and had some good times in Denver, but currently living in a small mountain town called Bailey.
+
+In my free time I like to fly fish, work on perfecting my Carolina Style BBQ and and hunt hard to find whiskey.
+
+If you want to know anything else, just ask!
