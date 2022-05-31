@@ -1,12 +1,9 @@
 ---
-title: "Creating Polymorphic Users With Devise and Rails"
-date: "2016-06-02T22:56:49.169Z"
-template: post
-draft: false
-categories: "Ruby"
-tags:
-  - "Ruby"
-description: "Creating Polymorphic Users with Devise and Rails"
+layout: post
+title:  Creating Polymorphic Users with Devise and Rails
+date:   2014-06-02 16:54:46 -0500
+category: bootcamp
+author: cody
 ---
 First and foremost, if you're not familiar with Devise, or are looking
 for a good place to get some good information on getting started with

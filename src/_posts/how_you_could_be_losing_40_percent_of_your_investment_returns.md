@@ -1,15 +1,9 @@
 ---
-title: How You Could Be Losing 40% of Your Investment Returns
-date: "2021-02-05T22:40:32.169Z"
-template: "post"
-draft: false
-slug: "how-you-could-be-losing-40-percent-of-your-investment-returns"
-category: "Investing"
-tags:
-  - "Investing"
-  - "Personal Finance"
-description: "How fees can eat into your returns without you even knowing"
-socialImage: "/media/42-line-bible.jpg"
+layout: post
+title:  How You Could Be Losing 40% of Your Investment Returns
+date:   2021-05-02 16:54:46 -0500
+category: personal finance
+author: cody
 ---
 If I were to ask you to name your investment returns and the fees you paid, which do you think you’d have a better chance of answering?
 

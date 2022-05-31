@@ -1,16 +1,9 @@
 ---
-title: The goal setting system used by the most successful people
-date: "2020-10-20T22:40:32.169Z"
-template: "post"
-draft: false
-slug: "the-goal-setting-system-used-by-the-most-successful-people"
-category: "Goal Setting"
-tags:
-  - "Goals"
-  - "Personal Development"
-  - "Time Management"
-description: "Here is a dope ass desciption to show up on the index page."
-socialImage: "/media/42-line-bible.jpg"
+layout: post
+title:  The goal setting system used by the most successful people
+date:   2020-10-20 16:54:46 -0500
+category: personal development
+author: cody
 ---
 If you’re reading this, I almost guarantee you’ve heard or read this quote before
 

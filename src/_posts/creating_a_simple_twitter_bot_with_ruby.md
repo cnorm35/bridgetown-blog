@@ -1,12 +1,9 @@
 ---
-title: "Creating A Simple Twitter Bot with Ruby"
-date: "2015-08-31T22:56:49.169Z"
-template: post
-draft: false
-categories: "Ruby"
-tags:
-  - "Ruby"
-description: "How I created the Hitchbot's ghost twitter bot"
+layout: post
+title: Creating A Simple Twitter Bot with Ruby
+date:   2015-08-31 16:54:46 -0500
+category: ruby
+author: cody
 ---
 Let me preface this by saying I'm not always the biggest fan of Twitter bots.  With that said, they can be useful and fun to build.  Here is a quick rundown of creating a simple Twitter bot in Ruby.
 

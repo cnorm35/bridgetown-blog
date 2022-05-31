@@ -1,12 +1,9 @@
 ---
-title: "Creating Rails Application Templates"
-date: "2015-08-17T22:56:49.169Z"
-template: post
-draft: false
-categories: "Ruby"
-tags:
-  - "Ruby"
-description: "Info on how I set up repeatable rails templates to generate a new rails app with my preferred setup"
+layout: post
+title: Creating Rails Application Templates
+date:   2015-08-17 16:54:46 -0500
+category: ruby
+author: cody
 ---
 Programmers are lazy.  This is probably one of the greatest things about us.  Anything that takes slightly longer than we think it should, and you start thinking “Hmmmmm……I wonder if I could fix that” or “I bet I could make that better".
 

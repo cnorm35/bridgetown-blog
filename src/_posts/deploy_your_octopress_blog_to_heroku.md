@@ -1,12 +1,9 @@
 ---
-title: "Deploy Your Octopress Blog To Heroku"
-date: "2015-01-13T22:56:49.169Z"
-template: post
-draft: false
-categories: "Ruby"
-tags:
-  - "Ruby"
-description: "Walkthrough on how I deployed my first static site with Octopress to Heroku"
+layout: post
+title: Deploy Your Octopress Blog To Heroku
+date:   2015-01-13 16:54:46 -0500
+category: bootcamp
+author: cody
 ---
 You may have noticed that my site's name is codebycodes, but I have yet to post any code on here.  Good job on calling me out.  So here it is.  This post will walk you through setting up a new blog with the Octopress blogging framework and deploy to Heroku.  This is the same setup that this blog is currently running on.
 

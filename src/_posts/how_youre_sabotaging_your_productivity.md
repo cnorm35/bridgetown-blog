@@ -1,16 +1,9 @@
 ---
-title: How You're Sabotaging Your Productivity
-date: "2020-10-13T22:40:32.169Z"
-template: "post"
-draft: false
-slug: "how-youre-sabotaging-your-productivity"
-category: "Productivity"
-tags:
-  - "Productivity"
-  - "Time Management"
-description: "This is the intro part for this post that shows as the snippet on
-the index"
-socialImage: "/media/42-line-bible.jpg"
+layout: post
+title:  How You're Sabotaging Your Productivity
+date:   2020-10-13 16:54:46 -0500
+category: personal development
+author: cody
 ---
 Time is a ruthless beast that no amount of money can tame or console.
 

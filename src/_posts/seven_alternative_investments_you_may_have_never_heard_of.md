@@ -1,16 +1,9 @@
 ---
-title: 7 Alternative Investments You May Have Never Heard Of
-date: "2021-01-29T22:40:32.169Z"
-template: "post"
-draft: false
-slug: "7-alternative-investments-you-may-have-never-heard-of"
-category: "Investing"
-tags:
-  - "Investing"
-  - "Personal Finance"
-description: "Here is a dope ass desciption to show up on the index page. This
-one is about investments and shit."
-socialImage: "/media/42-line-bible.jpg"
+layout: post
+title:  7 Alternative Investments You May Have Never Heard Of
+date:   2021-01-29 16:54:46 -0500
+category: personal finance
+author: cody
 ---
 With stocks jumping 90% or more in a single day, it’s hard to imagine why you wouldn’t want to get on that rocket ship with everyone else. When the gravy train with biscuit wheels is rolling through town, you get on board.
 
