@@ -1,13 +1,9 @@
 ---
-title: "Introductions"
-date: "2014-06-17T22:56:49.169Z"
-template: "post"
-draft: false
-categories: "Bootcamp"
-tags:
-  - "Bootcamp"
-  - "Career Change"
-description: "Quick introduction post before heading off for my Bootcamp across the country"
+layout: post
+title:  Introductions
+date:   2014-06-17 16:54:46 -0500
+category: bootcamp
+author: cody
 ---
 Hello everyone!  I started this blog to chronicle my journey through the Coding Dojo bootcamp in Mountain View, CA this summer.  First things first, a bit of background about myself.<!--more-->
 
