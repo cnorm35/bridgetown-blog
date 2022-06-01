@@ -6,6 +6,7 @@
 <div align="center">
 
 [![Use this template](https://img.shields.io/badge/Use_this_template-2ea44f?style=for-the-badge&logo=github)](https://github.com/bt-rb/bridgetown-theme-bootstrap-blog/generate)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fb86799f-5ca2-4f1a-be9f-fea6b097dc5e/deploy-status)](https://app.netlify.com/sites/ubiquitous-centaur-386a30/deploys)
 
 
 </div>
