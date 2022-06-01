@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title:  The Departure
 date:   2014-06-29 16:54:46 -0500
@@ -11,7 +10,6 @@ Also, hitting the exact day I would need to fly back (and stick to since I’m
 stubborn and would refuse to pay change fees) 5-6 months down the road really
 seemed like hitting a moving target."
 author: cody
-
 ---
 Before I get into what the application process was like for Coding Dojo, I thought I would go into some of the preparations for flying out and making arrangements, etc.
 
