@@ -12,11 +12,12 @@ layout: default
         </div>
         <div class="row justify-content-center mb-4">
           <div class="col-auto">
-            <img class="rounded-circle" style="object-fit: cover;" width="48" height="48"
-              src="{{ site.data.authors.andrewmcodes.avatar }}" alt="{{ site.data.authors.andrewmcodes.name }}">
+            <img class="rounded-circle" style="object-fit: cover;" width="48" height="48" 
+              src={{ "/images/cropped_hunting_image.png" | relative_url }} alt="{{ site.data.authors.cody.name }}" />
           </div>
           <div class="col-auto pl-2 text-left">
-            <a href="{{ page.author }}">{{ page.author }}</a>
+            {% comment %} <a href="{{ page.author }}">{{ page.author }}</a> {% endcomment %}
+            <a href="#">{{ page.author }}</a>
             <div class="text-muted">Author</div>
           </div>
         </div>
