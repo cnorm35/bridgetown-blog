@@ -16,24 +16,24 @@ attempt at solving the issue was using route constraints.
 That was something that I'm pretty sure I had heard of, but never had any
 experience so thought it would be a cool problem to tackle.
 
-There are two types of constraints, one that's a little more simple, and one
-that is it's own class.  The latter is what I eneded up going with.
+According to the Rails Guides:
 
-The  one with the class, and [rpbably the other one as well, takes in a
-`request` objecy MORE INFO on request objects here
+> _You can also constrain a route based on any method on the Request object that returns a String._
 
+There are a few different options for route constraints.  And originally went
+with using a lambda within the route definition but eventually moved to the
+using a class.
 
-My first pass had me adding the routes of my static pages to an array, and check
-the `request.path` to see if it was included in the request.
+[Rails Guides on Advanced Route Constraints](https://guides.rubyonrails.org/routing.html#advanced-constraints)
 
-That worked just fine, but after I added a new static page, I got another test
-fail for 404 (what happens when the shortener can't find an object)
+lambda route constraint example
 
-I wanted to see if there was a way to make that check dynamic and keep me from
-having to update manually, usually after seeing a spec fail and having to
-refresh my memory.
+```ruby
+  get '*path', to: 'restricted_list#index',
+    constraints: lambda { |request| RestrictedList.retrieve_ips.include?(request.remote_ip) }
+```
 
-
+class route constrain example
 
 ```ruby
 class ShortenerRouteConstraint
@@ -56,12 +56,61 @@ class ShortenerRouteConstraint
 end
 ```
 
+My first pass had me adding the routes of my static pages to an array, and check
+the `request.path` to see if it was included in the request.
+
+That worked just fine, but after I added a new static page, I got another test
+fail for 404 (what happens when the shortener can't find an object).
+
+I wanted to see if there was a way to make that check dynamic and keep me from
+having to update manually, usually after seeing a spec fail and having to
+refresh my memory.
+
+With our class for constraining the routes, we need to update the route
+definition to use the constraint.
+
 ```ruby
 # config/routes.rb
 require 'app/services/ShortenerRouteConstraint.rb'
 
-# get "/:id" => "shortener/shortened_urls#show", constraints: ShortenerRouteConstraint.new
+get "/:id" => "shortener/shortened_urls#show", constraints: ShortenerRouteConstraint.new
 ```
+
+_Note: I really didn't know where to best place to put that class, so just
+defaulted to putting it in my `app/services` directory and requiring that file
+at the top of my `config/routes.rb`_
+
+For finding paths to whitelist, one option would be to have an array of the
+static pages and add a new entry whenever I created a new page.  Checkng the
+routes against a dynamic list of view files is absolutely overkill, but really
+wanted to see if I could find a way to set and forget.
+
+A few minutes of skimming through the Ruby docs and found what I needed.
+
+```ruby
+  # dynamically pull all static pages
+  static_page_paths = Dir.new("app/views/static").children.map do |f|
+    "/#{File.basename(f, ".html.erb")}"
+  end
+```
+
+This creates a new Dir ADD LINK object for `app/views/static` directory.  We access it's
+children, use map to return a new array with a format that matches our path for
+the route constraint
+
+The output looks something like
+
+```ruby
+["/index",
+ "/contact",
+ "/success",
+ "/privacy",
+ "/pricing",
+ "/about",
+ "/terms"]
+```
+
+This will pull the name of any view ending in `.html.erb`, including partials in the `app/views/static` directory
 
 After checking all the pages in the static directoy, I add `/admin`, `/404`, and
 `/500` to the constraint for the other routes it was having a conflict with.
