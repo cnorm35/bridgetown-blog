@@ -7,55 +7,74 @@ excerpt: "Automate updating Twilio webhook callback urls to your running ngrok
 url"
 author: cody
 ---
+### Sms is a great tool
 Recently, I've been doing some work with Twilio.  I've always thought SMS as a
 really powerful tool to app to any app's arsenal since it leverages something
 users already use multiple times per day.  In a recent report, Twilio even
 reported some stupid high conversion rates (post link and figures here)
 
-When buying a phone number with Twilio.  You have callbacks for Voice and SMS.
+Twilio phone numbers have webhooks for both Voice and SMS. These webhooks are
+called whenever your Twilio phone number gets an inbound text or phone call.
+
 When someone calls in, the voice callback webhook url will receive a request
 from Twilio.  When someone texts the number, the messaging callback webhook url
-will receive a request from Twilio.  Both channels have a fallback URL if the
-first request to the webhook fails
+will receive a request from Twilio.
 
-When developing your Twilio feautres, you'll probably want to fire up your
-trusty ngrok instance, grab your url, and update your webhook URLs to point to
-your running ngrok instance.  If you have no idea what ngrok is, you can get
-more information LINK here. Basically, it exposes your local development
-environment to the outside world.
+Both channels have a fallback URL if the first request to the webhook fails.
 
-One option for updating your webhook urls is going into the twilio console,
-grabbing your ngrok url, and update the webhooks url.
+### Sending Webhook Requests To Your Local Environment
 
-Since I use ngrok for a lot of things, I'ved added it to my Procfile as it's own
-service.
+If you've ever developed features from a third party webhook with your local
+environemnt, you probably did it by exposing your local environment to the
+internet with something like ngrok.
 
-^^ Talk about how Rails 7 uses a Procfile and services by default
+If you haven't heard of ngrok, it's one of my favorite tools that I've been
+integrating into more workflow more and more.  You can read more about ngrok
+[here](https://ngrok.com/).
 
+
+### Running Ngrok In Your Procfile
+
+With Rails 7 really embracing using foreman and Procfiles for starting and running
+services, I've added ngrok as it's own process so it's always available.
+
+example `Procfile.dev`
 ```
 # Procfile.dev
 web: bin/rails server -p $PORT
 css: yarn build:css --watch
 js: yarn build --reload
 worker: bundle exec sidekiq
-stripe: stripe listen --forward-to localhost:5000/webhooks/stripe
-ngrok: ngrok http --log=stdout 5000
+stripe: stripe listen --forward-to $PORT/webhooks/stripe
+ngrok: ngrok http --log=stdout $PORT
 ```
 
-My only issue with this set up is whenever I restart my services, the ngrok URL
+### Updating Twilio Webhook Urls
+One option for updating your webhook urls is grabbing your ngrok url, going into the Twilio console and update the webhook urls for voice and sms.
+
+That was fine for me...for a while.
+
+My main issue with this set up is whenever I restart my services, the ngrok URL
 changes and needs to be updated again.  That can make for a lot of updates when
-starting and stopping your services
+starting and stopping your services and errors when forgetting to update the
+urls each time. Also, if that's something you're not doing very often, it's easy
+to forget how to find the section to update the webhook urls.
+
+That's when I got the itch to find a way to automate that whenever I needed it.
 
 After some digging in the Twilio documentation, I found some options to set the
-webhooks urls through the ruby gem
+webhooks urls through their [ruby gem](https://github.com/twilio/twilio-ruby)
 
-A little more digging helped me figure out there's and endpoint you can query
-while ngrok is running to get it's public url
+A little more digging helped me find an ngrok endpoint you can query to get it's public url.
 
-Putting those together in a rake task allows me to grab the current public_url
-of my ngrok instance and update to the running public_urls through the API via the ruby gem 
+Now we're cooking with gas.  With the two main parts we need, the next step is
+to decide how to exeute that code when we needed it. For me, that was a rake
+task.  That gives me a nice repeatable way to update the urls whenever I need
+to.
 
-Before I start breaking everything down, here's the code for the rake task. The
+### Rake Task to update
+
+Before I start going into mroe detail, here's the code for the rake task. The
 dependencies for the rake task are a running [ngrok](https://ngrok.com/) instance, the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem (I'm using v5.67.1), and if you'd like a pop of color in your terminal to make things easier to spot, the [colorize](https://github.com/fazibear/colorize) gem
 
 Here is an example of the rake task
@@ -64,7 +83,6 @@ namespace :development do
   desc "updates twilio webhook urls to ngrok url"
   task set_twilio_webhooks: :environment do
     return unless Rails.env.development?
-    # needs ngrok running
     begin
       response = JSON.parse(Net::HTTP.get(URI("http://localhost:4040/api/tunnels")))
       ngrok_url = response.dig("tunnels", 1, "public_url")
@@ -73,25 +91,27 @@ namespace :development do
     end
     if ngrok_url
       puts ngrok_url.green
-        twilio_client = Twilio::Client.new
-        twilio_client.api.v2010.accounts(account_sid).incoming_phone_numbers(INCOMING_PHONE_SID)
-          .update(sms_url: "#{ngrok_url}/webhooks/twilio",
-            sms_fallback_url: "#{ngrok_url}/webhooks/twilio_fallback",
-            voice_url: "#{ngrok_url}/webhooks/twilio_voice",
-            voice_fallback_url: "#{ngrok_url}/webhooks/twilio_voice_fallback")
-        puts "Webhook URLs updated!".green
-      rescue Twilio::REST::RestError => e
-        puts e
-      end
+      account_sid = Rails.application.credentials.dig(:twilio)[:account_sid]
+      auth_token = Rails.application.credentials.dig(:twilio)[:auth_token]
+      development_incoming_phone_number = Rails.application.credentials.dig(:twilio)[:auth_token]
+      twilio_client = Twilio::Client.new(account_sid, auth_token)
+      twilio_client.api.v2010.accounts(account_sid).incoming_phone_numbers(developemnt_incoming_phone_number)
+        .update(sms_url: "#{ngrok_url}/webhooks/twilio",
+          sms_fallback_url: "#{ngrok_url}/webhooks/twilio_fallback",
+          voice_url: "#{ngrok_url}/webhooks/twilio_voice",
+          voice_fallback_url: "#{ngrok_url}/webhooks/twilio_voice_fallback")
+      puts "Webhook URLs updated!".green
+    rescue Twilio::REST::RestError => e
+      puts e
+    end
     end
   end
 end
 ```
 
-Now lets dig a little deeper into what's going on.  First off, there are
-probably a lot of different ways to do this, but for me, it made the most sense
-as a rake task.  That gives me the control to run it easily and whenever I need
-it instead of something that fires off automatically whenever ngrok starts up.
+### The Deets
+
+Now lets dig a little deeper into what's going on.
 
 Inside the rake task, the first thing we need to do is find the URL of the
 running ngrok instance.  Ngrok has an api endpoint running at port 4040 for the
@@ -100,7 +120,22 @@ the current tunnels.  There are 2 tunnels returned, and I grab the one with the
 name `command_line (http)` which is the second one returned.
 
 Usually my ruby HTTP lib of choice is HTTParty but I wanted to set this up using
-the ruby Net::HTTP lib to keep from introducing a dependency when not needed
+the ruby Net::HTTP lib to keep from introducing another dependency. We'll make
+the request to the ngrok endpoint and parse the XML response.  Here's are some
+examples of the resposnes it sends back
+
+Truncated Ngrok response
+```xml
+<tunnelListResource>
+  <Tunnels>
+  </Tunnels>
+  <Tunnels>
+  </Tunnels>
+  <URI>/api/tunnels</URI>
+</tunnelListResource>
+```
+
+Single Tunnel Object
 
 ```xml
 <Tunnels>
@@ -129,9 +164,18 @@ the ruby Net::HTTP lib to keep from introducing a dependency when not needed
 </Tunnels>
 ```
 
+The rake task takes the parsed XML and grabs the 2nd Tunnel retured.  Why you
+ask?  
+
+It was most likely the first thing that worked from StackOverflow and I moved
+on.  The `<PublicURL>` for both tunnels seem to always be the same so it's
+possible either would work.
+
 If ngrok is not running, we'll get an `Errno::ECONNREFUSED` error so we can
 rescue that error, and print some output in yellow to make it easy to know when
 something went wrong
+
+#### Grab Ngrok Public Url
 
 ```ruby
   begin
@@ -142,17 +186,73 @@ something went wrong
   end
 ```
 
-Now we have a repeatable and reliable way to grab our ngrok url whenever it
-running.  The next part is to programatically update the webhook endpoints.
+Now we have a repeatable and reliable way to grab our ngrok url whenever it is
+running.  We also get some colored output to give us a quick visual indicator
+that everything looks a-ok.
+
+The next part is to programatically update the Twilio webhook endpoints with our
+public url.
 
 It took quite a big of digging to find the endpoints needed in the twilio-ruby
-gem, but once I located them, everything was pretty easy.
+gem, but once I found them, everything was pretty smooth.
 
-There's a few things we'll need to update the webhook url with twilio.  To
-create the twilio client, you'll need to get your `account_sid` and
+There's a few things we'll need to update the webhook urls for twilio.  The
+first thing we need is a client with our keys.
+
+To create the twilio client, you'll need to get your `account_sid` and
 `auth_token`.  You can find both of those by logging into twilio.  While you're
-there, be sure to find the service id of your phone number.  
+there, be sure to find the service id of your phone number. We'll need that to
+target the phone number for the webhooks.
 
-Since this was something I added to a rails app, I add my keys to twilio in an
-initializer so I can just use Twilio::Client.new anywhere in the app to create a
-new api client.
+
+Twilio Updates
+
+```ruby
+  account_sid = Rails.application.credentials.dig(:twilio)[:account_sid]
+  auth_token = Rails.application.credentials.dig(:twilio)[:auth_token]
+  development_incoming_phone_number = Rails.application.credentials.dig(:twilio)[:auth_token]
+  twilio_client = Twilio::Client.new(account_sid, auth_token)
+  twilio_client.api.v2010.accounts(account_sid).incoming_phone_numbers(developemnt_incoming_phone_number)
+    .update(sms_url: "#{ngrok_url}/webhooks/twilio",
+      sms_fallback_url: "#{ngrok_url}/webhooks/twilio_fallback",
+      voice_url: "#{ngrok_url}/webhooks/twilio_voice",
+      voice_fallback_url: "#{ngrok_url}/webhooks/twilio_voice_fallback")
+  puts "Webhook URLs updated!".green
+rescue Twilio::REST::RestError => e
+  puts e
+end
+```
+
+I included the Twilio client setup in the rake task, but that was mostly to have
+something that would work as-is without additional configuration.  I typically
+configure my Twilio client in an initializer so keep duplication to a minimum
+
+example `config/initializers/twilio.rb` file
+
+```ruby
+Twilio.configure do |config|
+  config.account_sid = Rails.application.credentials.dig(:twilio)[:account_sid]
+  config.auth_token = Rails.application.credentials.dig(:twilio)[:auth_token]
+end
+```
+
+With the client created, we can use the `ngrok_url` combined with the endpoint
+that points to your webhook handler and update our Twilio webhook urls.
+
+If everything goes as planned, we'll output a success message in green.
+
+If things _don't_ go as planned, we're rescuing `Twilio::REST::RestError` and
+outputting the error.
+
+With everything put together, when we need to update our Twilio webhook urls (or
+any other 3rd party service in the future) we can run:
+
+```bash
+
+$ bin/rails development:set_twilio_webhooks
+```
+
+Finding a way to automatically run ngrok in my Procfile and have a way to
+programatically grab it's public url was a great find and is something that can
+be expanded to tons of other services you may like to test in your development
+environment.
