@@ -3,9 +3,15 @@ layout: post
 title: Deploy Your Octopress Blog To Heroku
 date:   2015-01-13 16:54:46 -0500
 category: ruby
-excerpt: "So first off, what exactly _is_ Octopress.  Octopress is billed as a blogging framework for hackers.  It's a little different that some of the other blogging frameworks you may have had some experience with."
+excerpt: "So first off, what exactly is Octopress?  Octopress is billed as a blogging framework for hackers.  It's a little different that some of the other blogging frameworks you may have had some experience with."
 author: cody
 ---
+_Update 2022: This is another post that's pretty dated and really only kept
+around as more of an archive than a how-to artile.  If you're looking for
+something like Octopress, you should check out
+[Bridgetown](https://www.bridgetownrb.com/) and is what the site is currently
+using._
+
 You may have noticed that my site's name is codebycodes, but I have yet to post any code on here.  Good job on calling me out.  So here it is.  This post will walk you through setting up a new blog with the Octopress blogging framework and deploy to Heroku.  This is the same setup that this blog is currently running on.
 
 So first off, what exactly _is_ Octopress.  Octopress is billed as a blogging framework for hackers.  It's a little different that some of the other blogging frameworks you may have had some experience with.<!--more-->
@@ -44,8 +50,6 @@ $ rake preview
 ```
 will generate the required files for you site and start a simple web server.  Check out localhost:4000 to see if your site is up and running.  It should look something like this
 
-img went here
-
 Now we need to remove `public` and `Gemfile.lock` from our `.gitignore` file.  We'll need this to add generated content to Heroku.
 
 There are also a number of themes you can download and use for your Octopress site, or you can create your own.  You can find a good list of available themes [here](https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes).  There are pretty good instructions for downloading and installing a new theme for your blog.
@@ -54,7 +58,7 @@ Once that's take care of, let's head to `_config.yml` and start customizing the 
 
 Main settings:
 ```yaml
-url: http://www.codebycodes.com
+url: http://www.example.com
 title: Code by Codes
 subtitle: "Codes, rants and musings"
 author: Cody Norman

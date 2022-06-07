@@ -6,6 +6,11 @@ category: ruby
 excerpt: "Let me preface this by saying I'm not always the biggest fan of Twitter bots.  With that said, they can be useful and fun to build.  Here is a quick rundown of creating a simple Twitter bot in Ruby."
 author: cody
 ---
+_Update 2022: This was a post I did years ago and have absolutely zero faith of any
+of this working.  I was living in Philadelphia at the time, working a couple
+blocks from where Hitchbot met it's unfortunate fate and thought this story was
+hilarious._
+
 Let me preface this by saying I'm not always the biggest fan of Twitter bots.  With that said, they can be useful and fun to build.  Here is a quick rundown of creating a simple Twitter bot in Ruby.
 
 
@@ -16,7 +21,6 @@ It requires the app's Name, Description, and URL.  Fill out the info.  You can u
 
 Fill out the required info and create your new app.  Once that's done, you'll be taken to the Application details page.  Head over to the "Key and Access Tokens" section next.  This is where you'll find your Consumer Key and Consumer Secret Keys.  There's one more step that we need to do before we're going to be ready to go.  Scroll down to the bottom to "Token Actions" and create a new access token.  This will create the new "Access Token" and "Access Token Secret" needed to connect out bot to Twitter's API.
 
-img here
 
 Now that we have all of keys and tokens situated, we're ready to write some code.
 
