@@ -1,37 +1,40 @@
 ---
 layout: post
-title: Automating Twilio Webhook URLs
-date:   2022-05-31 16:54:46 -0500
+title: Automating Updates to Twilio Webhook URLs
+date:   2022-06-15 16:54:46 -0500
 category: ruby
-excerpt: "Automate updating Twilio webhook callback URLs to your running ngrok
-URL"
+excerpt: "After forgetting to update Twilio webhook URLs to ngrok pointing to
+my local environment one too many times, I wanted to see if there was a way to automate
+that process and not have to worry about it again."
 author: cody
 ---
 This was an interesting challenge I ran into recently and has been the 
 first time in a while that I've felt that _itch_ to solve a problem  just
-because I wanted to see if I could do it.  It's been (_checks notes_) about _7
+because I wanted to see if I could do it.
+
+It's been (_checks notes_) about _7
 years_ since the last time I wrote anything related to ruby and probably 5 years
-since spoke at a meetup or given a presentation.
+since I've given any talks or presentations.
 
 I don't think I realized how burnt out I was after a few tumultuous years both
-personally and professionally so it was great to feel like I _had_ to solve a
-problem and was compelled to write about it.
+personally and professionally. It was great to feel like I _had_ to solve a
+problem just for fun and was even compelled to write about it.
 
 That being said, ya boy is _rusty_, so bear with me.
 
 Recently, I've been doing some work on a side project that uses Twilio for sending and receiving text messages.
 I've always thought of SMS as a really powerful tool to add to any app's arsenal since it leverages something
 users already use multiple times per day.  In a recent report, Twilio even
-reported that 96% of messages are read within three minutes of receipt, and 90% within three seconds!
+reported that _**96% of messages are read within three minutes of receipt, and 90% within three seconds!**_
 
 This post won't go into detail on sending text messages.  If you'd like some
 more information on how to send text messages, the
-[twilio-ruby](https://github.com/twilio/twilio-ruby#send-an-sms) gem has some examples.
+[twilio-ruby](https://github.com/twilio/twilio-ruby#send-an-sms){:target="_blank"} gem has some examples.
 
 Twilio phone numbers have webhooks for both Voice and SMS. These webhooks are
 called whenever your Twilio phone number gets an inbound text or phone call.
 
-[Incoming message example](https://www.twilio.com/docs/usage/webhooks/sms-webhooks#type-1-incoming-message)
+[Incoming message example](https://www.twilio.com/docs/usage/webhooks/sms-webhooks#type-1-incoming-message){:target="_blank"}
 
 Both channels have a fallback URL if the first request to the webhook fails.
 
@@ -43,7 +46,7 @@ internet with something like ngrok.
 
 If you haven't heard of ngrok, it's one of my favorite tools that I've been
 integrating into more workflow more and more.  You can read more about ngrok
-[here](https://ngrok.com/).
+[here](https://ngrok.com/){:target="_blank"}.
 
 
 ### Running Ngrok In Your Procfile
@@ -81,7 +84,7 @@ to forget how to find the section to update the webhook URLs.
 That's when I felt the urge to find a way to automate that whenever I needed it.
 
 After some digging in the Twilio documentation, I found some options to set the
-webhooks URLs through their [ruby gem](https://github.com/twilio/twilio-ruby)
+webhooks URLs through their [ruby gem](https://github.com/twilio/twilio-ruby){:target="_blank"}
 
 A little more digging helped me find an endpoint for ngrok you can query to get
 it's public url.
@@ -95,8 +98,10 @@ URLs whenever I need to.
 
 ### Rake Task For Updating URLs
 
-Before I start going into more detail, here's the code for the rake task. The
-dependencies for the rake task are a running [ngrok](https://ngrok.com/) instance, the [twilio-ruby](https://github.com/twilio/twilio-ruby) gem (I'm using v5.67.1), and if you'd like a pop of color in your terminal to make things easier to spot, the [colorize](https://github.com/fazibear/colorize) gem
+Before I start going into more detail, here's the code for the rake task. The 
+dependencies for the rake task are a running ngrok instance, the `twilio-ruby` 
+gem (I'm using v5.67.1), 
+and if you'd like a pop of color in your terminal to make things easier to spot, the [colorize](https://github.com/fazibear/colorize){:target="_blank"} gem
 
 Here is an example of the rake task
 ```ruby
@@ -140,16 +145,18 @@ required, but I thought it was a nice check to keep from accidentally updating
 information outside of our `development` environment.
 
 After ensuring we're in our dev environment, we need to do is find the URL of the
-running ngrok instance.  Ngrok has an API endpoint running at port 4040 for the
+running ngrok instance.  Ngrok has an API endpoint running at port `4040` for the
 current tunnels.  This endpoint returns an XML response with information about
 the current tunnels.  There are 2 tunnels returned, and I grab the one with the
 name `command_line (http)` which is the second one returned.
 
-Usually, my ruby HTTP library of choice is [HTTParty](https://github.com/jnunemaker/httparty) but I wanted to set this up using
+Usually, my ruby HTTP library of choice is [HTTParty](https://github.com/jnunemaker/httparty){:target="_blank"} but I wanted to set this up using
 the ruby Net::HTTP lib to keep from introducing another dependency.
 
-Net::HTTP then makes a request to the ngrok endpoint and parses the XML response.
-Here's are some examples of the responses it sends back.
+After ensuring we're in the `development` environment, Net::HTTP then makes a 
+request to the ngrok endpoint and parses the XML response.
+
+Here are some examples of the response it sends back.
 
 *Truncated Ngrok response*
 
@@ -221,7 +228,7 @@ running.  We also get some colored output to give us a quick visual indicator
 that everything looks a-ok.
 
 The next part is to programmatically update the Twilio webhook endpoints with our
-public URL.
+public URL for ngrok.
 
 It took quite a bit of digging to find the endpoints needed in the twilio-ruby
 gem, but once I found them, it was smooth sailing from there.
@@ -236,7 +243,7 @@ To create the Twilio client, you'll need to get your `account_sid` and
 there, be sure to find the service id of your phone number. That's required to
 target the correct phone number for the updates.
 
-Twilio Updates
+_Twilio Updates_
 
 ```ruby
   account_sid = Rails.application.credentials.dig(:twilio)[:account_sid]
@@ -275,7 +282,7 @@ If everything goes as planned, we'll output a success message in green.
 If things _don't_ go as planned, we're rescuing `Twilio::REST::RestError` and
 outputting the error.
 
-With everything put together, when we need to update our Twilio webhook URLs (or
+Now, whenever we need to update our Twilio webhook URLs (or
 any other 3rd party service in the future) we can run:
 
 ```bash
@@ -284,6 +291,9 @@ $ bin/rails development:set_twilio_webhooks
 ```
 
 Finding a way to automatically run ngrok in my Procfile and have a way to
-programmatically grab its public URL was a great find and is something that can
+programmatically grab its public URL was a great find for my workflow. This is 
+something that can
 be expanded to tons of other services you may like to work with in your development
 environment.
+
+Let me know any other services you automate!
