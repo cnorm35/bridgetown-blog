@@ -7,22 +7,43 @@ excerpt: "How I tackled some pesky interference in my routes after adding a url
 shortener"
 author: cody
 ---
-I was having some problems with a URL shortenrer gem I added recently.  The
-shortener kept getting requested when viewing routes in my static controller.
-The easiest solution would have been to just mount the enginge under a prefix,
-something like `/srt`, which is exactly what I ended up doing, but my first
-attempt at solving the issue was using route constraints.
+Recently, I was working on a feature sending sms messages with appointment
+links. The links ended up taking up most of the message body so I wanted to look
+into some options to shorten the link to conserve space in the body of the
+message.
 
-That was something that I'm pretty sure I had heard of, but never had any
-experience so thought it would be a cool problem to tackle.
+Instead of using something like Bitly, I wanted to see if there were any simple
+options for something that would remain within the app.
+I did some googling for link shortner gems and tried a couple of the first ones
+that popped up.
 
-According to the Rails Guides:
+I was able to take my links and create a shortened version that gets sent out in
+the sms confirmation pretty easily. Everything seemed to be going fine until I
+noticed some test failures. Some of my static pages were returning 404.
+ After a bit of digging, I noticed that for all my staic pages, like
+`/about` were being intercepted by the shortner.  When it did't find a shortened
+link with an id of `about` it was returning a 404 and breaking my static pages.
 
-> _You can also constrain a route based on any method on the Request object that returns a String._
+The easiest solution would have been to just mount the shorteners rails engine under a prefix,
+something like `/srt`.
 
-There are a few different options for route constraints.  And originally went
-with using a lambda within the route definition but eventually moved to the
-using a class.
+This is what I ended up with but wanted to make an attempt
+at solving the issue using route constraints.
+
+Route constraints are something I've heard of, but have never had cause to use.
+I thought this would be a good chance to take a stab at routing
+constraints and get some more experience with them.
+
+<!-- According to the Rails Guides: -->
+
+<!-- > _You can also constrain a route based on any method on the Request object that returns a String._ -->
+
+There are a few different options for route constraints.  Some of the advanced
+options are using a lambda in the route definition and one that's a little more
+involved with create a class for the route constraint.
+
+My first approach was using a lambda within the route definition but eventually moved to the using a
+class.
 
 [Rails Guides on Advanced Route Constraints](https://guides.rubyonrails.org/routing.html#advanced-constraints)
 
@@ -56,18 +77,19 @@ class ShortenerRouteConstraint
 end
 ```
 
-My first pass had me adding the routes of my static pages to an array, and check
-the `request.path` to see if it was included in the request.
+My first pass had me adding the routes of my static pages to an array, and
+checking the `request.path` to see if it was included in the request.
 
 That worked just fine, but after I added a new static page, I got another test
-fail for 404 (what happens when the shortener can't find an object).
+fail for 404 errors (what happens when the shortener can't find an object).
 
-I wanted to see if there was a way to make that check dynamic and keep me from
-having to update manually, usually after seeing a spec fail and having to
-refresh my memory.
+I wanted to see if there was a way to make that check dynamic and keep from
+updating manually, usually after seeing a spec fail and having to
+refresh my memory on what's happening.
 
-With our class for constraining the routes, we need to update the route
-definition to use the constraint.
+I created a route constrain class matching the one above. After having the route
+constraint class, the next step was to update the routes to use that constraint
+class.
 
 ```ruby
 # config/routes.rb
@@ -80,10 +102,8 @@ _Note: I really didn't know where to best place to put that class, so just
 defaulted to putting it in my `app/services` directory and requiring that file
 at the top of my `config/routes.rb`_
 
-For finding paths to whitelist, one option would be to have an array of the
-static pages and add a new entry whenever I created a new page.  Checkng the
-routes against a dynamic list of view files is absolutely overkill, but really
-wanted to see if I could find a way to set and forget.
+Checkng the routes against a dynamic list of view files is absolutely overkill, 
+but really wanted to see if I could find a way to set and forget.
 
 A few minutes of skimming through the Ruby docs and found what I needed.
 
@@ -94,9 +114,11 @@ A few minutes of skimming through the Ruby docs and found what I needed.
   end
 ```
 
-This creates a new Dir ADD LINK object for `app/views/static` directory.  We access it's
-children, use map to return a new array with a format that matches our path for
-the route constraint
+This creates a new [Dir](https://ruby-doc.org/core-3.1.2/Dir.html) object for the
+`app/views/static` directory.  We access it's children, use `map` to return a new
+array with a format that matches our path for the route constraint.
+
+This will pull the name of any view ending in `.html.erb`, including partials, in the `app/views/static` directory.
 
 The output looks something like
 
@@ -110,11 +132,13 @@ The output looks something like
  "/terms"]
 ```
 
-This will pull the name of any view ending in `.html.erb`, including partials in the `app/views/static` directory
 
 After checking all the pages in the static directoy, I add `/admin`, `/404`, and
 `/500` to the constraint for the other routes it was having a conflict with.
 
-Like I mentioned earlier, shortly after implementing, I ended up going a
-different route, but thought it was an interesting challenge adding the
-constraint and making the checks dynamic and wanted to share.
+Now, whenever I add a new page to my static controller, that route will be added
+to the whitelist of staic pages that should not be checked against shortened
+routes.
+
+Like I mentioned before, I ended up going a differernt route but thought it was
+a good exercise in over-engineering a solution for the fun of it.
