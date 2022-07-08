@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  Route Constraints with Rails
+title:  Advanced Route Constraints with Rails
 date:   2022-07-07 16:54:46 -0500
 category: ruby
-excerpt: "How I tackled some pesky interference in my routes after adding a url
-shortener"
+excerpt: "A quick look into using advanced routing constraints with Ruby on
+Rails and how I used them to dynamically whitelist static page routes."
 author: cody
 ---
 Recently, I was working on a feature sending sms messages with appointment
