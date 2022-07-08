@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Route Constraints with Rails
-date:   2022-05-17 16:54:46 -0500
+date:   2022-07-07 16:54:46 -0500
 category: ruby
 excerpt: "How I tackled some pesky interference in my routes after adding a url
 shortener"
@@ -14,47 +14,45 @@ message.
 
 Instead of using something like Bitly, I wanted to see if there were any simple
 options for something that would remain within the app.
-I did some googling for link shortner gems and tried a couple of the first ones
+I did some googling for link shortener gems and tried a couple of the first ones
 that popped up.
 
 I was able to take my links and create a shortened version that gets sent out in
 the sms confirmation pretty easily. Everything seemed to be going fine until I
 noticed some test failures. Some of my static pages were returning 404.
- After a bit of digging, I noticed that for all my staic pages, like
-`/about` were being intercepted by the shortner.  When it did't find a shortened
-link with an id of `about` it was returning a 404 and breaking my static pages.
+ After a bit of digging, I noticed that all my static pages, like
+`/about` and `/contact` were being intercepted by the shortener.
+
+When it didn't find a shortened link with an id of `about` it was returning a 404 
+and breaking my static pages.
 
 The easiest solution would have been to just mount the shorteners rails engine under a prefix,
 something like `/srt`.
 
-This is what I ended up with but wanted to make an attempt
-at solving the issue using route constraints.
+This is what I ended up with but wanted to attempt
+to solve the issue using route constraints.
 
 Route constraints are something I've heard of, but have never had cause to use.
 I thought this would be a good chance to take a stab at routing
 constraints and get some more experience with them.
 
-<!-- According to the Rails Guides: -->
-
-<!-- > _You can also constrain a route based on any method on the Request object that returns a String._ -->
-
 There are a few different options for route constraints.  Some of the advanced
 options are using a lambda in the route definition and one that's a little more
-involved with create a class for the route constraint.
+involved that uses a class for the route constraint.
 
-My first approach was using a lambda within the route definition but eventually moved to the using a
-class.
+My first approach was using a lambda within the route definition but eventually 
+moved to using a class.
 
 [Rails Guides on Advanced Route Constraints](https://guides.rubyonrails.org/routing.html#advanced-constraints)
 
-lambda route constraint example
+lambda route constraint example:
 
 ```ruby
   get '*path', to: 'restricted_list#index',
     constraints: lambda { |request| RestrictedList.retrieve_ips.include?(request.remote_ip) }
 ```
 
-class route constrain example
+class route constrain example:
 
 ```ruby
 class ShortenerRouteConstraint
@@ -81,7 +79,7 @@ My first pass had me adding the routes of my static pages to an array, and
 checking the `request.path` to see if it was included in the request.
 
 That worked just fine, but after I added a new static page, I got another test
-fail for 404 errors (what happens when the shortener can't find an object).
+fail for 404 errors (this happens when the shortener can't find an object).
 
 I wanted to see if there was a way to make that check dynamic and keep from
 updating manually, usually after seeing a spec fail and having to
@@ -98,14 +96,14 @@ require 'app/services/ShortenerRouteConstraint.rb'
 get "/:id" => "shortener/shortened_urls#show", constraints: ShortenerRouteConstraint.new
 ```
 
-_Note: I really didn't know where to best place to put that class, so just
+_Note: I really didn't know the best place to put that class, so just
 defaulted to putting it in my `app/services` directory and requiring that file
 at the top of my `config/routes.rb`_
 
-Checkng the routes against a dynamic list of view files is absolutely overkill, 
-but really wanted to see if I could find a way to set and forget.
+Checking the routes against a dynamic list of view files is absolutely overkill, 
+but wanted to see if I could find a way to set and forget.
 
-A few minutes of skimming through the Ruby docs and found what I needed.
+After a few minutes skimming through the Ruby docs and found what I needed.
 
 ```ruby
   # dynamically pull all static pages
@@ -115,10 +113,11 @@ A few minutes of skimming through the Ruby docs and found what I needed.
 ```
 
 This creates a new [Dir](https://ruby-doc.org/core-3.1.2/Dir.html) object for the
-`app/views/static` directory.  We access it's children, use `map` to return a new
+`app/views/static` directory.  We access its children, and use `map` to return a new
 array with a format that matches our path for the route constraint.
 
-This will pull the name of any view ending in `.html.erb`, including partials, in the `app/views/static` directory.
+This will pull the name of any view ending in `.html.erb`, including partials, 
+in the `app/views/static` directory.
 
 The output looks something like
 
@@ -133,12 +132,14 @@ The output looks something like
 ```
 
 
-After checking all the pages in the static directoy, I add `/admin`, `/404`, and
-`/500` to the constraint for the other routes it was having a conflict with.
+After checking all the pages in the static directory, I add `/admin`, `/404`, and
+`/500` to the constraint for the other routes outside of my static pages it was 
+having conflicts with.
 
 Now, whenever I add a new page to my static controller, that route will be added
-to the whitelist of staic pages that should not be checked against shortened
+to the whitelist of static pages that should not be checked against shortened
 routes.
 
-Like I mentioned before, I ended up going a differernt route but thought it was
-a good exercise in over-engineering a solution for the fun of it.
+Like I mentioned before, I ended up going a different route (see what I did
+there?) but thought it was a good exercise in over-engineering a solution for 
+the fun of it.
