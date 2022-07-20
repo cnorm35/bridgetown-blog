@@ -47,7 +47,40 @@ request to your defined webhooks url.
 The main difference from the SMS webhooks is you need to send a Twiml(format
 this right) response
 to the webhook request. Twiml is basically Twilio flavored sms to control voice
-interactions.  Instead of construction the XML on my own, the twilio-ruby gem
+interactions.  
+
+I found a few examples of the capabilities and thought I could get a response
+working without too much hassle.  I added something pretty close to their docs
+to respond with a simple message saying this number was for inbound messages
+only and email support at blah blah blah dot com
+
+Instead of construction the XML on my own, the twilio-ruby gem
 has support for creating the reqiured Twiml respones.
+
+Outside of creating a new endpoint for the voice webhook, I was able to get a
+response working with a few lines of code
+
+```ruby
+# put response here
+```
+
+I started looking through some of their examples and docs and found some really
+cool capabilites and options.  
+
+One of the options was different voices with Amazon Polly in addition to the
+Twilio voices.  I remember thinking something along the lines of "I wish there
+was a cool 80s robot sounding voice like the computer from War Games"  
+
+Alas, there was not.
+
+However, I did remember seeing an example of returning the url of an MP3 file
+that would play on the call.
+
+That got me thinking.... maybe I could fake my own Joshua computer voice with
+some sound clips. Of course, "Would you like to play a game" is what I always
+think about when I hear War Games.
+
+That phrase got me thinking about the move and playing games with the computer.
+After all, he does connect with the super computer by dialing a phone line.
 
 
