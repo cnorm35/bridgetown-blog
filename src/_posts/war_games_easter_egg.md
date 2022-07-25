@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Building Easter Eggs Into Phone Systems with Ruby
-date:   2022-07-20 16:54:46 -0500
+date:   2022-07-24 16:54:46 -0500
 category: ruby
 excerpt: "Creating easter egg features in a Twilio voice
 phone line with a few blocks of code"
