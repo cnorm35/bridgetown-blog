@@ -3,7 +3,7 @@ layout: post
 title:  Building Easter Eggs Into Phone Systems with Ruby
 date:   2022-07-20 16:54:46 -0500
 category: ruby
-excerpt: "Creating and hiding easter egg features in a Twilio voice
+excerpt: "Creating easter egg features in a Twilio voice
 phone line with a few blocks of code"
 
 author: cody
@@ -113,7 +113,7 @@ cool capabilities and options.
 
 One of the options was different voices with Amazon Polly in addition to the
 Twilio voices.  I remember thinking something along the lines of "I wish there
-was a cool 80s robot-sounding voice like the computer from War Games"  [WIKI](https://en.wikipedia.org/wiki/WarGames)
+was a cool 80s robot-sounding voice like the computer from War Games"  [What's War Games?](https://en.wikipedia.org/wiki/WarGames)
 
 Alas, there was not.
 
