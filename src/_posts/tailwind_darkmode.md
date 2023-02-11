@@ -103,7 +103,122 @@ Now that we have the power of the dark side, let's (i don't know if i like how i
 keep useing lets) work on adding the option to switch back and forth.
 
 
+https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
 
+To allow us to toggle back and forth, we'll need to update some Tailwind
+settings.  Add `darkMode: 'class'` to `tailwind.config.js`
+
+Here is what my `config/tailwind.config.js` file looks like
+
+```js
+const defaultTheme = require('tailwindcss/defaultTheme')
+
+module.exports = {
+  darkMode: 'class',
+  content: [
+    './public/*.html',
+    './app/helpers/**/*.rb',
+    './app/javascript/**/*.js',
+    './app/views/**/*.{erb,haml,html,slim}'
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/typography'),
+  ]
+}
+```
+
+You might notice that once you've updated this setting, Tailwind will no longer
+default to the prefers-color-selction (or whatever) so the background color for
+the body should no longer be black.  There should not be any dark styles active
+even if you have your settings for it,  we'll need to toggle that on and off
+now.
+
+The thing that does da togglin' is looking for the `dark` class in one of the
+parent elements.  In other words, somewhere _above_ where the dark styling is
+present.
+
+I like the option of having a mix of these two approaches.  Defaulting to the
+user's system preference is present and still offering a manual selection.
+
+Tailwind has a great JS snippet for just that.
+
+```js
+// On page load or when changing themes, best to add inline in `head` to avoid FOUC
+if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  document.documentElement.classList.add('dark')
+} else {
+  document.documentElement.classList.remove('dark')
+}
+
+// Whenever the user explicitly chooses light mode
+localStorage.theme = 'light'
+
+// Whenever the user explicitly chooses dark mode
+localStorage.theme = 'dark'
+
+// Whenever the user explicitly chooses to respect the OS preference
+localStorage.removeItem('theme')
+
+```
+
+As is says in the comment, to avoid some issues, we're going to add this as a
+script tag the head of our HTML
+
+
+```html
+  <head>
+    <title>TailwindDarkmode</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <script>
+
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+
+      // Whenever the user explicitly chooses light mode
+      localStorage.theme = 'light'
+
+      // Whenever the user explicitly chooses dark mode
+      localStorage.theme = 'dark'
+
+      // Whenever the user explicitly chooses to respect the OS preference
+      localStorage.removeItem('theme')
+    </script>
+  </head>
+```
+
+In normal situations, I would add that in a partial and render the partial to
+keep things clean but since the focus today is on dark mode, we're just gonna
+send it and keep rolling on.
+
+After adding that snippet, our app will look for a dark mode system setting and
+if present use it again.  We have the beginning of the option to toggle back and
+forth
+
+
+### Building the switch
+
+Up until now, most of this info has been right from the tailwind docs.  A lot of
+this was lifted from the other blog post so thanks for that homie! Cite and
+share your work!
 
 
 
