@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Adding darkmode to tailwind rails app
+title:  Adding darkmode to tailwind rails stimulus
 date:   2023-02-10 16:54:46 -0500
 category: ruby
 excerpt: "Add dark mode for tailwind to your rails app"
@@ -43,8 +43,14 @@ included in.  maybe just do something like fresh rails app install instead?
 Create a controller for Static with an index page, that's the root and they only
 view we'll focus on.
 
+Something like `$ be rails g controller Static index`
+
+This will create a Static controller with an index view.  This is where the hero
+will go.
+
 Add a hero section to your index page to get some tailwind styles going
 
+`app/views/static/index.html.erb`
 ```html
 <div class="bg-gray-100">
   <div class="container mx-auto flex flex-col items-center py-12 sm:py-24">
@@ -66,6 +72,14 @@ Add a hero section to your index page to get some tailwind styles going
 ```
 
 ^ Add a preview image for what it should look like afterwards
+
+After adding your view, updte your routes to root to this new index page to
+keep things simple.
+
+`config/routes.rb`
+```
+root "static#index"
+```
 
 Now here is one of the cool things about tailwind.  Tailwind includes a `dark`
 variant that let's you specify the styles when dark mode is enabled.  By
@@ -229,9 +243,106 @@ Clicking an element
 Swapping the icon to show the current state 
 Add or remove the dark class )
 
+Let's break down what this toggle feature will consist of.
+
+- Clicking some element toggles from light to dark
+- Swap The Icon to the current theme
+- Add or remove the `dark` class to our body tag.
+
+
+To start with, let's (I really hate that <-) start with creating a partial for
+our dark mode toggle
+
+For something like this I'll usually put it in a `shared` folder so the new file
+would be `app/views/shared/_darkmode_toggle.html.erb`
+
+
+```html
+<button
+  id="app-darkmode-toggle"
+  type="button"
+  class="align-middle text-gray-300 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+  data-dark-mode-target="themeToggle"
+  data-action="click->dark-mode#toggleTheme"
+>
+  <svg
+    class="w-5 h-5 hidden"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+    data-dark-mode-target="darkIcon"
+  >
+    <path
+      d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+    ></path>
+  </svg>
+  <svg
+    class="w-5 h-5 hidden"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+    data-dark-mode-target="lightIcon"
+  >
+    <path
+      d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+    ></path>
+  </svg>
+</button>
+```
+
+
+Maybe just make the button the 'Get Started' one?
 
 
 
+`bin/rails generate stimulus darkmode`
+
+Now, we'll take the JS from the article above and adapt it to stimulus.
 
 
 
+```
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+  static targets = [ "lightIcon", "darkIcon", "themeToggle" ]
+
+  connect() {
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      this.lightIconTarget.classList.remove('hidden');
+    } else {
+      this.darkIconTarget.classList.remove('hidden');
+    }
+  }
+
+  toggleTheme() {
+    console.log('theme target clicked')
+    this.lightIconTarget.classList.toggle('hidden');
+    this.darkIconTarget.classList.toggle('hidden');
+    if (localStorage.getItem('color-theme')) {
+        if (localStorage.getItem('color-theme') === 'light') {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        }
+
+    // if NOT set via local storage previously
+    } else {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        }
+    }
+  }
+}
+```
+
+Now we have the JS in the stimulus controller, we need to add the correct data
+attributes to the HTML element, then tie a click event to it.
