@@ -220,6 +220,16 @@ Up until now, most of this info has been right from the tailwind docs.  A lot of
 this was lifted from the other blog post so thanks for that homie! Cite and
 share your work!
 
+(Pick back up with adding button and toggle)
+
+
+(Talk about what dark mode toggle is at its basics 
+
+Clicking an element 
+Swapping the icon to show the current state 
+Add or remove the dark class )
+
+
 
 
 
