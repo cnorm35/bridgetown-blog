@@ -303,7 +303,7 @@ Now, we'll take the JS from the article above and adapt it to stimulus.
 
 
 
-```
+```js
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -346,3 +346,95 @@ export default class extends Controller {
 
 Now we have the JS in the stimulus controller, we need to add the correct data
 attributes to the HTML element, then tie a click event to it.
+
+
+First we attcah the stimulus controller to the body so we can add or remove
+the dark class.
+
+`app/views/layouts/application.html.erb`
+```html
+  <body data-controller="dark-mode">
+  <body data-controller="darkmode">
+?
+    <main class="container mx-auto mt-28 px-5 flex">
+      <%= yield %>
+    </main>
+  </body>
+```
+
+```
+  data-dark-mode-target="themeToggle"
+  data-action="click->dark-mode#toggleTheme"
+```
+
+
+Something like this would work without the icon
+```
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+  // static targets = [ "lightIcon", "darkIcon", "themeToggle" ]
+  static targets = [ "themeToggle" ]
+
+  connect() {
+    // // this.lightIconTarget.classList.toggle('hidden')
+    // this.darkIconTarget.classList.toggle('hidden')
+    // Change the icons inside the button based on previous settings
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      // this.lightIconTarget.classList.remove('hidden');
+    } else {
+      // this.darkIconTarget.classList.remove('hidden');
+    }
+  }
+
+  toggleTheme() {
+    console.log('theme target clicked')
+    // this.lightIconTarget.classList.toggle('hidden');
+    // this.darkIconTarget.classList.toggle('hidden');
+    // maybe move?
+    if (localStorage.getItem('color-theme')) {
+        if (localStorage.getItem('color-theme') === 'light') {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        }
+
+    // if NOT set via local storage previously
+    } else {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        }
+    }
+  }
+}
+
+```
+
+Add that to the JS controller.
+
+Add the click event to the button 
+```
+      <button class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-700 bg-purple-700 transition duration-150 ease-in-out hover:bg-purple-600 lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-purple-700 py-2 sm:py-4 text-sm" data-action="click->darkmode#toggleTheme" data-darkmode-target="themeToggle">Get Started</button>
+
+```
+
+Update the views with some dark styles.
+
+Clicking on the button should toggle, that's fine. If you want you can finish
+here or you can stick around to see how to update and show if it's a light or
+dark theme and toggle back and forth.
+
+After that, I'm going to go into _how_ I choose the colors for a dark mode.
+While you could defintely just make everything have a black background with
+whitetext, but it's going to look closer to a geocities site than a slick modern
+front end.
+
+We can do that with a combination of the stock tailwind colors if we have the
+plugin added or we can add some of our custom colors.
+
