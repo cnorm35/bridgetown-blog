@@ -438,3 +438,9 @@ front end.
 We can do that with a combination of the stock tailwind colors if we have the
 plugin added or we can add some of our custom colors.
 
+
+You can, and probably should have more of these views in erb. I used to do that
+a lot more but being able to copy TailwindUI html right into my views with
+minimal tweaking to get to look decent, that's been a much faster and easier way
+for me to keep things rolling.  It's probably not the best, but it's not the
+worst and it's what I've been doing.
