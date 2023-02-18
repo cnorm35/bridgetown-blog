@@ -262,15 +262,15 @@ would be `app/views/shared/_darkmode_toggle.html.erb`
   id="app-darkmode-toggle"
   type="button"
   class="align-middle text-gray-300 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
-  data-dark-mode-target="themeToggle"
-  data-action="click->dark-mode#toggleTheme"
+  data-dark-modetarget="themeToggle"
+  data-action="click->darkmode#toggleTheme"
 >
   <svg
     class="w-5 h-5 hidden"
     fill="currentColor"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"
-    data-dark-mode-target="darkIcon"
+    data-darkmode-target="darkIcon"
   >
     <path
       d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
@@ -281,7 +281,7 @@ would be `app/views/shared/_darkmode_toggle.html.erb`
     fill="currentColor"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"
-    data-dark-mode-target="lightIcon"
+    data-darkmode-target="lightIcon"
   >
     <path
       d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
@@ -291,6 +291,13 @@ would be `app/views/shared/_darkmode_toggle.html.erb`
   </svg>
 </button>
 ```
+
+
+With the code as it is right now, both of the icons have the `hidden` class so
+they won't be visible.  If you'd like to check the placement of the icons, you
+can either remove the `hidden` class or finish the implementation that adds or
+removes that class.
+
 
 
 Maybe just make the button the 'Get Started' one?
@@ -349,80 +356,99 @@ attributes to the HTML element, then tie a click event to it.
 
 
 First we attcah the stimulus controller to the body so we can add or remove
-the dark class.
+the dark class.  Also add the partial for the toggle in there too
 
 `app/views/layouts/application.html.erb`
 ```html
-  <body data-controller="dark-mode">
-  <body data-controller="darkmode">
-?
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="dark:bg-black" data-controller="darkmode">
+    <main class="flex-1">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <%= render "shared/darkmode_toggle" %>
+      </div>
       <%= yield %>
     </main>
   </body>
 ```
 
-```
-  data-dark-mode-target="themeToggle"
-  data-action="click->dark-mode#toggleTheme"
-```
 
+<!-- Something like this would work without the icon -->
+<!-- ``` -->
+<!-- import { Controller } from "@hotwired/stimulus" -->
 
-Something like this would work without the icon
-```
-import { Controller } from "@hotwired/stimulus"
+<!-- export default class extends Controller { -->
+<!--   // static targets = [ "lightIcon", "darkIcon", "themeToggle" ] -->
+<!--   static targets = [ "themeToggle" ] -->
 
-export default class extends Controller {
-  // static targets = [ "lightIcon", "darkIcon", "themeToggle" ]
-  static targets = [ "themeToggle" ]
+<!--   connect() { -->
+<!--     // // this.lightIconTarget.classList.toggle('hidden') -->
+<!--     // this.darkIconTarget.classList.toggle('hidden') -->
+<!--     // Change the icons inside the button based on previous settings -->
+<!--     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { -->
+<!--       // this.lightIconTarget.classList.remove('hidden'); -->
+<!--     } else { -->
+<!--       // this.darkIconTarget.classList.remove('hidden'); -->
+<!--     } -->
+<!--   } -->
 
-  connect() {
-    // // this.lightIconTarget.classList.toggle('hidden')
-    // this.darkIconTarget.classList.toggle('hidden')
-    // Change the icons inside the button based on previous settings
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      // this.lightIconTarget.classList.remove('hidden');
-    } else {
-      // this.darkIconTarget.classList.remove('hidden');
-    }
-  }
+<!--   toggleTheme() { -->
+<!--     console.log('theme target clicked') -->
+<!--     // this.lightIconTarget.classList.toggle('hidden'); -->
+<!--     // this.darkIconTarget.classList.toggle('hidden'); -->
+<!--     // maybe move? -->
+<!--     if (localStorage.getItem('color-theme')) { -->
+<!--         if (localStorage.getItem('color-theme') === 'light') { -->
+<!--             document.documentElement.classList.add('dark'); -->
+<!--             localStorage.setItem('color-theme', 'dark'); -->
+<!--         } else { -->
+<!--             document.documentElement.classList.remove('dark'); -->
+<!--             localStorage.setItem('color-theme', 'light'); -->
+<!--         } -->
 
-  toggleTheme() {
-    console.log('theme target clicked')
-    // this.lightIconTarget.classList.toggle('hidden');
-    // this.darkIconTarget.classList.toggle('hidden');
-    // maybe move?
-    if (localStorage.getItem('color-theme')) {
-        if (localStorage.getItem('color-theme') === 'light') {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('color-theme', 'dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('color-theme', 'light');
-        }
+<!--     // if NOT set via local storage previously -->
+<!--     } else { -->
+<!--         if (document.documentElement.classList.contains('dark')) { -->
+<!--             document.documentElement.classList.remove('dark'); -->
+<!--             localStorage.setItem('color-theme', 'light'); -->
+<!--         } else { -->
+<!--             document.documentElement.classList.add('dark'); -->
+<!--             localStorage.setItem('color-theme', 'dark'); -->
+<!--         } -->
+<!--     } -->
+<!--   } -->
+<!-- } -->
 
-    // if NOT set via local storage previously
-    } else {
-        if (document.documentElement.classList.contains('dark')) {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('color-theme', 'light');
-        } else {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('color-theme', 'dark');
-        }
-    }
-  }
-}
+<!-- ``` -->
 
-```
-
-Add that to the JS controller.
+<!-- Add that to the JS controller. -->
 
 Add the click event to the button 
-```
+```html
       <button class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-700 bg-purple-700 transition duration-150 ease-in-out hover:bg-purple-600 lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-purple-700 py-2 sm:py-4 text-sm" data-action="click->darkmode#toggleTheme" data-darkmode-target="themeToggle">Get Started</button>
 
 ```
+
+
+Here is something that might work for the layout part (the body snippet above
+should work)
+
+<!-- ```html -->
+<!--   <body class="h-full font-sans antialiased font-normal leading-normal bg-gray-50 dark:bg-landing-page-dark" data-controller="dark-mode"> -->
+<!--     <div class="main flex flex-col"> -->
+<!--       <%= render partial: "shared/flash" %> -->
+
+<!--         <main class="flex-1"> -->
+<!--           <div class="py-6"> -->
+<!--             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8"> -->
+<!--               <%= render "shared/app_dark_mode_toggle" %> -->
+
+<!-- ``` -->
+
+Both of the icons start out hidden.  When our stimulus component connects, we
+check for users settings for dark mode and if we find one, show things with the
+dark theme.  When dark mode is active, we show the Sun or light icon.  Clicking
+on that converts things to light mode.
+
+
 
 Update the views with some dark styles.
 
@@ -444,3 +470,110 @@ a lot more but being able to copy TailwindUI html right into my views with
 minimal tweaking to get to look decent, that's been a much faster and easier way
 for me to keep things rolling.  It's probably not the best, but it's not the
 worst and it's what I've been doing.
+
+
+
+Now the power of dark mode toggling is yours.  Mentioned above, it's not always
+as straightforward as just making backgrounds black with white text.
+
+Tailwind ships with a great color pallatte https://tailwindcss.com/docs/customizing-colors
+
+You need to require the colors from tailwind:
+`const color = require("tailwindcss/colors")`
+
+You can probably pick a couple of those and start making some big improvements.
+That's a good option, but there's another way I like to do it adding some custom
+colors.
+
+Before every site started adding the option of darkmode, I've been using a
+couple of different dark mode plugins for years.  It seems to really help my
+eye strain so I've been using it for years now.
+
+I really like the Dark Reader one https://darkreader.org/
+
+I think it does a great job at converting sites to dark mode, so much so that I
+decided to take a little inspiration from it.
+
+What I do is go open the site I'm working on and activeate the plugin. With my
+site in a 'dark mode' from the plugin, I'll open my inspector and color drop a
+color I like to get a hex code.  Firefox has a built-in color dropper, not sure
+if Chrome does these days.
+
+For these cases where you need a custom color, you can add that custom color to
+the Tailwind configs
+
+```js
+module.exports = {
+  theme: {
+    colors: {
+        wicked-dark-blue: "#00001e"
+<!-- #000038 -->
+    },
+  },
+}
+```
+// Create your own at: https://javisperez.github.io/tailwindcolorshades
+
+(May have to restart everything to get it working)
+(Think you need to include colors before the theme and add your colors in the
+right spot.  Creating things from stock, I already had a `theme` block that I
+had to add my color stuff in.  Here is what the whole config looks like now
+
+`config/tailwind.config.js`
+```js
+const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
+// do i need colors if i don't override any?
+
+module.exports = {
+  darkMode: 'class',
+  content: [
+    './public/*.html',
+    './app/helpers/**/*.rb',
+    './app/javascript/**/*.js',
+    './app/views/**/*.{erb,haml,html,slim}'
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        "wicked-dark-blue": "#000038",
+        "landing-page-dark": "#19212c",
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/typography'),
+  ],
+}
+```
+
+(Maybe, looks like that actually broke a lot of shit)
+
+You should have the new color available for use.  Remember the format for
+background colors still applies: `bg-COLORNAME` so in this case it would be
+`bg-wicked-dark-blue`
+
+The same thing would go for text.  Would could update the accent color in the
+hero with `text-wicked-dark-blue`
+
+```
+<span class="text-purple-600 dark:text-wicked-dark-blue">Dark</span>
+```
+
+Once you have an idea of the colors you'd like to use for your dark mode
+variant, the easiest way is to add the dark variants into `@apply` and make a
+class.  That's a good option once you know what you want but until then, you'll
+probably spend a lot of time flipping back and forth between light and dark mode
+filling in all the spots you missed.  That's normal and part of the process that
+keeps it looking nicer than something that's just like a dark background with
+white text.
+
+Rails , Hotwire and Tailwind really makes me feel like I have superpowers these
+days. I think this is a great feature and there are a lot of benefits to dark
+mode like battery life, eye strain and badassness (debatable).  I hope this
+helps and I hope this work for you.
