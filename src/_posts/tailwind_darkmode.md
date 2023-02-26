@@ -522,20 +522,20 @@ right and I have a ton of respect for those that can do it well.  I don't
 consider myself part of that group.  Maybe you don't either and you need some
 help figuring out how you would like your site to look.
 
-Tailwind ships out of the box with a top-notch color pallatte and we also have
+Tailwind ships out of the box with a top-notch [color pallatte](https://tailwindcss.com/docs/customizing-colors) and we also have
 the ability to add some custom colors, once we figure out what we'd like those
 custom colors to be.
-
-(LEAVING OFF HERE ********)
-
-Tailwind ships with a great color pallatte https://tailwindcss.com/docs/customizing-colors
-
-You need to require the colors from tailwind:
-`const color = require("tailwindcss/colors")`
 
 You can probably pick a couple of those and start making some big improvements.
 That's a good option, but there's another way I like to do it adding some custom
 colors.
+
+
+LEAVING OFF HERE ---------
+
+You need to require the colors from tailwind?:
+`const color = require("tailwindcss/colors")`
+
 
 Before every site started adding the option of darkmode, I've been using a
 couple of different dark mode plugins for years.  It seems to really help my
