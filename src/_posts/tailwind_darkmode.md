@@ -537,85 +537,36 @@ You need to require the colors from tailwind?:
 `const color = require("tailwindcss/colors")`
 
 
-Before every site started adding the option of darkmode, I've been using a
+I've been using a
 couple of different dark mode plugins for years.  It seems to really help my
 eye strain so I've been using it for years now.
 
-I really like the Dark Reader one https://darkreader.org/
+As long as I can remember, I've usually preferred dark themes, they just seem to
+be much easier on my eyes. It seems over the past couple of years, a lot more
+sites are supporting dark mode options, but didn't used to be the case so I
+usually use a browser plugin to convert all sites to dark mode. The main one
+I've been using is [Dark Reader](https://darkreader.org/)
 
 I think it does a great job at converting sites to dark mode, so much so that I
 decided to take a little inspiration from it.
 
-What I do is go open the site I'm working on and activeate the plugin. With my
-site in a 'dark mode' from the plugin, I'll open my inspector and color drop a
-color I like to get a hex code.  Firefox has a built-in color dropper, not sure
-if Chrome does these days.
+For a good starting point to creating a nice dark mode theme, I usually open the
+site with the Dark Reader active, open my inspector and use a color-dropper to
+get the color codes the Dark Reader plugin is using.
 
-For these cases where you need a custom color, you can add that custom color to
-the Tailwind configs
+I'll make note of those hex codes and add them as [custom
+colors](https://tailwindcss.com/docs/customizing-colors) in Tailwind
 
-```js
-module.exports = {
-  theme: {
-    colors: {
-        wicked-dark-blue: "#00001e"
-<!-- #000038 -->
-    },
-  },
-}
-```
-// Create your own at: https://javisperez.github.io/tailwindcolorshades
+Another good resource for color inspiration is this handy Tailwind [color shade
+generator](https://javisperez.github.io/tailwindcolorshades)
 
-(May have to restart everything to get it working)
-(Think you need to include colors before the theme and add your colors in the
-right spot.  Creating things from stock, I already had a `theme` block that I
-had to add my color stuff in.  Here is what the whole config looks like now
+After adding more of your dark styles, you'll probably start to notice a few
+spots where different states don't have any dark syles,  think `hover`, `focus`, `active` and
+others.
 
-`config/tailwind.config.js`
-```js
-const defaultTheme = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
-// do i need colors if i don't override any?
+For these cases, you add the state your targeting after `dark`
 
-module.exports = {
-  darkMode: 'class',
-  content: [
-    './public/*.html',
-    './app/helpers/**/*.rb',
-    './app/javascript/**/*.js',
-    './app/views/**/*.{erb,haml,html,slim}'
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-      },
-      colors: {
-        "wicked-dark-blue": "#000038",
-        "landing-page-dark": "#19212c",
-      },
-    },
-  },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/typography'),
-  ],
-}
-```
-
-(Maybe, looks like that actually broke a lot of shit)
-
-You should have the new color available for use.  Remember the format for
-background colors still applies: `bg-COLORNAME` so in this case it would be
-`bg-wicked-dark-blue`
-
-The same thing would go for text.  Would could update the accent color in the
-hero with `text-wicked-dark-blue`
-
-```
-<span class="text-purple-600 dark:text-wicked-dark-blue">Dark</span>
-```
+`dark:hover:bg-gray-600` or `dark:focus:ring-blue-500`
 
 Once you have an idea of the colors you'd like to use for your dark mode
 variant, the easiest way is to add the dark variants into `@apply` and make a
