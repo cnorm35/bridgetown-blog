@@ -9,7 +9,11 @@ ability to toggle back and forth, we'll also go over some ways you can create
 your own custom dark theme"
 author: cody
 ---
-Psssst....Hey you.....*opens jacket*.....you want some dark-mode?
+Psssst....
+
+Hey you.....Yeah you...
+
+*opens jacket*.....want some dark-mode?
 
 If you _really_ want some, you can skip the article and view the example repo
 [here](https://github.com/cnorm35/tailwind_darkmode_example)
