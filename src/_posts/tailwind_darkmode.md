@@ -11,6 +11,9 @@ author: cody
 ---
 Psssst....Hey you.....*opens jacket*.....you want some dark-mode?
 
+If you _really_ want some, you can skip the article and view the example repo
+[here](https://github.com/cnorm35/tailwind_darkmode_example)
+
 These days, it seems like every site on the internet has a toggle for switching
 to dark-mode.  There are a lot of reasons for it.  It can conserve power, lower
 eye strain, and let's face it, looks cool.
