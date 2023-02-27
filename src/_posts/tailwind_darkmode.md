@@ -87,8 +87,8 @@ rails and add the following code for the hero section.
 </div>
 
 ```
-SCREENSHOT HERE IF POSSIBLE
-^ Add a preview image for what it should look like afterward
+
+![Tailwind Hero Section](https://personal-blog-assets.s3.amazonaws.com/DarkModeLightBackground.png "Tailwind Hero Section")
 
 
 Here is one of the many cool things about tailwind.  Tailwind includes a `dark`
@@ -296,6 +296,8 @@ allows you to check the placement and make sure the SVGs for the icons are
 rendering correctly.
 
 SCREENSHOT
+
+![Tailwind Dark Hero Section](https://personal-blog-assets.s3.amazonaws.com/DarkModeDarkBackground.png "Tailwind Dark Hero Section")
 
 Now comes the JS.  To get started with the JS for toggling back and forth
 between dark and light mode, generate a new Stimulus controller with the
