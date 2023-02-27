@@ -9,49 +9,44 @@ author: cody
 
 Go on, embrace the Dark Side
 
-These days, it seems like every site on the internet has a toggle for switching
-to dark mode.  There are a lot of reasons for it.  It can conserve power, lower
-eye strain and lets' face it, looks cool as shit.
+Psssst....Hey you.....*opens jacket*.....you want some dark-mode?
 
-Want some sweet dark mode action with Tailwind but not sure where to start?
+These days, it seems like every site on the internet has a toggle for switching
+to dark-mode.  There are a lot of reasons for it.  It can conserve power, lower
+eye strain, and let's face it, looks cool.
+
+Want some sweet dark-mode action with Tailwind but not sure where to start?
 You've come to the right place.
 
 Before we get started, I'd like to credit this article
 https://www.freecodecamp.org/news/how-to-build-a-dark-mode-switcher-with-tailwind-css-and-flowbite/
-for the inspiratin for this post. I think that dude created Flowbite too, but
+for the inspiration for this post. I think that dude created Flowbite too, but
 not sure.  Either way, thanks for doing that.
 
-With that post and some information on dark mode straight from Tailwind https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
+With that post and some information on dark-mode straight from Tailwind https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
 we have the info we need to start going to the dark side
-
-<!-- We just (<- fix that, it could be really hard) need to convert that to stimulus -->
-<!-- JS and add some styles for dark mode. -->
 
 Now we have all the ingredients we need to put everything together in our app.
 
 Speaking of the app, let's create a fresh rails app with Tailwind and get
 crackin'
 
-In your terminal, run the following command
+In your terminal, run the following command:
 
 
-`rails new tailwind_darkmode --css tailwind`
+`$ bin/rails new tailwind_darkmode --css tailwind`
 
-This creates a fresh Rails app with Tailwind already installed and ready to do.  At the time of writing this, it will be a Rails 7 app with importmaps ans SQLite DB
+This creates a fresh Rails app with Tailwind already installed and ready to do.  At the time of writing this, it will be a Rails 7 app with importmaps and SQLite DB
 
-Now that everything is enabled, let's make a couple of changs to see if
+Now that everything is enabled, let's make a couple of changes to see if
 everything is working as it should.
 
-<!-- Actually think a lot of things are a little funky with the bootstrap stuff being -->
-<!-- included in.  maybe just do something like fresh rails app install instead? -->
+Before we can start adding some dark styles, we have to add some views to add styles to.
 
-(Talk about updating for darkmode class)
-
-Before we can start adding some dark styles, we have to add some views to style.
 Create a controller for Static with an index page, that's the root and the only
 view we'll focus on.
 
-`$ rails g controller Static index`
+`$ bin/rails g controller Static index`
 
 After the generator completes, head to `config/routes/rb` and make our new view
 the root path.
@@ -63,9 +58,8 @@ Rails.application.routes.draw do
 end
 ```
 
-When adding changes to your routes file, you'll need to restat your sever for
-the changes to take effect so be sure to restat your server after adding the
-route.
+When adding changes to your routes file, be sure to restat your server after
+adding the updated route.
 
 
 Now our new page is the root path by default, let's get to adding some Tailwind
@@ -94,21 +88,21 @@ rails and add the following code for the hero section.
 
 ```
 SCREENSHOT HERE IF POSSIBLE
-^ Add a preview image for what it should look like afterwards
+^ Add a preview image for what it should look like afterward
 
 
 Here is one of the many cool things about tailwind.  Tailwind includes a `dark`
-variant that let's you specify the styles when dark mode is enabled.
+variant that allows you specify the styles when dark-mode is enabled.
 
 By default this uses the `prefer-color-scheme` [CSS media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme).
 
 This will automatically detect if you have your OS or browser settings
-enabled for dark mode and use that automatically.
+enabled for dark-mode and use that automatically.
 
 If you don't care about the option to toggle back and forth and just display a
 dark version of the site if the user has that set somewhere else, all that's
-left is to add your styling for dark mode. To see if everything is configured
-and working correctly, you can add a dark mode style to the body and see if it
+left is to add your styling for dark-mode. To see if everything is configured
+and working correctly, you can add a dark-mode style to the body and see if it
 updates. Add a dark style to the body in `app/views/layouts/application.html.erb`
 
 ```html
@@ -119,23 +113,23 @@ updates. Add a dark style to the body in `app/views/layouts/application.html.erb
   </body>
 ```
 
-If you have dark mode enabled for your browser or OS, the page should look
+If you have dark-mode enabled for your browser or OS, the page should look
 something like this:
 
 IMAGE HERE
 
 If you aren't looking to add the ability to toggle back and forth, all that's
 left is to start adding dark styles to your app.  It's not _quite_ as simple as
-just inverting the colors, there's a surprising amount of fine tuning that goes
-into a nice dark theme. I'm by no means an expert, but have picked up a couple
+just inverting the colors, there's a surprising amount of fine-tuning that goes
+into a nice dark theme. I'm by no means an expert but have picked up a couple
 of tricks to help you figure out what looks good.
 
 Defaulting to the user's OS or browser preference is nice but variety is the
 spice of life.  With a few extra steps, we can add the ability to toggle back
 and forth depending on our fancy.
 
-Tailwind needs a couple of changes to know that dark mode styles are used with
-classes instead of the users prefernces and media queryies.
+Tailwind needs a couple of changes to know that dark-mode styles are used with
+classes instead of the user's preferences and media queries.
 
 https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
 
@@ -172,8 +166,8 @@ module.exports = {
 
 You might notice that once you've updated this setting, Tailwind no longer
 defaults to the `prefers-color-selction`. If you refresh and visit the homepage,
-even if you have your browser or OS settings prefering dark styles, the dark
-styles are not being applied automatically.  This is what we want.  That means
+even if you have your browser or OS settings preferring dark styles, the dark
+styles are not applied automatically.  This is what we want.  That means
 Tailwind is now looking for a `dark` class which is what we will use to toggle
 back and forth.
 
@@ -207,7 +201,7 @@ localStorage.removeItem('theme')
 ```
 
 If you read over the comments in the snippet above, you'll see a note about
-adding this to the head of our html to prevent FOUC or Flashes Of Unstyled Content.
+adding this to the head of our HTML to prevent FOUC or Flashes Of Unstyled Content.
 
 You can insert that snippet directly into the head of the HTML in your layout,
 or you can add it to a partial that's rendered within the head.  This is my
@@ -297,8 +291,8 @@ forth, I like to add it to our view  and make sure everything is displaying
 correctly.
 
 With the code as it is right now, both of the icons have the `hidden` class so
-they won't be visible.  Removing the `hidden` class from both of those button
-allows you to check the placement and make sure the svgs for the icons are
+they won't be visible.  Removing the `hidden` class from both of those buttons
+allows you to check the placement and make sure the SVGs for the icons are
 rendering correctly.
 
 SCREENSHOT
@@ -306,8 +300,6 @@ SCREENSHOT
 Now comes the JS.  To get started with the JS for toggling back and forth
 between dark and light mode, generate a new Stimulus controller with the
 following command:
-
-(standardize darkmode and dark_mode)
 
 `bin/rails generate stimulus dark_mode`
 
@@ -396,7 +388,7 @@ classes.
 This is the `connect` [method](https://stimulus.hotwired.dev/reference/lifecycle-callbacks) of the Stimulus controller.  This code will be executed anytime the controller connects to the DOM.
 
 The first line looks for dark theme preferences saved to local storage (like in
-our script we added to the header) or `prefers-color-scheme` in our brower
+our script we added to the header) or `prefers-color-scheme` in our browser
 settings. If so, removes the hidden class to the light icon.  This is how we
 reference the `lightIcon` target from above.  The logic is also a little
 confusing without seeing it in action.
@@ -439,27 +431,27 @@ toggleTheme() {
 
 
 The first thing that happens in this controller is logging to the console that
-the method was called.  This is really helpful for ensuring that your action ran
+the method was called.  This iswhelpful for ensuring that your action ran
 at the correct time, like clicking the theme toggle button.
 
-The next part is to add the `hidden` class to `both` the light and dark mode.
+The next part is to add the `hidden` class to `both` the light and dark-mode.
 Hiding both allows us to make some checks to determine if the `lightIcon` or
 `darkIcon` should be displayed.  Again, the browser localStorage is checked for
 an existing `color-theme` with `localStorage.getItem('color-theme')`.  If one if
-found, the next step is to see if the values is `'light'` or `'dark'`.
+found, the next step is to see if the value is `'light'` or `'dark'`.
 
-Depending on those values, the next step either adds or removes the `dark` class
+Depending on that value, the next step either adds or removes the `dark` class
 and sets the theme to the `localStorage` in the browser.
 
 Now we have the JS in the stimulus controller, we need to add the correct data
 attributes to the HTML element, then tie a click event to it.
 
-With a better idea of what's happening inside the Stimulus contoller and how
+With a better idea of what's happening inside the Stimulus controller and how
 Tailwind toggles back and forth, it's time to attach this Stimulus controller to
-our dark mode toggle buttons so we can see this in action.
+our dark-mode toggle buttons so we can see this in action.
 
 To attach the Stimulus controller to the `body` tag, we add the data attribute
-mentioned in the comment after we first generated the Stimuls controller
+mentioned in the comment after we first generated the Stimulus controller
 `data-controller="dark-mode"`
 
 
@@ -475,14 +467,14 @@ mentioned in the comment after we first generated the Stimuls controller
   </body>
 ```
 
-This just connects the Stimuls controller to the body tag in our view, we still
+This just connects the Stimulus controller to the body tag in our view, we still
 need to add the action to toggle back and forth with `toggleTheme`
 
 For that, we need to add a click event to the toggle button we added earlier.
 
-If you copied the markup from above for the darkmode toggle, then all the data
+If you copied the markup from above for the dark-mode toggle, then all the data
 attributes you need are already in place.  If those are in place, things should
-be toggling back and foth now.  Here is what those data attributes are doing.
+be toggling back and forth now.  Here is what those data attributes are doing.
 
 `data-dark-mode-target="themeToggle"`
 
@@ -492,22 +484,22 @@ This tells Stimulus that this is the `themeToggle` target in the controller
 
 `data-action="click->dark-mode#toggleTheme"` is where we add a click event to
 the button.  When this button is clicked, the `toggleTheme` within the
-`dark-mode` Stimulus controller will be ran.
+`dark-mode` Stimulus controller will be run.
 
 
 Clicking on the button should toggle the theme between dark and light mode now.
 If you've been following along, clicking the toggle should toggle between a
-black background and a white one. And now you have a fancy new dark mode...sort
+black background and a white one. And now you have a fancy new dark-mode...sort
 of.
 
-Before moving on to how I start refining the look of my dark mode theme, I'd
+Before moving on to how I start refining the look of my dark-mode theme, I'd
 like to point out one thing about the views added so far.
 
 You can, and probably should have more of these views with more erb than HTML
 (think buttons and divs).
 
 I used to write a lot more of my views with erb, but being able to copy TailwindUI HTML right into my views with
-minimal tweaking to get to look decent, has been much faster and easier way
+minimal tweaking to get it to look decent, has been faster and easier way
 for me to keep things rolling.  It's probably not the best, but for me, was an
 acceptable tradeoff for the speed of adding new changes it gives me so for me,
 that makes it worth it.
@@ -517,7 +509,7 @@ quite as easy as just making backgrounds black with text white. For the older
 folks reading this, it gives your site a real Geocities vibe.  You might as well
 throw in a site counter.
 
-There's a suprising amount of finese that goes into getting a dark theme to look
+There's a surprising amount of finesse that goes into getting a dark theme to look
 right and I have a ton of respect for those that can do it well.  I don't
 consider myself part of that group.  Maybe you don't either and you need some
 help figuring out how you would like your site to look.
@@ -527,31 +519,23 @@ the ability to add some custom colors, once we figure out what we'd like those
 custom colors to be.
 
 You can probably pick a couple of those and start making some big improvements.
-That's a good option, but there's another way I like to do it adding some custom
+That's a good option, but there's another way I like to do it by adding some custom
 colors.
 
-
-LEAVING OFF HERE ---------
-
-You need to require the colors from tailwind?:
-`const color = require("tailwindcss/colors")`
-
-
-I've been using a
-couple of different dark mode plugins for years.  It seems to really help my
+I've been using a couple of different dark-mode plugins for years.  It seems vastly reduce my
 eye strain so I've been using it for years now.
 
 As long as I can remember, I've usually preferred dark themes, they just seem to
 be much easier on my eyes. It seems over the past couple of years, a lot more
-sites are supporting dark mode options, but didn't used to be the case so I
-usually use a browser plugin to convert all sites to dark mode. The main one
+sites are supporting dark-mode options, but that didn't use to be the case so I
+usually use a browser plugin to convert all sites to dark-mode. The main one
 I've been using is [Dark Reader](https://darkreader.org/)
 
-I think it does a great job at converting sites to dark mode, so much so that I
+I think it does a great job at converting sites to dark-mode, so much so that I
 decided to take a little inspiration from it.
 
-For a good starting point to creating a nice dark mode theme, I usually open the
-site with the Dark Reader active, open my inspector and use a color-dropper to
+For a good starting point for creating a nice dark mode theme, I usually open the
+site with the Dark Reader active, open my inspector, and use a color-dropper to
 get the color codes the Dark Reader plugin is using.
 
 I'll make note of those hex codes and add them as [custom
@@ -576,7 +560,6 @@ filling in all the spots you missed.  That's normal and part of the process that
 keeps it looking nicer than something that's just like a dark background with
 white text.
 
-Rails , Hotwire and Tailwind really makes me feel like I have superpowers these
-days. I think this is a great feature and there are a lot of benefits to dark
-mode like battery life, eye strain and badassness (debatable).  I hope this
-helps and I hope this work for you.
+Rails , Hotwire and Tailwind makes me feel like I have superpowers these
+days. I think this is a great feature and there are a lot of benefits to dark-mode like battery life, eye strain and badassness (debatable).  I hope this
+helps and works well for you.
