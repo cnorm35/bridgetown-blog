@@ -1,14 +1,14 @@
 ---
 layout: post
-title:  Adding darkmode to tailwind rails stimulus
+title:  Adding dark mode to your Rails application
 date:   2023-02-10 16:54:46 -0500
 category: ruby
-excerpt: "Add dark mode for tailwind to your rails app"
+excerpt: "This post walks through the steps to add a dark-mode toggle to your
+Rails site with Tailwind and Stimulus JS.  On top of actually implementing the
+ability to toggle back and forth, we'll also go over some ways you can create
+your own custom dark theme"
 author: cody
 ---
-
-Go on, embrace the Dark Side
-
 Psssst....Hey you.....*opens jacket*.....you want some dark-mode?
 
 These days, it seems like every site on the internet has a toggle for switching
@@ -18,6 +18,7 @@ eye strain, and let's face it, looks cool.
 Want some sweet dark-mode action with Tailwind but not sure where to start?
 You've come to the right place.
 
+### Inspiration
 Before we get started, I'd like to credit this article
 https://www.freecodecamp.org/news/how-to-build-a-dark-mode-switcher-with-tailwind-css-and-flowbite/
 for the inspiration for this post. I think that dude created Flowbite too, but
@@ -30,6 +31,8 @@ Now we have all the ingredients we need to put everything together in our app.
 
 Speaking of the app, let's create a fresh rails app with Tailwind and get
 crackin'
+
+### Getting Started
 
 In your terminal, run the following command:
 
@@ -61,6 +64,7 @@ end
 When adding changes to your routes file, be sure to restat your server after
 adding the updated route.
 
+### Adding your first Tailwind view
 
 Now our new page is the root path by default, let's get to adding some Tailwind
 styles. In `app/views/static/index.html.erb` replace the generated code from
@@ -99,6 +103,9 @@ By default this uses the `prefer-color-scheme` [CSS media feature](https://devel
 This will automatically detect if you have your OS or browser settings
 enabled for dark-mode and use that automatically.
 
+
+### Adding styles for dark-mode
+
 If you don't care about the option to toggle back and forth and just display a
 dark version of the site if the user has that set somewhere else, all that's
 left is to add your styling for dark-mode. To see if everything is configured
@@ -116,7 +123,6 @@ updates. Add a dark style to the body in `app/views/layouts/application.html.erb
 If you have dark-mode enabled for your browser or OS, the page should look
 something like this:
 
-IMAGE HERE
 
 If you aren't looking to add the ability to toggle back and forth, all that's
 left is to start adding dark styles to your app.  It's not _quite_ as simple as
@@ -127,6 +133,8 @@ of tricks to help you figure out what looks good.
 Defaulting to the user's OS or browser preference is nice but variety is the
 spice of life.  With a few extra steps, we can add the ability to toggle back
 and forth depending on our fancy.
+
+### Adding option to toggle between Light and Dark
 
 Tailwind needs a couple of changes to know that dark-mode styles are used with
 classes instead of the user's preferences and media queries.
@@ -299,6 +307,8 @@ SCREENSHOT
 
 ![Tailwind Dark Hero Section](https://personal-blog-assets.s3.amazonaws.com/DarkModeDarkBackground.png "Tailwind Dark Hero Section")
 
+### Toggle with Stimulus JS
+
 Now comes the JS.  To get started with the JS for toggling back and forth
 between dark and light mode, generate a new Stimulus controller with the
 following command:
@@ -433,7 +443,7 @@ toggleTheme() {
 
 
 The first thing that happens in this controller is logging to the console that
-the method was called.  This iswhelpful for ensuring that your action ran
+the method was called.  This is helpful for ensuring that your action ran
 at the correct time, like clicking the theme toggle button.
 
 The next part is to add the `hidden` class to `both` the light and dark-mode.
@@ -494,6 +504,8 @@ If you've been following along, clicking the toggle should toggle between a
 black background and a white one. And now you have a fancy new dark-mode...sort
 of.
 
+
+### HTML vs ERB views
 Before moving on to how I start refining the look of my dark-mode theme, I'd
 like to point out one thing about the views added so far.
 
@@ -505,6 +517,8 @@ minimal tweaking to get it to look decent, has been faster and easier way
 for me to keep things rolling.  It's probably not the best, but for me, was an
 acceptable tradeoff for the speed of adding new changes it gives me so for me,
 that makes it worth it.
+
+### Refining your colors
 
 I mentioned it briefly before, but having a nice dark theme for your app isn't
 quite as easy as just making backgrounds black with text white. For the older
@@ -553,6 +567,8 @@ others.
 For these cases, you add the state your targeting after `dark`
 
 `dark:hover:bg-gray-600` or `dark:focus:ring-blue-500`
+
+### Final Thoughts
 
 Once you have an idea of the colors you'd like to use for your dark mode
 variant, the easiest way is to add the dark variants into `@apply` and make a
