@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  Adding dark mode to your Rails application
-date:   2023-02-10 16:54:46 -0500
+title:  Adding dark mode to your Rails application with Tailwind and Stimulus
+date:   2023-02-27 16:54:46 -0500
 category: ruby
 excerpt: "This post walks through the steps to add a dark-mode toggle to your
-Rails site with Tailwind and Stimulus JS.  On top of actually implementing the
-ability to toggle back and forth, we'll also go over some ways you can create
+Rails app with Tailwind and Stimulus JS.  On top of actually implementing the
+ability to toggle back and forth, I'll also go over some ways you can create
 your own custom dark theme"
 author: cody
 ---
