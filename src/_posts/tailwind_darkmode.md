@@ -108,7 +108,7 @@ enabled for dark-mode and use that automatically.
 
 ### Adding styles for dark-mode
 
-If you don't care about the option to toggle back and forth and just display a
+If you don't care about the option to toggle back and forth and just want to display a
 dark version of the site if the user has that set somewhere else, all that's
 left is to add your styling for dark-mode. To see if everything is configured
 and working correctly, you can add a dark-mode style to the body and see if it
@@ -125,6 +125,12 @@ updates. Add a dark style to the body in `app/views/layouts/application.html.erb
 If you have dark-mode enabled for your browser or OS, the page should look
 something like this:
 
+<img
+  alt="Tailwind Dark Hero Section"
+  class="position-relative mx-auto rounded w-100 shadow-lg"
+  src="https://personal-blog-assets.s3.amazonaws.com/DarkModeDarkBackground.png"
+/>
+
 
 If you aren't looking to add the ability to toggle back and forth, all that's
 left is to start adding dark styles to your app.  It's not _quite_ as simple as
@@ -132,7 +138,7 @@ just inverting the colors, there's a surprising amount of fine-tuning that goes
 into a nice dark theme. I'm by no means an expert but have picked up a couple
 of tricks to help you figure out what looks good.
 
-Defaulting to the user's OS or browser preference is nice but variety is the
+Defaulting to the user's OS or browser preference is nice, but variety is the
 spice of life.  With a few extra steps, we can add the ability to toggle back
 and forth depending on our fancy.
 
@@ -187,7 +193,7 @@ are to be applied.
 
 I like the option of having a mix of these two approaches.  Defaulting to the
 user's system preference is present and still offering a manual selection.
-Lukck for me, so do the fine folks at Tailwind
+Lukck for me, so do the fine folks at Tailwind.
 
 Tailwind has a great JS snippet for just that.
 
@@ -255,7 +261,7 @@ Before jumping in, let's break down what this toggle feature will consist of.
 Since there is already a `shared` directory, that seems like a nice place to put
 this partial.  The new file will be called `app/views/shared/_darkmode_toggle.html.erb`
 
-This view was pulled from the Flowbite tutorial above
+This view was pulled from the Flowbite tutorial linked at the top of the [post](https://www.freecodecamp.org/news/how-to-build-a-dark-mode-switcher-with-tailwind-css-and-flowbite/).
 
 `app/views/shared/_darkmode_toggle.html.erb`
 
@@ -304,12 +310,6 @@ With the code as it is right now, both of the icons have the `hidden` class so
 they won't be visible.  Removing the `hidden` class from both of those buttons
 allows you to check the placement and make sure the SVGs for the icons are
 rendering correctly.
-
-<img
-  alt="Tailwind Dark Hero Section"
-  class="position-relative mx-auto rounded w-100 shadow-lg"
-  src="https://personal-blog-assets.s3.amazonaws.com/DarkModeDarkBackground.png"
-/>
 
 ### Toggle with Stimulus JS
 
@@ -416,7 +416,7 @@ toggle to the light theme, instead of displaying the current theme.  It makes
 sense seeing it in action, but can look a little odd at first glance so wanted
 to point that out.
 
-The next method is the main focus of the controller, the `toggleTheme()` method
+The next method is the main focus of the controller, the `toggleTheme()` method.
 
 ```js
 toggleTheme() {
@@ -467,7 +467,8 @@ Tailwind toggles back and forth, it's time to attach this Stimulus controller to
 our dark-mode toggle buttons so we can see this in action.
 
 To attach the Stimulus controller to the `body` tag, we add the data attribute
-mentioned in the comment after we first generated the Stimulus controller
+mentioned in the comment after we first generated the Stimulus controller.
+
 `data-controller="dark-mode"`
 
 
@@ -484,7 +485,7 @@ mentioned in the comment after we first generated the Stimulus controller
 ```
 
 This just connects the Stimulus controller to the body tag in our view, we still
-need to add the action to toggle back and forth with `toggleTheme`
+need to add the action to toggle back and forth with `toggleTheme`.
 
 For that, we need to add a click event to the toggle button we added earlier.
 
@@ -494,8 +495,7 @@ be toggling back and forth now.  Here is what those data attributes are doing.
 
 `data-dark-mode-target="themeToggle"`
 
-This tells Stimulus that this is the `themeToggle` target in the controller
-`dark-mode`
+This tells Stimulus that this is the `themeToggle` target in the controller `dark-mode`
 
 
 `data-action="click->dark-mode#toggleTheme"` is where we add a click event to
@@ -549,7 +549,7 @@ As long as I can remember, I've usually preferred dark themes, they just seem to
 be much easier on my eyes. It seems over the past couple of years, a lot more
 sites are supporting dark-mode options, but that didn't use to be the case so I
 usually use a browser plugin to convert all sites to dark-mode. The main one
-I've been using is [Dark Reader](https://darkreader.org/)
+I've been using is [Dark Reader](https://darkreader.org/).
 
 I think it does a great job at converting sites to dark-mode, so much so that I
 decided to take a little inspiration from it.
@@ -582,6 +582,11 @@ filling in all the spots you missed.  That's normal and part of the process that
 keeps it looking nicer than something that's just like a dark background with
 white text.
 
-Rails , Hotwire and Tailwind makes me feel like I have superpowers these
-days. I think this is a great feature and there are a lot of benefits to dark-mode like battery life, eye strain and badassness (debatable).  I hope this
-helps and works well for you.
+
+Thanks to the 'Rails Renaissance' and leveraging Hotwire and Tailwind, I've been
+able to build better apps faster than ever before. I can't remember the last
+time I was even remotely inclined to write anything front-end related, but these
+tools have really given me a boost in my workflow and wanted to share my
+learnings.
+
+If this has helped you, please share with someone who might also find it useful!
