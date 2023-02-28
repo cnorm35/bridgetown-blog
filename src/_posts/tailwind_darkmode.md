@@ -99,7 +99,11 @@ rails and add the following code for the hero section.
 
 ```
 
-![Tailwind Hero Section](https://personal-blog-assets.s3.amazonaws.com/DarkModeLightBackground.png "Tailwind Hero Section")
+<img
+  alt="Tailwind Hero Section"
+  class="position-relative mx-auto rounded w-100 shadow-lg"
+  src="https://personal-blog-assets.s3.amazonaws.com/DarkModeLightBackground.png"
+/>
 
 
 Here is one of the many cool things about tailwind.  Tailwind includes a `dark`
@@ -310,9 +314,11 @@ they won't be visible.  Removing the `hidden` class from both of those buttons
 allows you to check the placement and make sure the SVGs for the icons are
 rendering correctly.
 
-SCREENSHOT
-
-![Tailwind Dark Hero Section](https://personal-blog-assets.s3.amazonaws.com/DarkModeDarkBackground.png "Tailwind Dark Hero Section")
+<img
+  alt="Tailwind Dark Hero Section"
+  class="position-relative mx-auto rounded w-100 shadow-lg"
+  src="https://personal-blog-assets.s3.amazonaws.com/DarkModeDarkBackground.png"
+/>
 
 ### Toggle with Stimulus JS
 
