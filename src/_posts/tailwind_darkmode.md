@@ -22,22 +22,18 @@ These days, it seems like every site on the internet has a toggle for switching
 to dark-mode.  There are a lot of reasons for it.  It can conserve power, lower
 eye strain, and let's face it, looks cool.
 
-Want some sweet dark-mode action with Tailwind but not sure where to start?
-You've come to the right place.
+Are you looking for some sweet dark-mode action with Tailwind and Stimulus JS but not sure where to start?
+Well, you've come to the right place.
 
 ### Inspiration
-Before we get started, I'd like to credit this article
-https://www.freecodecamp.org/news/how-to-build-a-dark-mode-switcher-with-tailwind-css-and-flowbite/
-for the inspiration for this post. I think that dude created Flowbite too, but
-not sure.  Either way, thanks for doing that.
+Before we get started, I'd like to credit this [article](https://www.freecodecamp.org/news/how-to-build-a-dark-mode-switcher-with-tailwind-css-and-flowbite/)
+for the inspiration for this post. When I was looking for some resources on how
+to add dark-mode for my own app, it was a big help so thank you Zoltán!
 
-With that post and some information on dark-mode straight from Tailwind https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
-we have the info we need to start going to the dark side
+With that post and some information on dark-mode straight from [Tailwind](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually),
+we have the info we need to start embracing the dark side.
 
-Now we have all the ingredients we need to put everything together in our app.
-
-Speaking of the app, let's create a fresh rails app with Tailwind and get
-crackin'
+To start, let's create a fresh rails app with Tailwind and get started.
 
 ### Getting Started
 
@@ -46,20 +42,16 @@ In your terminal, run the following command:
 
 `$ bin/rails new tailwind_darkmode --css tailwind`
 
-This creates a fresh Rails app with Tailwind already installed and ready to do.  At the time of writing this, it will be a Rails 7 app with importmaps and SQLite DB
-
-Now that everything is enabled, let's make a couple of changes to see if
-everything is working as it should.
+This creates a fresh Rails app with Tailwind already installed and ready to go.  At the time of writing this, it will be a Rails 7 app with importmaps and SQLite DB.
 
 Before we can start adding some dark styles, we have to add some views to add styles to.
 
-Create a controller for Static with an index page, that's the root and the only
+Create a Static controller with an index page. This will be the root path and the only
 view we'll focus on.
 
 `$ bin/rails g controller Static index`
 
-After the generator completes, head to `config/routes/rb` and make our new view
-the root path.
+After the generator completes, open the routes file in` config/routes.rb` and make our new view we just created the root path.
 
 `config/routes.rb`
 ```ruby
@@ -68,14 +60,13 @@ Rails.application.routes.draw do
 end
 ```
 
-When adding changes to your routes file, be sure to restat your server after
-adding the updated route.
+Keep in mind, When adding changes to your routes file, be sure to restat your server for your changes to take effect.
 
 ### Adding your first Tailwind view
 
 Now our new page is the root path by default, let's get to adding some Tailwind
-styles. In `app/views/static/index.html.erb` replace the generated code from
-rails and add the following code for the hero section.
+styles. In `app/views/static/index.html.erb` replace the code generated when we
+created the view and add the following code for the hero section.
 
 
 `app/views/static/index.html.erb`
