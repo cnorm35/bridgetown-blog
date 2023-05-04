@@ -141,7 +141,6 @@ Once upon a time there was a Chinese farmer whose horse ran away. That evening, 
 The following day his son tried to break one of the horses, and while riding it, he was thrown and broke his leg. The neighbors then said, “Oh dear, that’s too bad,” and the farmer responded, “Maybe.” The next day the conscription officers came around to conscript people into the army, and they rejected his son because he had a broken leg. Again all the neighbors came around and said, “Isn’t that great!” Again, he said, “Maybe.”
 
 It doesn’t exactly fit on a fortune cookie, but it’s pretty poignant. I’ve been thinking about this story and some of the specific lessons for a while now.
-(not sure about all of that above)
 
 ### Redefining Luck
 I’ve been stuck in a bit of a rut at careerwise lately and for the first time in a while, I started to consider exploring some new opportunities. After getting involved with mentorship for the first time in a few years, I got a spark that had been tamped down and burnt out for some time.
