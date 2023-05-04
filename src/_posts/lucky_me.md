@@ -2,7 +2,7 @@
 layout: post
 title: Lucky Me
 date:   2023-05-02 16:54:46 -0500
-category: ruby
+category: personal development
 excerpt: "Something interesting I've noticed is that what you consider lucky can
 change as time goes on."
 author: cody
