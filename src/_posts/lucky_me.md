@@ -166,6 +166,12 @@ I had been thinking for a while that I’d get something vegas themed but after 
 
 I skimmed through some flash on the walls. Found something that was pretty close to what I was looking for and let my artist know what I’d like to change. He asked me what I wanted on the banner and “Lucky Me” just popped out of my mouth. I’ve seen “Lucky You” or some variation of that a few times but something about “Lucky Me” just made sense. I’m the lucky one and this is my way of telling the universe that I can stick it out until things that seem unlucky start to look lucky.
 
+<img
+  alt="Tailwind Hero Section"
+  class="position-relative mx-auto rounded w-100 shadow-lg"
+  src="https://personal-blog-assets.s3.amazonaws.com/LuckyMe.png"
+/>
+
 It’s not quite as poetic as Jack from Titanic saying “I make my own luck” or whatever it was but it’s me.
 
 So you’re writing this whole thing just to tell us about a tattoo?
