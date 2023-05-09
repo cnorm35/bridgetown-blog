@@ -7,3 +7,6 @@
 - name: "Posts"
   url: "/posts"
   internal: true
+- name: "Consulting"
+  url: "/consulting"
+  internal: true
