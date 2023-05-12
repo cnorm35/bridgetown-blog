@@ -2,7 +2,7 @@
 layout: post
 title: The Mom Test Revisited
 date:   2023-05-08 16:54:46 -0500
-category: SaaS
+category: startups
 excerpt: "Re-reads always surface new information but re-reading at different
 parts of my customer journey was great"
 author: cody
