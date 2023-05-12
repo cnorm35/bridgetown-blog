@@ -2,7 +2,7 @@
 layout: post
 title:  My Time At Dreamit Ventures
 date:   2014-12-10 16:54:46 -0500
-category: accelerator
+category: startups
 excerpt: "On June 20th of this year, I boarded a flight bound for San Francisco.
 Armed with only a suitcase and a laptop, I was heading to a coding bootcamp to
 follow a crazy dream of switching careers and becoming a developer.  I had no
