@@ -4,17 +4,17 @@ title: Work
 permalink: /work/
 ---
 
-Here's some of the things I'm working on now:
+Here's some of the things I'm currently working on.
 
 ### Spot Squid
 
-Spot Squid is a software solution for tattoo artists to fill cancealtions easier
+Spot Squid is a software solution for tattoo artists to fill cancellations easier
 than ever before with less hassle.  This is a project that started based on some
 of my own experiences as a tattoo client and feedback from different tattoo
-aritsts I've received feedback from. Focusing more on the aspects of product and
+artists I've received feedback from. Focusing more on the aspects of product and
 customer development over just implementing technical features has been a great
 learning experience. I've been writing more about my experiences so be sure to
-checkout the posts tagged with SaaS if you'd like to know more.
+check out the posts tagged with startups if you'd like to know more.
 
 <div class="my-5">
     <a href="https://spotsquid.com" target="blank_">
@@ -34,10 +34,10 @@ The best thing I can say about this project is it's something that I feel is
 very 'me'.  Odd, yet practical with a dash of weird.  This is something I made
 purely because I wanted it to be a thing. Call or text 3213-HORROR for
 recommendations of horror movies available to stream now. If you keep an eye out at the
-conferences I attend, there's usually some scattered pins and stickers.  If
-you'd like to see what it's all about _without_ racking up any Twilio charges on
-my account, you can listen to the intro and error message I had recorded by a professional voice over
-artist.
+conferences I attend, they're usually some scattered pins and stickers while
+they last.  If you'd like to see what it's all about _without_ racking up any Twilio charges on
+my account, you can listen to the intro and error message I had recorded by a professional voice-over
+artist below.
 
 
 <div class="my-20">
@@ -70,8 +70,8 @@ artist.
 
 ### Engineering Mentor Agency of Learning
 
-I've been volunteering as a mentor with an organization called The Agency of
-Learning.  The groups goal is to help prepare developers early in their career
+I've been volunteering as a mentor with an organization called [The Agency of
+Learning](https://agencyoflearning.com/).  The groups goal is to help prepare developers early in their career
 not only land their first gig, but thrive and excel.  One of the interesting
 differences is we try to keep everything as close to what you'd experience at a
 job as possible.  That include things like daily standups, grooming and triaging
@@ -84,6 +84,11 @@ to help ensure a bright future for the ruby comminity.
 
 I'm an independent Rails consultant and have been focsuing particularly on SaaS
 projects with either Jumpstart Pro or Bullet Train. I currently do not have any
-availability, but I'd love to hear how I might be able to help you in the future
-so please email here: codes@codynorman.com
+availability, but I'd love to hear how I might be able to help you in the
+future.  You can reach me for any questions or project inquiries at the link
+below
+
+<a class="mr-3" href="mailto:codes@codynorman.com?subject=Project Inquiry" rel="noopener noreferrer" target="_blank">
+  Email
+</a>
 
