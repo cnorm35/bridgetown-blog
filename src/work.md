@@ -4,11 +4,9 @@ title: Work
 permalink: /work/
 ---
 
-# This is the work page
-
 Here's some of the things I'm working on now:
 
-### Spot Squid - link screen shot blurb
+### Spot Squid
 
 Spot Squid is a software solution for tattoo artists to fill cancealtions easier
 than ever before with less hassle.  This is a project that started based on some
@@ -18,16 +16,57 @@ customer development over just implementing technical features has been a great
 learning experience. I've been writing more about my experiences so be sure to
 checkout the posts tagged with SaaS if you'd like to know more.
 
+<div class="my-5">
+    <a href="https://spotsquid.com" target="blank_">
+    <img
+        alt="Spot Squid Website Screenshot"
+        class="position-relative mx-auto rounded w-100 shadow-lg"
+        src="/images/SpotSquidScreenshot.png"
+        style="z-index: 10"
+    />
+    </a>
+</div>
 
-### Screaming Recs - Recording clip and sms screen shots
+
+### Screaming Recomendations
 
 The best thing I can say about this project is it's something that I feel is
 very 'me'.  Odd, yet practical with a dash of weird.  This is something I made
-purely because I wanted it to be a thing.  If you keep an eye out at the
+purely because I wanted it to be a thing. Call or text 3213-HORROR for
+recommendations of horror movies available to stream now. If you keep an eye out at the
 conferences I attend, there's usually some scattered pins and stickers.  If
 you'd like to see what it's all about _without_ racking up any Twilio charges on
-my account, you can listen to the intro I had done by a professional voice over
+my account, you can listen to the intro and error message I had recorded by a professional voice over
 artist.
+
+
+<div class="my-20">
+    <h5>Greeting</h5>
+    <audio controls>
+    <source src="https://screaming-recommendations.s3.amazonaws.com/screaming-recs-intro-compressed.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+    </audio>
+</div>
+
+<div class="my-20">
+    <h5>Error Message</h5>
+    <audio controls>
+    <source src="https://screaming-recommendations.s3.amazonaws.com/screaming-recs-error-message-compressed.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+    </audio>
+</div>
+
+<div class="my-5">
+    <a href="https://spotsquid.com" target="blank_">
+        <img
+            alt="Screaming Recomendations Logo"
+            class="position-relative mx-auto rounded shadow-lg"
+            src="/images/screaming_recs_logo.png"
+            style="z-index: 10"
+            height="400"
+        />
+    </a>
+</div>
 
 ### Engineering Mentor Agency of Learning
 
@@ -41,9 +80,9 @@ issues, and pairing sessions.
 I've really enjoyed mentoring newer develpopers and am thankful I can do my part
 to help ensure a bright future for the ruby comminity.
 
-### Consulting
+### Ruby on Rails Consulting
 
-I'm an solo Rails consultant and have been focsuing particularly on SaaS
+I'm an independent Rails consultant and have been focsuing particularly on SaaS
 projects with either Jumpstart Pro or Bullet Train. I currently do not have any
 availability, but I'd love to hear how I might be able to help you in the future
 so please email here: codes@codynorman.com
