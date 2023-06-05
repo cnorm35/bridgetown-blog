@@ -31,7 +31,7 @@ Here are some examples of common things I do within the Rails console.
 Testing the output of helper methods by using `helper`
 
 ```ruby
-helper.nubmer_to_currency(123)
+helper.number_to_currency(123)
 => "$123.00"
 ```
 
