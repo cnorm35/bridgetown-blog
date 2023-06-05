@@ -115,7 +115,7 @@ Now that you have connected to your debugger, what's next?
 
 Usually, I check the current state of variables and objects. Sometimes I’ll build new ones, call `.valid?`, and check any errors before trying to save.  That lets me try to set some values and see if I know what’s required to get our object to a valid state.
 
-My debugger of choice is [ruby debug](https://github.com/ruby/debug) and my favorite unsung feature of ruy debug is it has an alias that allows you to use `debugger` which is the same keyword for the JS debugger.
+My debugger of choice is [ruby debug](https://github.com/ruby/debug) and my favorite unsung feature of ruby debug is it has an alias that allows you to use `debugger` which is the same keyword for the JS debugger.
 
 There are a ton of options you can use.  I don’t use much more past ‘c’ for continue meaning continue execution, and ‘n’ for next when goes to the next line.
 
