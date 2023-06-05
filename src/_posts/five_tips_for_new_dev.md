@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  5 tips for new Rails develoopers
+title:  5 tips for new Rails developers
 date:   2023-06-02 16:54:46 -0500
 category: ruby
 excerpt: "5 tips for new Rails developers to be more productive and confident."
