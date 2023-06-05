@@ -15,7 +15,8 @@ It seems like every day I have a “Oh by the way…” that leads into some exa
 
 This is by no means exhaustive, but here are a few tips I’ve found myself talking about a lot recently.
 
-### You should probably be using your Rails console more
+### 1. You should probably be using your Rails console more
+(add something about IRBrc expanding models here)
 This one might be a little opinionated. I’m a hands on learner and _always_ am poking around in the Rails console.  Getting a running Rails console and pulling a model is usually the first thing I do after getting a new app up I’m onboarding to and running.  I have a completely unsubstantiated theory that with the advent of VSCode and more editors with a IDE feel with everything built in has made it seem like the Rails console is an afterthought and not a core feature.  *Shakes fist* back in my day (not sure about that one)
 
 You can also customize your rails console by updating your .irbrc file.  Some of the things you can customize are automatically expanding objects or disable the autocomplete available in the newer versions of Ruby.
@@ -62,7 +63,6 @@ irb(main):001:0> user.method(:send_confirmation_instructions).source_location
 => ["/Users/cody/.rbenv/versions/3.2.1/lib/ruby/gems/3.2.0/gems/devise-4.8.1/lib/devise/models/confirmable.rb", 115]
 ```
 
-
 With this info, we can run `bundle open devise` and can look in
 `lib/devise/models/confirmable.rb` on line 115 to see where the
 `send_confirmation_instructions` method is defined.
@@ -71,55 +71,134 @@ That's a great option, but when I have to dig through source code, I usually use
 Github since it's easier to share a link to a specific line in a file (more on
 that below)
 
-### Practice using more debugging tools.
-This one is admittedly a little more tricky than it used to be if you run your Rails application with bin/dev using something like foreman.
+### 2. Practice using more debugging tools.
+If you run your Rails application with bin/dev using something like foreman,
+this can be a little tricky for a newer developer.
 
-In this scenario, you’ll place your debugger (pry, debugger, byebug or whatever) and your server process will pause and display a debugger prompt that you’re unable to connect to.  Personally, I’m a big fan of overmind from the fine folks at Evil Martians which will let me connect to a specific process in my Procfile.  What does all that mean?  Let say I start my Rails server in a process I’m calling ‘web’ , I have some other services that handle things like rebuilding js and css, and sometimes extras like stripe cli, docker, or ngrok.  
+In this scenario, you’ll place your debugger (pry, debugger, byebug or whatever) and your server process will pause and display a debugger prompt that you’re unable to connect to.  In other words, you'll see the debugger prompt, but your not able to interact with it.
+
+Personally, I’m a big fan of [overmind](https://github.com/DarthSim/overmind) which will let me connect to a specific process in my Procfile.dev.  What does all that mean?  Let say I start my Rails server in a process I’m calling ‘web’ , I have some other services that handle things like rebuilding js and css, and sometimes extras like stripe cli, docker, or ngrok.  Here's an example of what's in my `Procfile.dev`
+
+```
+web: bin/rails server -p $PORT
+css: yarn build:css --watch
+js: yarn build --reload
+worker: bundle exec sidekiq
+stripe: stripe listen --forward-to localhost:5000/webhooks/stripe
+ngrok: ngrok http --log=stdout 5000
+```
 
 I can connect to any one of these individual processes with:
 
-`$ overmind connect web`
+`$ overmind connect PROCESS_NAME`
+
+If I placed a debugger in one of my controllers, I could connect to my web
+process with `overmind connect web`
 
 This connects me to my web process with overmind.  This is along the same lines of if I just started my Rails server with rails s.
 
-That connects me to the debugger.
+If I wanted to do something similar to debug a job running in Sidekiq, I could
+place a debugger in my job and connect to the `worker` process with `overmind
+connect worker`
 
-Overmind requires tmux, which dont get my wrong is one of my favorite tools, but it’s still an additional dependency and one more thing to install and mange as a newer dev.
+Overmind requires tmux, which don't get my wrong, is one of my favorite tools. But, it’s still an additional dependency and one more thing to install and mange as a newer dev.
 
-I think the easiest way to get to a live debugger is something like commenting out the web process in your Procfile, open a new window for your terminal and start a Rails server.  In this window your debugger will be available.
+I think the easiest way to get to a live debugger is something like commenting out the web process in your Procfile (so you can still use `bin/dev` for assets and other items if that's already set up), open a new window for your terminal and start a Rails server.  In this window your debugger will be available.
 
-Once you _have_ the debugger repl running?
+Now that you have actually connected to your debugger, what now?
 
-Usually I check the current state of variables and objects, sometimes I’ll build new ones and check valid? And errors before trying to save and raising errors.  That lets me try to set some values and see if I know what’s required to get our object to a valid state.
+Usually I check the current state of variables and objects. Sometimes I’ll build new ones, call `.valid?` and to check any errors before trying to save.  That lets me try to set some values and see if I know what’s required to get our object to a valid state.
+
+My debugger of choice is [ruby debug](https://github.com/ruby/debug) and my favorite unsung feature of ruy debug is it has an alias that allows you to use `debugger` which is the same keyword for the JS debugger.
 
 There are a ton of options you can use.  I don’t use much more past ‘c’ for continue meaning continue execution, and ‘n’ for next when goes to the next line.
 
-The biggest benefit for me is using it as a quick way to re-create the exact conditions of an error making for a much shorter feedback loop
+The biggest benefit for me is using it as a quick way to re-create the exact conditions of an error making for a much shorter feedback loop.  I'll have some more to say on keeping a short feedback loop.
 
-### Communication
-This is a pretty broad one.  Can be anything from writing a good commit message, a good pull request description, comment for clarification on an issue, how to clarify feedback and approach and even how to talk about what you learned in more detail to share with others
-
-
-### Git gud
-This isn’t even about using Git.  It’s more about figuring out how to find more information on whatever it is that your looking for wherever the repo is hosted.  For me, that’s usually github.  One thing I suggest is before you open your first pull request, take some time to look through a lot of the recently merged changes to get a better understanding of how the team prefers to do things.  Branch naming conventions, what type and how much testing do they require, screenshots or recordings that may be needed and any other specific info that might not be 100% in a pull request template, if it’s even there at all.
-
-Being able to search through source code for gems your using to see how things are defined, or seeings how they’re implemented and tested
-
-Searching the git blame for history on changes
-
-Searching by a specific term or feature and filtering by closed pull requests to see what’s been merged.
+### 3. Communication
+<!-- This is a pretty broad one. This can be anything from writing a good commit message, a good pull request description, comment for clarification on an issue, how to clarify feedback and approach and even how to talk about what you learned in more detail to share with others -->
 
 
-### Don’t fly too close to the sun and try to add a giant block in a spec at once
-This is a continuation of keeping your feedback loop quick.  I can’t tell you how many times I’ve tried to implement a whole spec with contexts, describe, before blocks of set up only to leave out an end or two.
+This is a pretty broad one.  Ruby was designed with programmer happiness and
+readability in mind.  It can be really easy to read through some ruby code and
+have an idea of what's happening.  Readability and clarity are things you should
+focus on outside of your code editor as well.  It can be intimidating asking for
+clarification or filling out a bug report on a new project.
+
+To feel more confident in your communication, do a little bit of digging around
+prior to sending your message.  What exactly does that mean?
+
+Let's say you're not sure who or how to ask for clarification on a ticket you've
+been assigned.  Look through some of the recentl closed tickets to get an idea
+of how that particular team is communicating and any important information you
+need to include.  This can help you get together things like pull request links,
+screenshots, or steps to re-produce beforehand, giving whoever your reaching out
+to the best information.
+
+You can do the same thinig with async communication tools like Slack and
+Discord.  Skim through the history and see if your question has already been
+answered or the best way to ask your question.
+
+Prior to opening my first pull request on a team.  I'll take some time and
+review some recently merged pull requests to make sure I have everything I need,
+see if there's anything that I may need to include that may not be included in a
+pull request template if there's even one at all.
+
+Solid comminication is something that can help others give you help.  It's not
+uncommon for me to work on a few projects within a single day.  Giving my poor,
+context-switched brain detailed information on what you've tried, what you
+expect to happen, and what's actually happening can give me a much better
+context as to what's happening.
+
+Good communication between technical and less technical stakeholders can be a
+huge benefit.
+
+
+### 4. Code Spelunking
+I don't think this is a real term, this is just something I refer to as
+embarking into source code to find some more information.  Usually this is in
+the source code of a gem.
+
+Being able to search through source code for gems your using to see how or where things are defined, seeing how they’re implemented and seeing examples of how it's being tested are all some examples of common things I'll do.
+
+Searching the git blame for history on changes is another good one.  Viewing the
+history and seeing each commit where each line was introduced can give some
+great information on a file.  If you see 1 or 2 single commits, a lot of times,
+those are bug fixes.  Clicking on that commit in Github takes you to all the
+changes for that commit and a quick search of that commit will point you to the
+pull request where that change was merged in.
+
+Lots of single commits could indicate a lot of churn in that file, meaning there
+are lots of smaller changes which could mean multople bugs and issues. This is
+com great infomration on a potentially brittle file that you may want to explore
+further.  All it took was a few clicks.
+
+Searching by a specific term or feature and filtering by closed pull requests to see what’s been merged is another way to get some more information on a task if you're not sure where to start.
+
+
+<!-- ### 5. Don’t fly too close to the sun and try to add a giant block in a spec at once -->
+### 5. Keep your feedback look tight
+(update that to keep your feeback loop quick)
+<!-- This is a continuation of keeping your feedback loop quick.  I can’t tell you how many times I’ve tried to implement a whole spec with contexts, describe, before blocks of set up only to leave out an end or two. -->
+
+<!-- A good habit I always recommend is adding your blocks one at a time and running your spec to make sure everything is still working. -->
+
+<!-- It may sound like overkill, but a few extra seconds and finding errors fast and after minimal changes beats commenting out and running things to try to get it all working.  Run often and fail fast. -->
+
+Failing fast isn't just something that's reserved for startups.  Failing fast in
+development terms, at least for me, is trying or testing things after _each
+change_.  Or, whenever it makes sense.  Doing this helps me see issues and
+errors faster and more importantly, with fewer changes introduced since the last
+working state.  Having a list of 1-2 things that could be wrong can help you
+find your issue so much faster than if you have 10-15.
+
+I can’t tell you how many times I’ve tried to implement a whole spec with context, describe, and before blocks of set up only to leave out an end or two.
 
 A good habit I always recommend is adding your blocks one at a time and running your spec to make sure everything is still working.
 
 It may sound like overkill, but a few extra seconds and finding errors fast and after minimal changes beats commenting out and running things to try to get it all working.  Run often and fail fast.
 
-
 Like I said, this is by no means exhaustive or definitive, just some things I’ve found myself talking about on a few occasions recently.  If there are some tips you’ve found really useful for becoming a more comfortable and confident rails developer, please let me know, I’d love to hear them.
-
 
 I hope the tips are helpful for you and help you feel more comfortable with
 Rails.  Let me know which tips you think are the most helpful, I'll be expanding
