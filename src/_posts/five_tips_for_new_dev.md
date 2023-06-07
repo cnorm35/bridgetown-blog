@@ -40,7 +40,7 @@ correct values and seeing the correct output
 
 ```ruby
 irb(main):001:0> I18n.t('users.agreements.show')
-=> {:title=>"%{agreement} Changed", :last_updated=>"Last updated %{date}", :description=>"Before you can proceed, you must read and accept the new %{agreement}.", :accept=>"I Accept", :decline=>"I Decline"}
+=> {:title>"%{agreement} Changed", :last_updated=>"Last updated %{date}", :description=>"Before you can proceed, you must read and accept the new %{agreement}.", :accept=>"I Accept", :decline=>"I Decline"}
 ```
 
 A quick smoke test to make sure a new class or module has been added.  An example of this would be creating a concern called MySpecialConcern and calling that in the console.  If it’s defined correctly, it will return itself. Let's say I just added a new plain ruby class called `TwilioService` and would like to confirm it's being loaded correctly.  The main reasons it would not load correctly are misspellings either with the class or the file name or the location of the file not being autoloaded into your application.  It's just another quick test to catch errors quickly.
