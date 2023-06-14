@@ -306,6 +306,7 @@ you have configured in you database.yml file.
 
 You'll see some errors if you haven't set up your database yet so make sure
 that's been completed before trying it.  Or don't I'm not a cop (shrug)
+If you've never used a DB console, at least on PG, use `/q` to exit.
 
 While not specifically a 'rails' console thing, there's another console that's
 available within Rails.  That's the `db_console`
