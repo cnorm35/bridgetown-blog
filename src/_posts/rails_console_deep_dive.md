@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Rails Console Deep Dive
-date:   2023-06-02 16:54:46 -0500
+date:   2023-06-07 16:54:46 -0500
 category: ruby
 excerpt: "Tips and tricks to help you get the most from your Rails console"
 author: cody
@@ -239,12 +239,90 @@ Working version
 <!-- something_else as my var names.  Maybe say something about that Jason Sweet post -->
 <!-- about making rules for not thinking about things -->
 
-route stuff
-<!-- encrypted creds -->
-source_location stuff and source code for method
-listing and searching for methods
-talk about the `app` object
+<!-- route stuff -->
+### Route helpers
+You can also check the paths for your route helpers that will return the path
+for the given route by calling the route on the `app` object
+
+```ruby
+[11] pry(main)> app.new_billing_address_path
+=> "/billing_address/new"
+[12] pry(main)> app.root_path
+=> "/"
+
+### source location
+```
+> Product.instance_method(:discount_amount).source_location
+=> ["/home/arjun/Sampl_work/rr/app/models/product.rb", 7]
+```
+(copeied over from the last post)
+One of my favorite tricks to use in the Rails console is `source_location`.
+[Source location](https://ruby-doc.org/3.2.2/Method.html#method-i-source_location){:target="_blank"} tells you the location where a method is defined.
+
+Let's say we have a `User` model using Devise and requires the User to confirm their email
+address.  If we'd like to find where the `send_confirmation_instructions` method
+is defined we can use the code from the snippet below.
+
+```ruby
+irb(main):001:0> user.method(:send_confirmation_instructions).source_location
+=> ["/Users/cody/.rbenv/versions/3.2.1/lib/ruby/gems/3.2.0/gems/devise-4.8.1/lib/devise/models/confirmable.rb", 115]
+```
+
+With this info, we can run `bundle open devise` and can look in
+`lib/devise/models/confirmable.rb` on line 115 to see where the
+`send_confirmation_instructions` method is defined.
+
+That's a great option, but when I have to dig through source code, I usually use
+GitHub since it's easier to share a link to a specific line in a file (more on
+that below)
+
+```
+
+### Listing methods on a class
+Within the console, you can also list out the methods on a given class. The
+methods are returned as an Array of symbols.  There's nothing particularly
+magical about this return value and we can chain additional methods to that
+Array to get more information.
 
 
-Touch on Rails runners and DBConsole
+(Double check this, some of these values look weird.  It might be returning the
+methods on the `Class` class
+
+
+```ruby
+[26] pry(main)> Enumerable.methods.include?(:to_a?)
+=> false
+[27] pry(main)> Enumerable.methods.include?(:to_s)
+=> true
+```
+
+### Viewing tables
+```ruby
+> ActiveRecord::Base.connection.tables
+```
+If you need to do more than just see a list of the tables, you can use the handy
+`rails dbconsole command` to open a database console connected to the database
+you have configured in you database.yml file.
+
+You'll see some errors if you haven't set up your database yet so make sure
+that's been completed before trying it.  Or don't I'm not a cop (shrug)
+
+While not specifically a 'rails' console thing, there's another console that's
+available within Rails.  That's the `db_console`
+
+### Rails runners
+And rouding out the rails console adjacent tasks, rails runners are cool and
+might be something you need to do for a long time with a single command.  Think
+something like generating and sending reports on Heroku
+
+https://guides.rubyonrails.org/command_line.html#bin-rails-runner
+
+
+
+I hope you've enjoyed and found some of these tips helpful, the Rails console is
+absolutely one of my favorite tools in the rails ecosystem and knowledge is
+power.  It keeps your feedback loop small and fast and makes you look really
+cool.  Or, at least cool to me.
+
+
 
