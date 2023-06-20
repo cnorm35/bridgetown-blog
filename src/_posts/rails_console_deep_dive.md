@@ -6,25 +6,30 @@ category: ruby
 excerpt: "Tips and tricks to help you get the most from your Rails console"
 author: cody
 ---
-I received a lot of great feedback on some of the tips for how to get the most out of your Rails console. It was great seeing new and experienced developers pick up a couple of new tips to add
-to their arsenal.
+<!-- I received a lot of great feedback on tips for how to get the most out of your Rails console. It was great seeing new and experienced developers pick up a couple of new tips to add -->
+<!-- to their arsenal. -->
+
+I received some great feedback on how newer Rails developers can start to
+level up and get the most from the Rails console. I also heard from some
+experienced developers they picked up some new tricks as well.  This will be a
+more in-depth look at how you can get more out of the Rails console.
 
 I'm not sure if it's true, but it definitely _feels_ like I spend a big chunk of
-my dev time with my Rails console.  I really love being able to check things in
+my dev time with my Rails console. I really love being able to check things in
 the console prior to running the app and have a chance to spot potentials errors
 before having to load the app. This is one of the ways I keep my feedback loop
 tight.
 
-Here are some handy tips and tricks to get the most from your Rails console.
+Here are some handy tips and tricks to get the most from the Rails console.
 
 ### Helper methods
 
-If you read my other post with 5 ti[s for new Rails developers, some of these
+If you read my other post, _5 Tips for New Rails Developers_, some of these
 may look familiar.
 
 I love being able to use and test helper methods in the console.  Some of the
 more common ones I find myself using are [ActionView helper methods](https://guides.rubyonrails.org/action_view_helpers.html){:target="_blank"} and I18n translations.
-Being able to quickly test different options is a much easier process without
+Quickly testing different options in the console is a much easier process without
 having to refresh your browser and check the output.
 
 Some examples from `ActionView::Helpers::NumberHelper`
@@ -52,14 +57,14 @@ irb(main):007:0> helper.number_to_phone('5555555555a', raise: true)
 
 ```
 
-If these look cool to you it's because you're absolutely right.  There aren't a
-ton of unique problems that people have never had to solve before and Rails
-usually has a solution or method for your need so don't forget to check around before
-implementing everything on your own.
+If these look cool to you it's because you're absolutely right and you have
+excellent taste.  There aren't a ton of problems that someone has never had to solve and Rails
+usually has a solution or method for your need. Don't forget to check the
+documentation  before implementing everything on your own.
 
 While not specifically a helper method, checking I18n output, especially if
-there are any options passed is another handy way to check things prior to
-running.
+any options are being used, is another handy way to check things prior to
+running your application.
 
 ```ruby
 irb(main):001:0> I18n.t('users.agreements.show')
@@ -71,8 +76,7 @@ irb(main):001:0> I18n.t('are_you_sure')
 
 
 ### Checking for a Class or Module
-<!-- Another thing I like to check is making sure new Modules and Classes I've added -->
-<!-- are loaded correctly -->
+
 After creating a new Class or Module, I will enter the name of my newly created
 file and make sure it returns itself.  This is an easy way to check if your new
 Class or Module has been loaded.
@@ -85,12 +89,15 @@ irb(main):002:0> FakeService
 (irb):2:in `<main>': uninitialized constant FakeService (NameError) FakeService
 ```
 
-
-
 ### Viewing encrypted credentials
 
 If you're using encrypted credentials and would like to see the values of your
-credentials without needing to open your config file outside your console, you can use the following commands
+credentials without needing to open your config file outside your console, we have some options for that in the Rails console.
+
+These commands will return a full `Hash` of the credentials in your `yml` file.
+
+There's nothing special about the object that's returned. It's just a regular
+ruby Hash and you can access the values with the normal methods.
 
 ```ruby
 irb(main):001:0> Rails.application.credentials
@@ -100,21 +107,15 @@ irb(main):002:0> Rails.application.credentials.dig(:twilio)[:auth_token]
 => '123123123'
 ```
 
-Which will return a full Hash of the credentials in your `yml` file.
-
-There's nothing special about the object that's returned, it's just a regular
-ruby Hash and you can access the values with the normal methods.
-
-
 
 ### Setting the last result to a variable
 
-This is one I hardly, if ever, use if I'm being honest.  That's not because it
+This is one I hardly, if ever, use.  That's not because it
 isn't useful. It's mainly because I have have a different (less fancy looking)
 way of accomplishing it.
 
 In the Rails console, there's a special method for returning the last value
-returned with the `_`method
+returned with `_` 
 
 ```ruby
 User.first
@@ -128,24 +129,13 @@ user = _
 While not as elegant, I usually hit the up key to get the last command, hit
 `ctrl + a` to jump to the beginning of the line and save to a variable.
 
-Also, somewhere along the way, I found that most of the variables I set in the
-console are going to be compared to another variable.  I pretty much always use
-`something` for my subject and `something_else` for the comparison.  Nothing
-fancy, but have a rule around that is one less thing to think about.  Keeping
-brain friction to a minimum saves that brain power for your more important tasks
-instead of trying to decide what you're going to name a variable.
-
-
 ### Different methods of starting a Rails console
 
-<!-- There are also some handy options for _starting_ your Rails console. -->
 There are also some handy tips to know before even _starting_ your Rails console.
 
 By default, running `rails console` starts up a Rails console within the context
 of your `development` environment.
 
-<!-- Let's say you don't feel like going full code-cowboy and trying to fix an issue -->
-<!-- on your production or staging environment. -->
 Let's say you have a bug or error on your `production` or `staging` environment.
 If you don't feel like going full code-cowboy right off the bat, you can use the `-e` flag to specify a specific environment you would like to
 start your console with.
@@ -162,8 +152,10 @@ $ bin/rails console -e production
 ```
 
 You're also not only limited to `test`, `development` or `production`.  Any
-environment you've configured a file for within `config/environments/` will be
-available.  For example, if I have a staging environment configured for my app
+environment you've configured a file for within `config/environments/*` will be
+available.
+
+For example, if I have a staging environment configured for my app
 and a file at `config/environments/staging.rb` or `config/environments/demo.rb` I could open a Rails console in
 the context of the staging or demo environment with
 
@@ -304,7 +296,7 @@ You'll see some errors if you haven't set up your database yet so make sure
 that's been completed before trying it.  Or don't I'm not a cop (shrug)
 If you've never used a DB console, at least on PG, use `/q` to exit.
 
-I hope you've enjoyed and found some of these tips helpful. The Rails console is
-absolutely one of my favorite tools in the rails ecosystem and knowledge is
-power.  It keeps your feedback loop small and fast and makes you look really
-cool.  Or, at least cool to me.
+I hope found some of these tips helpful. The Rails console is
+absolutely one of my favorite tools in the rails ecosystem. Knowing the
+capabilities and options available to you, helps you get the most from your tooling. It keeps your feedback loop small and fast and makes you look really
+cool. Or, at least cool to me.
