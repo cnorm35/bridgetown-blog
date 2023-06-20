@@ -77,6 +77,9 @@ That's a great option, but when I have to dig through source code, I usually use
 GitHub since it's easier to share a link to a specific line in a file (more on
 that below)
 
+If you'd like to know more about the Rails console, I have a more in-depth
+article <a href="http://codynorman.com/ruby/rails_console_deep_dive/">here</a>
+
 ### 2. Practice using more debugging tools.
 If you run your Rails application with bin/dev using something like Foreman,
 this can be a little tricky for a newer developer.
