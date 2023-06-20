@@ -100,7 +100,7 @@ ruby Hash and you can access the values with the normal methods.
 irb(main):001:0> Rails.application.credentials
 => {...super secret...}
 
-irb(main):002:0> Rails.application.credentials.dig(:twilio)[:auth_token]
+irb(main):002:0> Rails.application.credentials.dig(:twilio, :auth_token)
 => '123123123'
 ```
 
