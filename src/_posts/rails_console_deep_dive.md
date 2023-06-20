@@ -1,14 +1,11 @@
 ---
 layout: post
 title:  Rails Console Deep Dive
-date:   2023-06-07 16:54:46 -0500
+date:   2023-06-19 16:54:46 -0500
 category: ruby
-excerpt: "Tips and tricks to help you get the most from your Rails console"
+excerpt: "Tips and tricks to help you get the most from the Rails console."
 author: cody
 ---
-<!-- I received a lot of great feedback on tips for how to get the most out of your Rails console. It was great seeing new and experienced developers pick up a couple of new tips to add -->
-<!-- to their arsenal. -->
-
 I received some great feedback on how newer Rails developers can start to
 level up and get the most from the Rails console. I also heard from some
 experienced developers they picked up some new tricks as well.  This will be a
