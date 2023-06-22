@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Blue Ridge Ruby Recap
-date:   2023-06-19 16:54:46 -0500
+date:   2023-06-21 16:54:46 -0500
 category: ruby
 excerpt: "Recap of the inagural Blur Ridge Ruby Conference and overview of my
 travel and tech setup"
