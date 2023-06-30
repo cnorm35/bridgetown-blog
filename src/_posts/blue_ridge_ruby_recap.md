@@ -25,7 +25,7 @@ accessible making it a great way for people to attend their first conference.
 
 [Blue Ridge Ruby](https://blueridgeruby.com/){:target="_blank"} is a new regional conference in Asheville, NC hosted by [Jeremy Smith](https://twitter.com/jeremysmithco){:target="_blank"} and [Mark Locklear](https://twitter.com/marklocklear){:target="_blank"}.  It's a wonderful example of why I love regional Ruby conferences.
 
-I had a chance to meet Jeremey Smith, one of the organizers at Rails SaaS last year and remember seeing him tweet out the first inklings of a conference idea (and was already calling it Blue Ridge Ruby). It was great to see this materialize the way it has. I’ve also never followed a conference from inception to the first one so that was a great thing to see unfold.
+I had a chance to meet Jeremy Smith, one of the organizers at Rails SaaS last year and remember seeing him tweet out the first inklings of a conference idea (and was already calling it Blue Ridge Ruby). It was great to see this materialize the way it has. I’ve also never followed a conference from inception to the first one so that was a great thing to see unfold.
 
 I've also never attended a conference that I saw go from idea to reality in less
 than a year.  It was a great experience to watch it all unfold.
