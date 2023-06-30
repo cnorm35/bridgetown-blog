@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  Blue Ridge Ruby Recap
-date:   2023-06-21 16:54:46 -0500
+date:   2023-06-29 16:54:46 -0500
 category: ruby
-excerpt: "Recap of the inagural Blur Ridge Ruby Conference and overview of my
-travel and tech setup"
+excerpt: "Recap of the inaugural Blur Ridge Ruby Conference and an overview of my
+conference travel and tech setup"
 author: cody
 ---
 It feels like we're in the midst of a regional Ruby conference renaissance.  It's
@@ -86,29 +86,32 @@ So, saying this is a survival kit is probably overkill.  Having recently made a 
 Here are some of the items I always make sure to bring when traveling to a
 conference:
 
-Ear Plugs
-Night mask
-Battery packs
-Cords and adapters
-Aspirin
-Kindle
-Small notebook (great for keeping stickers unbent)
-Coffee Setup (new addition)
+- Ear Plugs
+- Night mask
+- Battery packs
+- Cords and adapters
+- Aspirin
+- Kindle
+- Small notebook (great for keeping stickers unbent)
+- Coffee Setup (new addition)
 
 I typically don’t sleep well while traveling and anything I can do to squeeze out better rest is worth it to me.
 
 The coffee setup is a new addition to the travel kit and this was my first time
 testing it out. The items in my coffee setup are
 
-Travel Kettle
-Aeropress with metal mesh grinder
-Hand crank burr grinder
-Whole bean coffee
-Camping coffee mug
+- Travel Kettle
+- Aeropress with metal mesh grinder
+- Hand crank burr grinder
+- Whole bean coffee
+- Backpacking coffee mug
 
+**Collapsed Coffee Kit**
+<img class="position-relative mx-auto rounded w-100 shadow-lg" src="https://personal-blog-assets.s3.amazonaws.com/TravelCoffeeSetup.png" />
+
+**Coffee Kit in Action**
 <img class="position-relative mx-auto rounded w-100 shadow-lg" src="https://personal-blog-assets.s3.amazonaws.com/CoffeeAction.png" />
 
-<img class="position-relative mx-auto rounded w-100 shadow-lg" src="https://personal-blog-assets.s3.amazonaws.com/TravelCoffeeSetup.png" />
 
 
 Albeit a little precarious to pour hot water in the tiny hole of the upside down
@@ -124,29 +127,28 @@ co-working space to catch up on some work.
 This is a rundown of what's in my travel setup and some of the changes I'll make
 before next time.
 
-
+**Work Setup**
 <img class="position-relative mx-auto rounded w-100 shadow-lg" src="https://personal-blog-assets.s3.amazonaws.com/WorkSetup.png" />
 
 
-13 in M2 MacBook Air
+**13 in M2 MacBook Air**
 
 The M2 Air has been amazing.  I've been pretty impressed with it's performance and battery life. I did a whole day at a coworking space, complete with about 2hrs of video calls, streaming and running my dev environment (normal Rails app without using Docker) all day and was left with about 50% towards the end of the day, it’s wild.
 
-Audio Technica ATX-50s
+**Audio Technica ATX-50s**
 
 I love these headphones and have been using them almost daily for 9 years now, I brought a 4ft 1.2m (or whatever) cable along for the trip since it seemed like it would work, and while it worked, with the setup I was using, I wish it was a bit longer. The co-working space had a standing desk and the cable was getting in the way while standing.
 
-Roost Laptop Stand
+**Roost Laptop Stand**
 
 The roost stand performed great.  It was a little expensive but rock solid providing multiple angles and really portable when it’s collapsed.
 
-Keyboard
+**Keyboard**
 
 I decided to bring along my Ergodox EZ with silent cherry brown switches.  I recently swapped the switches for something that wouldn’t be as obnoxious in public and these have been great.  I could probably reduce the noise even more by adding some o-rings. After scouring amazon, I was able to find a case with the correct dimensions to make transporting the ergodox a lot easier.
 
-Mouse
-
-Logitech MX Ergo trackball.
+**Mouse**
+Logitech MX Ergo trackball
 
 This is the only thing I plan on changing.  It was great having something ergonomic but it’s pretty bulky.  I ordered a case for the mouse before leaving, but that was one item that never showed up.  It stopped working shortly after getting back home and wouldn’t be surprised if it was related to being stuck in my checked luggage for 2 flights. While I was waiting on a replacement, I borrowed my wife’s magic trackpad and think this is a much better option and will be using something like this over toting around my trackball (just got the same one with more tilt)
 
