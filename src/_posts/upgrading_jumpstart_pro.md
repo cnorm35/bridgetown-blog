@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Upgrading your Jumpstart Pro App
-date:   2023-06-02 16:54:46 -0500
+date:   2023-07-19 16:54:46 -0500
 category: ruby
 excerpt: "Details on how to pull upstream changes to your Jumpstart Pro SaaS
 app."
@@ -21,7 +21,7 @@ start thinking about scrapping what you have and starting over.
 I've been there so many times.  I've also been on projects that go so long
 without being updated or maintained, it never gets done.
 
-That was something I wanted to avoid with SpotSquid [link] and to try to take a
+That was something I wanted to avoid with [SpotSquid](https://spotsquid.com){:target="_blank"} and to try to take a
 long term view of things and make sure things never get to the point of no
 return.
 
@@ -30,6 +30,7 @@ a solo developer.  I'll be going through how I keep my Jumpstart Pro app updated
 while still shipping features and other changes.
 
 ### Dependabot
+
 Dependabot updates have been a _huge_ help for me keeping things updated.  If
 you don't make the time to try to stay on top of them though, they can quickly
 pile up and become a distraction.
@@ -40,13 +41,14 @@ these pull requests start coming in shortly after pushing to github.
 
 The current Jumpstart Pro default for how often Dependabot checks for updates is
 weekly.  If this is a little optomistic for your taste, you can change the
-`interval` value to `"monthly"` to only check for updates once per month.  Link
-for interval docs. https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#scheduleinterval
+`interval` value to `"monthly"` to only check for updates once per month.
 
 If you want to go the opposite direction, you can also configure Dependabot to
 check for updates daily.
 
-Here are some other config values for Dependabot https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+[Dependabot Interval Options](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#scheduleinterval){:target="_blank"}
+
+[Dependabot Configuration Options](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file){:target="_blank"}
 
 The three `package-ecosystems` we're telling Dependabot to watch for changes for
 are `"github-actions"` for your actions you've added and configured as part of
@@ -54,11 +56,11 @@ your Build/CI process on GitHub, `"npm"` and `"bundler"`
 
 
 This will check NPM for updates to the JS packages and Bundler for ruby gem
-updates.
+updates and open a pull request to our app bumping the versions.
 
 #### Merging changes
 
-(add screenshot in gdrive folder)
+<img class="position-relative mx-auto rounded w-100 shadow-lg" src="https://personal-blog-assets.s3.amazonaws.com/DependabotPullRequests.png" />
 
 This is an exmaple of what you'll see when you view the Dependabot pull requests
 in GitHub.
@@ -73,12 +75,6 @@ was trying at first, but it was a little time consuming and without doing a
 quick check after each merge, if issues surfaced, it was hard to pinpoint
 exactly where the problems were introduced. This one has _really_ burnt me with
 some of the JS package updates.
-
-
-<!-- ******** Think part of it was cut off or pasted in the middle here -->
-Being the solo developer, I have to get the most from my limited time so this is
-what I
-
 
 That way if something goes south in the upgrade, I don't have to worry about
 reverting it, I can just delete the upgrade branch and come back to it whenever
@@ -97,8 +93,6 @@ me more context when I come back to things.
 
 Then I push this branch up to GitHub, update the target branch for each gem
 upgrade PR to my upgrade branch `upgrades/ruby/07-19-23` and merge the changes.
-
-(Add some screenshots of that )
 
 After merging in the updates to the upgrade branch, I pull down the changes to
 my local machine and do some quick checks to make sure everything is working.  I
@@ -136,14 +130,7 @@ time you have.
 I would say currently, if most of the versions bumps are pretty small, it takes
 about 15-20 mins to do those updates.
 
-### Ruby updates
-(Not sure if there's anything that should be here that's not already covered
-above)
-
-
-
 ### Scheduled reminders and recurring tasks to bug my into it
-(slack reminders, recurring trello cards, dependabot settings, etc)
 
 Depending on your notifications, you probably see something when Dependabot
 opens a new pull request.  However, this will _not_ let you know when there are
@@ -175,6 +162,7 @@ Thinking of it as a perk instaead of a chore made it sit a little better with
 me.
 
 ### Upstream Changes
+
 I've done quite a few of upgrades to Jumpstart at this point and this is the
 process I've ended up with.  Feel free to tweak as needed but I really think
 having a process or some rules for how you approach these things save your
@@ -194,6 +182,8 @@ First, I pull the latest changes from upstream (the main JSP repo)
 $ git fetch jumpstart
 ```
 
+<img class="position-relative mx-auto rounded w-100 shadow-lg" src="https://personal-blog-assets.s3.amazonaws.com/JumpstartUpstreamFetch.png" />
+
 Then, I create a branch in the same way I do for the gem updates
 
 ```bash
@@ -208,7 +198,46 @@ After creating my upgrade branch, I merge the jumpstart branch into my upgrade
 branch and push to GitHub.
 
 ```bash
-$ git merge jumpstart branch into upgrades/july-19
+$ git merge jumpstart/main
+```
+
+If you've been updating regularly, this is usually pretty smooth. You may have
+to resolve some conflicts before completing the merge.  If it's only a handful
+of conflicts and/or you feel comfortable resolving conflicts once everything is
+resolved and you've merged your branch you can push that branch up to GitHub to
+start comparing the changes.
+
+If it's been more than a couple of months since you've pulled updates from the
+upstream version of Jumpstart Pro, you'll probably have a lot of conflicts to
+resolve.  If you don't want to tackle all of those conflicts at once, this is my
+process for making that a little easier.
+
+When I need more time and more clarity to work through all the changes, I will
+create a branch with the code from Jumpstart upstream main branch, push that to
+GitHub, then open a pull request to an upgrade or my main branch (depends on how
+brave I'm feeling).
+
+Fetch the latest version on the Jumpstart remote and checkout the main branch
+
+```
+$ git fetch jumpstart
+$ git checkout jumpstart/main
+```
+
+You'll see a notice about 'detached HEAD' which is read-only.  We need to switch
+branches so we'll be able to make commits.
+
+```
+$ git switch -c jumpstart-updates-july
+```
+
+This gives us a local branch with the code we were trying to merge with `git
+merge jumpstart/main`
+
+Push the new branch to GitHub
+
+```
+$ git push origin jumpstart-updates-july
 ```
 
 After pushing, I open a pull request on GitHub from the upgrade branch to the
@@ -222,12 +251,15 @@ come back to this and finish up.
 
 
 (Screenshots of Diffs and collapsed changes)
+<img class="position-relative mx-auto rounded w-100 shadow-lg" src="https://personal-blog-assets.s3.amazonaws.com/JumpstartProUpstreamDiff.png" />
 
 
 This gives you a nice visual to see all the changes.  After reviewing some of
 the changes you may want to do something like "just accept all the changes in
 lib" and "ignore the changes in app/views".  That's really up to you and how you
-prefer to do things.  For me, I'm not actively working or making changes to
+prefer to do things.  Resolving conflicts is out of scope for this article but
+the `--ours` and `--theirs` flags for git can be a big help. You can read some more info on those [here](https://howchoo.com/git/git-merge-conflicts-rebase-ours-theirs){:target="_blank"}
+For me, I'm not actively working or making changes to
 `lib` so feel ok marking those as revivewed and generally ignore all the changes
 to my views and cherry-pick or copy-paste any changes I'd like to include.
 
@@ -247,7 +279,6 @@ depoly to my staging server.
 
 If everything looks good, or at least nothing looks bad, I deploy those changes
 to production.
-
 
 ### Finishing up
 
