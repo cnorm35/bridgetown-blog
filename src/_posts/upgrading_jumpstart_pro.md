@@ -36,11 +36,11 @@ you don't make the time to try to stay on top of them though, they can quickly
 pile up and become a distraction.
 
 Jumpstart Pro ships with configuration for Dependabot so you'll start seeing
-these pull requests start coming in shortly after pushing to github.
+these pull requests start coming in shortly after pushing to GitHub.
 
 
 The current Jumpstart Pro default for how often Dependabot checks for updates is
-weekly.  If this is a little optomistic for your taste, you can change the
+weekly.  If this is a little optimistic for your taste, you can change the
 `interval` value to `"monthly"` to only check for updates once per month.
 
 If you want to go the opposite direction, you can also configure Dependabot to
@@ -62,7 +62,7 @@ updates and open a pull request to our app bumping the versions.
 
 <img class="position-relative mx-auto rounded w-100 shadow-lg" src="https://personal-blog-assets.s3.amazonaws.com/DependabotPullRequests.png" />
 
-This is an exmaple of what you'll see when you view the Dependabot pull requests
+This is an example of what you'll see when you view the Dependabot pull requests
 in GitHub.
 
 One thing you'll notice is we have some nice labels showing that each one of
@@ -111,7 +111,7 @@ gems and can either A) revert the changes and try to merge each gem individually
 to try to find where the problems are being introduced or B) Declare upgrade
 bankruptcy on this one and get try again on the next round of upgrades.  If
 you're on the monthly interval, that might be a little more time than you'd like
-to put things off. The importantl thing is to find what works best for _you_.
+to put things off. The important thing is to find what works best for _you_.
 
 Another big perk of merging things in groups like this is those issues are
 contained within the upgrade branch instead of merged into your main branch
@@ -134,14 +134,14 @@ about 15-20 mins to do those updates.
 
 Depending on your notifications, you probably see something when Dependabot
 opens a new pull request.  However, this will _not_ let you know when there are
-upates to the upstream repo (the repo you forked Jumpstart Pro from).  It's easy
-to forget about this let your verions drift further and further from upstream.
+updates to the upstream repo (the repo you forked Jumpstart Pro from).  It's easy
+to forget about this let your versions drift further and further from upstream.
 The longer it goes, the more involved the upgrade process is.
 
 As a way of gently nudging and reminding myself to upgrade I have a monthly
 Slack reminder to 'Check on upgrades' which is kind of a placeholder for
-dependabot updates if they're not already covered _and_ checking on the upstream
-chagnes from Jumpstart Pro.
+Dependabot updates if they're not already covered _and_ checking on the upstream
+changes from Jumpstart Pro.
 
 I also have a recurring Trello card that gets created once per month to at least
 _check_ on the upgrades.
@@ -158,7 +158,7 @@ advantage of the GoRails team. Thinking of it that way as a time-strapped solo
 founder, why _wouldn't_ I want the GoRails team porting changes that update and
 enhance my app.
 
-Thinking of it as a perk instaead of a chore made it sit a little better with
+Thinking of it as a perk instead of a chore made it sit a little better with
 me.
 
 ### Upstream Changes
@@ -260,7 +260,7 @@ lib" and "ignore the changes in app/views".  That's really up to you and how you
 prefer to do things.  Resolving conflicts is out of scope for this article but
 the `--ours` and `--theirs` flags for git can be a big help. You can read some more info on those [here](https://howchoo.com/git/git-merge-conflicts-rebase-ours-theirs){:target="_blank"}
 For me, I'm not actively working or making changes to
-`lib` so feel ok marking those as revivewed and generally ignore all the changes
+`lib` so feel ok marking those as reviewed and generally ignore all the changes
 to my views and cherry-pick or copy-paste any changes I'd like to include.
 
 As mentioned before, keeping this potentially hairy upgrade within it's own
@@ -275,7 +275,7 @@ rolling as needed.
 
 After running the upgrade branch locally and making sure everything seems to be
 in order, after feeling pretty comfortable about the changes I'll merge and
-depoly to my staging server.
+deploy to my staging server.
 
 If everything looks good, or at least nothing looks bad, I deploy those changes
 to production.
