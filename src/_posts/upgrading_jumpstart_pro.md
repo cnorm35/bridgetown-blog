@@ -7,21 +7,29 @@ excerpt: "An In-depth look on how to pull upstream changes to your Jumpstart Pro
 application."
 author: cody
 ---
-It's something I'm sure most people reading this post are familiar with.  You
-started working on your latest idea from an app.  Start out crushing it and
-shipping code left and right.  Then...as it tends to do, life gets in the way.
+If you're reading this, there's a good chance this will sound familiar...
+
+You've decided to build your latest idea for a SaaS app with [Jumpstart Pro](https://jumpstartrails.com/).
+
+Things are going great and you're shipping code left and right.  Then...as it
+tends to do, life gets in the way.
+
+Weeks or months later, you find some time and renewed vigor to get back at it.
+But before getting back into development, you'd like to take advantage of any
+bug fixes or new features merged to Jumpstart since you initially started the
+app.
 
 Blowing the dust off your old side project and getting things updated again can
 be a pretty daunting task.  There's a point most of us hit where we start
 wondering if the ol' _kill it with fire_ approach is the best path forward and
 start thinking about scrapping what you have and starting over.
 
-I've been there so many times.  I've also been on projects that go so long
-without being updated or maintained, it never gets done.
+I've been there...a lot.  I've also been on projects that go so long
+without being updated or maintained, it hits a point where it seems impossible
+or at least improbable to get approval from the higher ups.
 
-That was something I wanted to avoid with [SpotSquid](https://spotsquid.com){:target="_blank"} and to try to take a
-long-term view of things and make sure things never get to the point of no
-return.
+That was something I wanted to avoid when I first started building [SpotSquid](https://spotsquid.com){:target="_blank"}. I wanted to take a
+long-term view and make sure things never get to the point of no return.
 
 I have a few processes I've started using to keep my running SaaS app updated as
 a solo developer.  I'll be going through how I keep my Jumpstart Pro app updated
