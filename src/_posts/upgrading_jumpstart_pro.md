@@ -3,26 +3,24 @@ layout: post
 title:  Upgrading your Jumpstart Pro App
 date:   2023-07-19 16:54:46 -0500
 category: ruby
-excerpt: "Details on how to pull upstream changes to your Jumpstart Pro SaaS
-app."
+excerpt: "An In-depth look on how to pull upstream changes to your Jumpstart Pro
+application."
 author: cody
 ---
-
-
-It's something I'm sure most people reading this post is familiar with.  You
+It's something I'm sure most people reading this post are familiar with.  You
 started working on your latest idea from an app.  Start out crushing it and
 shipping code left and right.  Then...as it tends to do, life gets in the way.
 
 Blowing the dust off your old side project and getting things updated again can
 be a pretty daunting task.  There's a point most of us hit where we start
-wondering if the ol' _kill it with fire_ method is the best path forward and
+wondering if the ol' _kill it with fire_ approach is the best path forward and
 start thinking about scrapping what you have and starting over.
 
 I've been there so many times.  I've also been on projects that go so long
 without being updated or maintained, it never gets done.
 
 That was something I wanted to avoid with [SpotSquid](https://spotsquid.com){:target="_blank"} and to try to take a
-long term view of things and make sure things never get to the point of no
+long-term view of things and make sure things never get to the point of no
 return.
 
 I have a few processes I've started using to keep my running SaaS app updated as
@@ -31,7 +29,7 @@ while still shipping features and other changes.
 
 ### Dependabot
 
-Dependabot updates have been a _huge_ help for me keeping things updated.  If
+Dependabot updates have been a _huge_ help boost to keeping my app up to date.  If
 you don't make the time to try to stay on top of them though, they can quickly
 pile up and become a distraction.
 
@@ -43,7 +41,7 @@ The current Jumpstart Pro default for how often Dependabot checks for updates is
 weekly.  If this is a little optimistic for your taste, you can change the
 `interval` value to `"monthly"` to only check for updates once per month.
 
-If you want to go the opposite direction, you can also configure Dependabot to
+If you want to go in the opposite direction, you can also configure Dependabot to
 check for updates daily.
 
 [Dependabot Interval Options](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#scheduleinterval){:target="_blank"}
@@ -51,8 +49,8 @@ check for updates daily.
 [Dependabot Configuration Options](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file){:target="_blank"}
 
 The three `package-ecosystems` we're telling Dependabot to watch for changes for
-are `"github-actions"` for your actions you've added and configured as part of
-your Build/CI process on GitHub, `"npm"` and `"bundler"`
+are `"github-actions"` for the actions you've added and configured as part of
+your Build/CI process on GitHub, as well as `"npm"` and `"bundler"`
 
 
 This will check NPM for updates to the JS packages and Bundler for ruby gem
@@ -171,12 +169,10 @@ flow and set of steps that works well for you is important to making this
 something that's repeatable and not so draining.
 
 These steps are assuming you've set up your local repo according to the
-Jumpstart Pro docs here https://jumpstartrails.com/docs/upgrading
-
-in particular `git remote rename origin jumpstart`
+[Jumpstart Pro Docs](https://jumpstartrails.com/docs/upgrading) in particular `git remote rename origin jumpstart`
 
 
-First, I pull the latest changes from upstream (the main JSP repo)
+First, I pull the latest changes from upstream (the main Jumpstart Pro repo).
 
 ```bash
 $ git fetch jumpstart
@@ -190,11 +186,10 @@ Then, I create a branch in the same way I do for the gem updates
 $ git checkout -b upgrades/july-19
 ```
 
-I don't usually have other open upgrade branches while updating JSP so don't
+I don't usually have any other open upgrade branches while updating Jumpstarst so I don't
 include anything noting this is for upstream changes but that might help.
 
-
-After creating my upgrade branch, I merge the jumpstart branch into my upgrade
+After creating my upgrade branch, I merge the `jumpstart/main` branch into my upgrade
 branch and push to GitHub.
 
 ```bash
@@ -213,8 +208,8 @@ resolve.  If you don't want to tackle all of those conflicts at once, this is my
 process for making that a little easier.
 
 When I need more time and more clarity to work through all the changes, I will
-create a branch with the code from Jumpstart upstream main branch, push that to
-GitHub, then open a pull request to an upgrade or my main branch (depends on how
+create a branch with the code from Jumpstart upstream main branch. Then push that to
+GitHub and open a pull request to an upgrade branch or my main branch (depending on how
 brave I'm feeling).
 
 Fetch the latest version on the Jumpstart remote and checkout the main branch
@@ -257,15 +252,17 @@ come back to this and finish up.
 This gives you a nice visual to see all the changes.  After reviewing some of
 the changes you may want to do something like "just accept all the changes in
 lib" and "ignore the changes in app/views".  That's really up to you and how you
-prefer to do things.  Resolving conflicts is out of scope for this article but
-the `--ours` and `--theirs` flags for git can be a big help. You can read some more info on those [here](https://howchoo.com/git/git-merge-conflicts-rebase-ours-theirs){:target="_blank"}
+prefer to do things.
+
+Resolving conflicts is beyond the scope for this post but the `--ours` and `--theirs` flags for git can be a big help.
+You can read some more info on those [here](https://howchoo.com/git/git-merge-conflicts-rebase-ours-theirs){:target="_blank"}
 For me, I'm not actively working or making changes to
 `lib` so feel ok marking those as reviewed and generally ignore all the changes
 to my views and cherry-pick or copy-paste any changes I'd like to include.
 
-As mentioned before, keeping this potentially hairy upgrade within it's own
-branch giving you plenty of time to review and test prior to merging allows you
-to skip all together or pick back up where you left off whenever you run out of
+As mentioned before, keeping this potentially hairy upgrade within its own
+branch giving you plenty of time to review and test before merging allows you
+to skip it entirely or pick back up where you left off whenever you run out of
 time.  Merging the upgrade branch into your main branch this way also gives you
 the option to revert those changes with a single click.
 
@@ -285,8 +282,3 @@ to production.
 I wouldn't say I _love_ all of the upgrading I've been doing but I will say it's
 been a huge help in keeping my apps up to date and finding ways to help myself
 and others keep theirs updated as well.
-
-I've been working on building apps with Jumpstart for about 2 years now both
-personally and professionally and would love to talk to you about how I might be
-able to help (at some point, no availability right now)
-
