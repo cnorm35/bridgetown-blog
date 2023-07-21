@@ -3,8 +3,7 @@ layout: post
 title:  Upgrading your Jumpstart Pro App
 date:   2023-07-19 16:54:46 -0500
 category: ruby
-excerpt: "An In-depth look on how to pull upstream changes to your Jumpstart Pro
-application."
+excerpt: "An in-depth look at how I keep my Jumpstart Pro SaaS apps updated"
 author: cody
 ---
 If you're reading this, there's a good chance this will sound familiar...
