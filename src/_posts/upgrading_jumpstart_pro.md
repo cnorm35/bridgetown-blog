@@ -69,12 +69,12 @@ updates and open a pull request to our app bumping the versions.
 This is an example of what you'll see when you view the Dependabot pull requests
 in GitHub.
 
-You'll notice there are some nice labels showing if each one of
+You'll notice some nice labels are showing if each one of
 these is a dependency update and if it's for JS or Ruby.  You may also notice the failing
 builds, I haven't had time or desire to fix that but I think this process can be pretty close to automatic where it merges after tests pass if you choose to do so.
 
 One option is to merge each of these pull requests individually.  This is how I
-was doing things at first, but it was a little time consuming.  Also, if any
+was doing things at first, but it was a little time-consuming.  Also, if any
 issues popped up, it was hard to pinpoint exactly where the problems were
 introduced.
 
@@ -82,7 +82,7 @@ introduced.
 What I've found works best for me is to create a new branch to merge the gem
 updates into and one to merge the JS updates into.
 
-I used to only do a single upgrade branch but after running into a couple issues
+I used to only do a single upgrade branch but after running into a couple of issues
 with JS package updates, I keep those separate from _everything else_ to be able
 to point a finger in the right direction if something goes wrong.
 
@@ -91,7 +91,7 @@ reverting it right away.  You can just delete or ignore the upgrade branch or
 come back to it when you have more time.
 
 Especially when this is a side-project, you may have hard stops on your time,
-this keeps your app from getting to a broken state so the next time you some free time to work on it, you'll spend it just getting things
+this keeps your app from getting to a broken state so the next time you have some free time to work on it, you'll spend it just getting things
 running again.
 
 I start with the Ruby gems since that's where I have the most experience with
@@ -132,10 +132,10 @@ to put things off. The important thing is to find what works best for _you_.
 
 Another big perk of merging things in groups like this is those issues are
 contained within the upgrade branch instead of merged into your main branch
-where you feel like you have to try to frantically fix a broken deploy.
+where you feel like you have to try to frantically fix a broken deployment.
 
-Then I repeat the same process for the JS pacakges.  I'm not pointing fingers
-but the JS pacakges seem more likely to introduce breaking changes in minor
+Then I repeat the same process for the JS packages.  I'm not pointing fingers
+but the JS packages seem more likely to introduce breaking changes in minor
 versions so I _really_ try to keep these separate and make sure everything is
 working as a whole before merging.
 
@@ -144,7 +144,7 @@ friction to upgrading and makes it a little more enticing and manageable.
 Especially if you're working solo, you have to get the most out of the limited
 time you have.
 
-I would say currently, if most of the versions bumps are pretty small, it takes
+I would say currently, if most of the version bumps are pretty small, it takes
 me about 15-20 mins per week to keep everything updated.
 
 ### Scheduled reminders and recurring tasks
@@ -152,12 +152,12 @@ me about 15-20 mins per week to keep everything updated.
 Depending on your notifications, you probably see something when Dependabot
 opens a new pull request.  However, this will _not_ let you know when there are
 updates to the upstream repo (the repo you generated your Jumpstart Pro app from).  It's easy
-to forget about this let your versions drift further and further from upstream.
+to forget about this and let your versions drift further and further from upstream.
 The longer it goes, the more involved the upgrade process can be.
 
 As a way of gently nudging and reminding myself to upgrade, I have a monthly
-Slack reminder to 'Check on upgrades'. That's is kind of a placeholder for
-Dependabot updates if they're not already covered _and_ checking on the upstream
+Slack reminder to 'Check on upgrades'. That's kind of a placeholder for
+Dependabot updates if they're not already covered _and_ to check on the upstream
 changes from Jumpstart Pro.
 
 I also have a recurring Trello card that gets created once per month to at least
@@ -183,9 +183,9 @@ me.
 
 ### Upstream Changes
 
-I've done quite a few of upgrades to Jumpstart at this point and this is the
-process I've ended up with.  Feel free to tweak as needed but I really think
-having a process or some rules for how you approach these things save your
+I've done quite a few upgrades to Jumpstart at this point and this is the
+process I've ended up with.  Feel free to tweak as needed but I think
+having a process or some rules for how you approach these things saves your
 mental bandwidth for the interesting challenges your app is tackling.  Finding a
 flow and set of steps that works well for you is important to making this
 something that's repeatable and not so draining.
@@ -276,11 +276,12 @@ the changes you may want to do something like "just accept all the changes in
 lib" and "ignore the changes in app/views".  That's really up to you and how you
 prefer to do things.
 
-Resolving conflicts is beyond the scope for this post but the `--ours` and `--theirs` flags for git can be a big help.
-You can read some more info on those [here](https://howchoo.com/git/git-merge-conflicts-rebase-ours-theirs){:target="_blank"}
 For me, I'm not actively working or making changes to
 `lib` so feel ok marking those as reviewed and generally ignore all the changes
 to my views and cherry-pick or copy-paste any changes I'd like to include.
+
+Resolving conflicts is beyond the scope of this post but the `--ours` and `--theirs` flags for git can be a big help.
+You can read some more info on those [here](https://howchoo.com/git/git-merge-conflicts-rebase-ours-theirs){:target="_blank"}
 
 As mentioned before, keeping this potentially hairy upgrade within its own
 branch giving you plenty of time to review and test before merging allows you
