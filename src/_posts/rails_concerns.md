@@ -161,7 +161,7 @@ end
 ```
 
 ```ruby
-disabled_accoutns = Account.disabled
+disabled_accounts = Account.disabled
 ```
 
 This gives us a clean and powerful way to define logic that we'd like to share
@@ -233,7 +233,7 @@ in base object (is that what they call it for concerns)
 
 Add example and link to some more info.
 
-### Testing and Custom Errors
+### Custom Errors
 
 One thing I like to add to Concerns is a custom error class I raise if there are
 any errors.  Raising the specific error allows error handling to be more
@@ -252,6 +252,8 @@ module FileNames
   end
 end
 ```
+
+### Testing
 
 There are a few different ways to test Concerns. Some people prefer doing
 something like a shared context for the functionality the Concern adds, others
