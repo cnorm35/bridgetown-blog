@@ -38,7 +38,7 @@ A [Concern](https://api.rubyonrails.org/classes/ActiveSupport/Concern.html){:tar
 
 From the [Rails
 Docs](https://api.rubyonrails.org/classes/ActiveSupport/Concern.html) we can
-look at an example of a Concern, and what an equvilient module would look like
+look at an example of a Concern, and what an equivalent module would look like
 without the extras provided by `ActiveSupport::Concern`
 
 ```ruby
@@ -132,7 +132,7 @@ included do
 end
 ```
 
-The code within the `included do` block will be added to any class it's inlcuded
+The code within the `included do` block will be added to any class it's included
 into.
 
 Say we have a `User` model with a `disabled: boolean` column
@@ -171,7 +171,7 @@ We're also not limited to Class methods, we can also define instance methods.
 Let's assume both the `User` and `Account` models from above have a `name` field
 that's a string.
 
-Let's say we want to format the `name` field a specifc way to create a filename.
+Let's say we want to format the `name` field a specific way to create a filename.
 
 ```ruby
 module FileNames
@@ -214,7 +214,7 @@ specific spot, those directories are there for organization and clarity.
 
 If you're working with something that interacts with both Models and
 Controllers and don't want to break into smaller chunks, consider placing
-somwhere like `lib`
+somewhere like `lib`
 
 ### Prepending
 
@@ -224,7 +224,7 @@ our Concern.
 Prepending changes the method lookup order to be in front of where it's being
 prepended into.
 
-If we were to `prepend FileNames` when we added our conern, our methods defined
+If we were to `prepend FileNames` when we added our concern, our methods defined
 in the `FileNames` concern would be returned before any methods of the same name
 in the class it's being included into.
 
@@ -255,7 +255,7 @@ end
 
 There are a few different ways to test Concerns. Some people prefer doing
 something like a shared context for the functionality the Concern adds, others
-perfer testing the methods directly in the objects they're included to.  There's
+prefer testing the methods directly in the objects they're included to.  There's
 also the option of creating a dummy class to include your Concern to and testing
 that dummy class.  This is the method I go for most of the time. In the same way
 concerns help keep duplication to a minimum, I like this option since I'm not
@@ -298,7 +298,7 @@ purposes of testing.
 
 ### Closing
 Concerns are a great way to keep your code DRY.  When you find yourself
-re-writing or repeating similar methods arcross different classes, think about
+re-writing or repeating similar methods across different classes, think about
 if moving some of the logic to a concern makes sense.  Hopefully, this post has
 prepared you to better handle the next time to have to update existing concerns
 or find an opportunity to add a new one.
