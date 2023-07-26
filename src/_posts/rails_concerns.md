@@ -3,7 +3,9 @@ layout: post
 title:  Using Concerns with Ruby on Rails
 date:   2023-07-23 16:54:46 -0500
 category: ruby
-excerpt: "Looking at what are Rails concerns and how and why to use them"
+excerpt: "Rails Concerns are a great way to keep your code DRY by making it easy
+to share code across Modules and Classes.  The post will be going through some
+of the in-and-outs of Concerns, why they're useful and how to use them."
 author: cody
 ---
 For the past few months, I've been holding standups and office hours with a top-notch group of
