@@ -84,7 +84,7 @@ end
 ```
 
 
-Not only does `ActiveSupport::Concern` give us a cleaner interface dynamically
+Not only does `ActiveSupport::Concern` give us a cleaner interface to dynamically
 define methods into the classes they're included in, it can also resolve module
 dependencies.
 
@@ -141,8 +141,8 @@ included do
 end
 ```
 
-The code within the `included` block will be added to any class it's included
-into.
+The code within the `included` block will be added to any Class it's included
+in.
 
 Say we have a `User` model with a `disabled: boolean` column
 
@@ -259,9 +259,10 @@ end
 
 There are a few different ways to test Concerns. Some people prefer doing
 something like a shared context for the functionality the Concern adds, others
-prefer testing the methods directly in the objects they're included to.  There's
-also the option of creating a dummy class to include your Concern to and testing
-that dummy class.  This is the method I go for most of the time. In the same way
+prefer testing the methods directly in the objects they're included in. 
+
+There's also the option of creating a dummy class to include your Concern into and testing
+that class.  This is the method I go for most of the time. In the same way
 concerns help keep duplication to a minimum, I like this option since I'm not
 continuously adding testing to new objects
 
