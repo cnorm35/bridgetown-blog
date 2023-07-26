@@ -233,7 +233,25 @@ Without overthinking it too much, if your Concern will be added into a
 controller, it should be in the `app/controllers/concerns` directory and the
 same applies for models.
 
-If you're working with something that interacts with both Models and
+If you're Concern is only interacting with a single model, it's best to
+namespace your concern with the same name as the model you're interacting with.
+
+```ruby
+# app/models/post.rb
+class Post
+  include Foo
+end
+
+# app/models/post/foo.rb
+module Post::Foo
+  extend ActiveSupprt::Concern
+end
+```
+
+Thanks to [Kasper Timm Hansen](https://github.com/kaspth) for this suggestion on
+namespacing!
+
+When you're working with something that interacts with both Models and
 Controllers and don't want to break into smaller chunks, consider placing
 somewhere like `lib`.
 
