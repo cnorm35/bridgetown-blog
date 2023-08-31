@@ -311,7 +311,7 @@ RSpec.describe MockController, type: :controller do
   end
 
   describe "#browser_time_zone" do
-    expect(controller.browser_time_zone).to "America/Los_Angeles"
+    expect(controller.browser_time_zone).to eq("America/Los_Angeles")
   end
 end
 
