@@ -77,8 +77,13 @@ differences is we try to keep everything as close to what you'd experience at a
 job as possible.  That include things like daily standups, grooming and triaging
 issues, and pairing sessions.
 
+I'm fortuante to be one of the tech leads overseeing the development for the
+conference app built by a team of early career developers for the first ever
+Rails World conference in Amsterdam.  You can read more about this project
+[here](https://rubyonrails.org/2023/5/30/rails-foundation-and-agency-of-learning-partner-for-event-app){:target="_blank"}.
+
 I've really enjoyed mentoring newer develpopers and am thankful I can do my part
-to help ensure a bright future for the ruby comminity.
+to help ensure a bright future for the Ruby community.
 
 ### Ruby on Rails Consulting
 
