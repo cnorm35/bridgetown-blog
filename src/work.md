@@ -28,7 +28,7 @@ check out the posts tagged with startups if you'd like to know more.
 </div>
 
 
-### Screaming Recomendations
+### Screaming Recommendations
 
 The best thing I can say about this project is it's something that I feel is
 very 'me'.  Odd, yet practical with a dash of weird.  This is something I made
@@ -68,32 +68,39 @@ artist below.
     </a>
 </div>
 
-### Engineering Mentor Agency of Learning
+### Engineering Mentor with The Agency of Learning
 
 I've been volunteering as a mentor with an organization called [The Agency of
-Learning](https://agencyoflearning.com/).  The groups goal is to help prepare developers early in their career
-not only land their first gig, but thrive and excel.  One of the interesting
+Learning](https://agencyoflearning.com/).  The group's goal is to help prepare developers early in their career
+not just land their first gig, but thrive and excel.  One of the interesting
 differences is we try to keep everything as close to what you'd experience at a
-job as possible.  That include things like daily standups, grooming and triaging
+job as possible.  That includes things like daily standups, grooming and triaging
 issues, and pairing sessions.
 
-I'm fortuante to be one of the tech leads overseeing the development for the
+I'm fortunate to be one of the tech leads overseeing the development for the
 conference app built by a team of early career developers for the first ever
 Rails World conference in Amsterdam.  You can read more about this project
 [here](https://rubyonrails.org/2023/5/30/rails-foundation-and-agency-of-learning-partner-for-event-app){:target="_blank"}.
 
-I've really enjoyed mentoring newer develpopers and am thankful I can do my part
+I've really enjoyed mentoring newer developers and am thankful I can do my part
 to help ensure a bright future for the Ruby community.
+
+If you'd like to know more about how you can hire and empower new developers for
+your team.  I would love to talk with you.
+
+<a class="mr-3" href="mailto:codes@codynorman.com?subject=New Developer Onboarding" rel="noopener noreferrer" target="_blank">
+ Email Me
+</a>
 
 ### Ruby on Rails Consulting
 
-I'm an independent Rails consultant and have been focsuing particularly on SaaS
-projects with either Jumpstart Pro or Bullet Train. I currently do not have any
+I'm an independent Rails consultant and have been focusing on SaaS
+projects using either Jumpstart Pro or Bullet Train. I currently do not have any
 availability, but I'd love to hear how I might be able to help you in the
 future.  You can reach me for any questions or project inquiries at the link
 below
 
 <a class="mr-3" href="mailto:codes@codynorman.com?subject=Project Inquiry" rel="noopener noreferrer" target="_blank">
-  Email
+  Send Project or Consulting Inquiry
 </a>
 
