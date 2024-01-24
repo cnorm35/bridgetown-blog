@@ -155,6 +155,24 @@ it helpful to use `:all` to send _any_ inbound email to the mailbox you pass it.
 
 `routing all: :replies`
 
+This lets you start focuing on the business logic of the mailbox right away and
+update the routing as your needs evolve.
+
+Now, everything is setup to forward _any_ inbound email to the `RepliesMailbox`
+
+You may be wondering...
+
+How do I send an email to my local Rails App?
+
+It's time to have your ticket punched by the Rails Condutor
+
+
+### Sending Emails with Rails Conductor
+
+
+
+
+
 ```
 # app/mailboxes/application_mailbox.rb
 routing all: :replies
