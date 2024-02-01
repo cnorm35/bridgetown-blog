@@ -254,4 +254,89 @@ If you'd like to connect a domain you have to handle all your inbound mailers
 
 https://postmarkapp.com/developer/user-guide/inbound/inbound-domain-forwarding
 
-SEE if you can get this running with ngrok (update development.rb ingress)
+The short version is you need to create a MX record for your inbound email
+domain and set the value to `inbound.postmarkapp.com`
+
+If I wanted to set up something like `inbound.example.com` as my inbound email
+URL, I would create a new DNS record, set the type to MX, add `inbound` in the
+Name section, set the priority 10 (from their docs) and the value to
+`inbound.postmark.com`
+
+[SCREENSHOT OF SUBDOMAIN EXMAMPLE]
+
+The screenshot illustrates adding the DNS record for `example.yourdomain.com`
+
+After adding your DNS record, head back to the Inbound Stream settings page and
+add your inbound domain to the 'Inbound domain forwarding' section and click
+'Save Changes'
+
+And Voila, now you have a production setup for your inbound email.
+
+It's pretty likely that at some point, you'll have some issues you'd like to try
+to diagnose or re-create in your local environment.  
+
+Using ngrok or cloudflare secure tunnel servive exposes your local development
+environment (localhost:3000) to a public URL.  This is great for testing
+webhooks from a 3rd party service to your local environment.
+
+(play around with the ngrok stuff
+(See if you can get this running with ngrok (update development.rb ingress)
+
+start ngrok with `ngrok http 3000` or `ngrok http --log=stdout 3000`
+
+You'll also need to update your `config/environments/development.rb` file to set
+the action mailbox ingress to use Postmark
+
+
+```
+# config/environments/development.rb
+  # use ngrok and update postmark settings to test locally
+  config.action_mailbox.ingress = :postmark
+```
+
+be sure to re-start your server for the changes to take effect (not positive on
+that but probably)
+
+Grab your ngrok URL, vist in your browser to make sure your app loads.
+
+Swap your domain name for the ngrok domain in the Webhook settings, it should
+look something like this:
+
+`https://actionmailbox:7XidyHhGWk7Lir9@dbdca4d80499.ngrok.app/rails/action_mailbox/postmark/inbound_emails`
+
+where `dbdca4d80499.ngrok.app` is the URL sending traffic to my local
+environment.
+
+If we hit the 'Check' button, even without saving, that should check the URL to
+make sure it's working.  You should see a request from Postmark hit your local
+environment a couple seconds after clicking the button.  If all goes well,
+you'll see the green text saying Postmark received a 204 status code.
+
+If it failed, hopefully it made it to your app and you'll have more information
+in your local logs.
+
+
+(Trying to send a test email to postmark email
+6c122bd4809060bdccf96b593a0720ad@inbound.postmarkapp.com - waiting to see if it
+hits my app. I can see the inbound emails but they're still sitting in the
+queued status)
+
+^^^^^ Derp, I don't think I saved the changes so that's probably why it was
+queued for so long?  Updated and still seeing hte emails queued like 25 mins
+later.
+
+This isn't a super speedy process so you may want to just fire the email to
+postmark, download the source and use in the Rails conductor
+
+
+
+Mention something about reviewing the emails in the Activity section,
+downloading the source and using in the Rails Conductor.
+
+
+
+
+
+
+
+
