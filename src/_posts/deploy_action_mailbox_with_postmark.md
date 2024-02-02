@@ -328,7 +328,9 @@ later.
 This isn't a super speedy process so you may want to just fire the email to
 postmark, download the source and use in the Rails conductor
 
-
+It's been like a day and emails still showing as pending in Postmark.  Maybe
+just cut this and talk about getting the email source and using it in the Rails
+Conductor.
 
 Mention something about reviewing the emails in the Activity section,
 downloading the source and using in the Rails Conductor.
