@@ -694,19 +694,16 @@ has the advantage of making it easier to grab the original email file for
 debugging.  This is a great example of where the 'create email from source' in
 the Rails Conductor comes in handy.
 
-Rob Zolkos has a great write up on how you can do that [here](https://world.hey.com/robzolkos/debugging-production-actionmailbox-issues-in-development-f5886579)
+Rob Zolkos has a great write up on how you can do that [here](https://world.hey.com/robzolkos/debugging-production-actionmailbox-issues-in-development-f5886579).
 
 Thanks Rob!
 
 #### Using a subdomain for inbound mail
+
 Another thing that I've found helpful when setting up ActionMailbox for
 production is running all your inbound emails through a subdomain.
 
 `inbound.yourapp.com`
-
-<!-- What you name your sub-domain isn't super important but it helps with making the -->
-<!-- matchers easier in the ApplicationMailbox since you can assume anything ending -->
-<!-- in `inbound.yourapp.com` needs to go _somewhere_. -->
 
 This also helps keeping your MX records separate on DNS.  If you have internal
 email addresses for you app with something like `name@yourapp.com`  and try to
@@ -716,15 +713,18 @@ to accidently overwrite your current DNS settings for existing email stuff.
 <!-- Ask me how I know... -->
 I've learnt this lesson first hand...
 
-<!-- I usually go with Postmark and will be posting something soon on getting -->
-<!-- ActionMailbox running live with Postmark. -->
+Sometimes, mining for gems takes some diggin'.
 
+Action Mailbox is a wonderful example of clean and concise code handling a
+complex problem and have learned a lot reviewing the source code.
 
 I think ActionMailbox is a vastly underrated features of rails and can add
-powerful functionality in a way that feels very Rails-y. Allowing your users to
-perform actions from inbound emails is a great way to add conveinience and
-flexibility to your Rails app.
+powerful functionality in a way that feels very familiar to the standard Rails
+Controllers.
+
+Allowing your users to perform actions from inbound emails is a great way to add conveinience and
+flexibility to your Rails app.  I hope this article has demystified the process
+and given you some ideas on how you can use inbound email in you Rails app.
 
 Let me know if you have any questions, or spot any issues that should be
 updated.  Keep your eye out for some more ActionMailbox content coming soon!
-
