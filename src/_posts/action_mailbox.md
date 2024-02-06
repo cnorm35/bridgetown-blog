@@ -612,16 +612,22 @@ bounce_with PostRequiredMailer.missing(inbound_email)
 
 #### Parsing Attachments
 
-Parsing Attachments from E-mail.  As I've mentioned many times before, people
-are going to be a lot more familiar with their email than the UI of your
-application.  Allowing them to email attachments is a super familiar pattern and
-something pretty much everyone knows how to do.  If they don't I'm honestly
-quite impressed they managed to sign up for your app.
+<!-- Parsing Attachments from E-mail.  As I've mentioned many times before, people -->
+<!-- are going to be a lot more familiar with their email than the UI of your -->
+<!-- application.  Allowing them to email attachments is a super familiar pattern and -->
+<!-- something pretty much everyone knows how to do.  If they don't I'm honestly -->
+<!-- quite impressed they managed to sign up for your app. -->
 
-Let's set I need some 'attachments', in this case, PDF documents from a User.  I
+It's very likely people are exponentialy more familiar with their chosen email
+client than they are the UI of your application. Attaching a file to an email is
+something they've probably done dozens if not hundreds of times.  Leverage this
+familiarness by allowing attachments and docuemnts to be sent and uploaded
+through email.
+
+Let's set I need some 'attachments' or files. in this case, PDF documents from a User.  I
 could give them the steps to walk through uploading everything on their own in
-some sort of self-service portal, or I could lean on what they already know how
-to do.
+some sort of self-service portal, have them upload the required documents in a
+forma...or I could lean on what they already know how to do.
 
 In this example, We'll look at what the process would be for grabbing an
 attached PDF from an email, creating an ActiveStorage object and alerting an
@@ -647,11 +653,11 @@ class LegacyDocumentMailbox < ApplicationMailbox
     )
 
     legacy_document.save!
-    # maybe up this to rescue or bounce with on fail?
   end
 end
 
 ```
+
 
 All of our business logic is within the `create_legacy_document` method, so
 let's break down what's happening.
@@ -664,11 +670,25 @@ legacy_document = LegacyDocument.new(
 ```
 
 We have a `LegacyDocument` active record object that has `name` and `email`
-attributes.  We're creaing a new object and setting the `name` to the value of
+attributes.  Next, we're creating a new object and setting the `name` to the value of
 the email subject and `email` to the first returned sender.
 
-The `mail` gem returns an array of string values when calling `from` so we grab
+Don't forget the `mail` gem returns an array of string values when calling `from` so we grab
 the first one.
+
+Assuming our `LegacyDocument` has the ActiveStorage attachment set up correctly.
+Remember, ActiveStorage is a requirement of ActionMailbox so we should already
+have everything setup and only need to add the `has_one_attached
+:imported_document` to the model.
+
+```ruby
+# app/models/LegacyDocument
+has_one_attached :imported_document
+```
+
+This is how we can create a new ActiveStorage attachment of the PDF attachment
+from the InboundEmail.
+
 
 ```ruby
     legacy_document.imported_document.attach(
@@ -677,10 +697,6 @@ the first one.
     )
 ```
 
-```ruby
-# app/models/LegacyDocument
-has_one_attached :imported_document
-```
 
 With our object created, this code is manually creating and attaching an
 ActiveStorage::Attachment called `imported_document` on the LegacyWaiver model
@@ -689,20 +705,22 @@ https://github.com/mikel/mail?tab=readme-ov-file#testing-and-extracting-attachme
 
 `attachments` is a method from Ruby mail that returns a list of the attachments.
 
+[Extracting Attachments](https://github.com/mikel/mail?tab=readme-ov-file#testing-and-extracting-attachments)
+
 Aside from the `mail` methods for accessing data on the mail object, this code
 is mostly ActiveStorage.  `mail.attachments.first.body.decoded` will return a
 string representation of the attachment which we wrap in StringIO and send to
-ActiveStorage. Digging into ActiveStorage is out of scope for this post but the
-general idea is you 'manually' attach the file (imported_document) to the parent object
-(LegacyWaiver)
+ActiveStorage.
+
+Digging into ActiveStorage is out of scope for this post but the
+general idea is you 'manually' attach the file (imported_document) to the parent object (`LegacyWaiver`)
 
 Accepting attachments all willy-nilly like this does open yourself up to more
 potential issues.  Some things you may want to consider are:  file size, file
-type, etc.
+type, dealing with multiple attachments with things like signatures, etc.
 
-setting these limits and validations with a way to communicate the issue back to
-the sender if something goes wrong can help with hard to track down failures.
-
+<!-- setting these limits and validations with a way to communicate the issue back to -->
+<!-- the sender if something goes wrong can help with hard to track down failures. -->
 
 #### Ingress Options and Production Considerations
 
