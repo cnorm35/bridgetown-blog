@@ -7,53 +7,6 @@ excerpt: "Getting started with Action Mailbox"
 author: cody
 ---
 
-<!-- Here is something about the post -->
-
-<!-- Rough Topic List: -->
-
-<!-- Routes and Routing -->
-
-<!-- Creating a Catchall -->
-
-<!-- Sending a basic email -->
-
-<!-- Sending an email by source -->
-
-<!-- Sending with Attachments -->
-
-<!-- Parsing Attachments -->
-
-<!-- Maill::Message and ruby mail -->
-
-<!-- Gotchas with the email processing with ActiveJob -->
-
-<!-- Can you use ActionMailbox outside of Rails? (if so talk about how to do it) -->
-
-<!-- Talk about `  before_processing :ensure_list` or something like that for before -->
-<!-- hooks -->
-
-<!-- Bounce With -->
-
-<!-- before_processing -->
-
-
-<!-- I've said it before and I'll say it again... -->
-
-<!-- I love building email and sms features into my apps. -->
-
-<!-- These are two channels that are comfortable and familar to your users with low -->
-<!-- friction. --> 
-
-<!-- This article is going to focus on the email portion of this. Specifically, using -->
-<!-- ActionMailbox to allow incoming emails to your Rails app. -->
-
-
-
-
-
-<!-- MAKE Action Mailbox consistent (try to use ActionMailbox when referring to the -->
-<!-- code) -->
-
 I wouldn't say I love email, more like I'm in love with the _idea of email_.
 
 Allowing inbound email is a powerful and flexible way to extend the capabilities of your Rails
