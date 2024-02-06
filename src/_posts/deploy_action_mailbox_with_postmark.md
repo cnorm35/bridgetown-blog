@@ -7,14 +7,17 @@ excerpt: "Deploying Action Mailbox to Postmark"
 author: cody
 ---
 
-ref post: https://postmarkapp.com/blog/handling-inbound-emails-in-rails-using-postmark 
+<!-- ref post: https://postmarkapp.com/blog/handling-inbound-emails-in-rails-using-postmark -->
+<!-- Not sure that's still needed, think that's just for their webhook stuff -->
 
-
-In another post, I went into some of the detail aroind ActionMailbox and some
+[ActionMailbox Post](/action_mailbox) I went into some of the detail aroind ActionMailbox and some
 ways it can be used.
 
 I wanted to have a separate post that was just for deploying your app with
 ActionMailbox to production somewhere.
+
+I wanted to have a separate post that was only focused on deploying your Action
+Mailbox code to one of the available ingress options.
 
 The current options Rails offers are:
 
@@ -27,22 +30,21 @@ going to walk through in this post.
 Before we get started, there are a couple of things you'll need that will help
 your setup go smoother.
 
-A Postmark Account
-A domain to use for the mailer.
+- A Postmark Account
+- A domain to use for the mailer
 
 (can probably even leave out the domain stuff and maybe just use ngrok? not sure
 about the approval stuff)
 
 This post will assume your app is already deployed somewhere and won't be
-covering deploying your Rails app, just connecting Postmark for your inbound
-emails.  If you're looking for some help deploying your app, I've been a long
+covering deploying your Rails app.  We're only focusing on connecting Postmark for your inbound
+emails.
+
+If you're looking for some help deploying your app, I've been a long
 time user of [Hatchbox](https://hatchbox.io/) and can't recommend them enough.
 
-(Maybe have something that's using ngrok to send the inbound mail to local app?)
-```
-  # use ngrok and update postmark settings to test locally
-  # config.action_mailbox.ingress = :postmark
-```
+
+
 
 With your ActionMailbox app ready to go, let's start adding some of the configs
 needed for Postmark.
@@ -50,31 +52,44 @@ needed for Postmark.
 [Rails Guide -
 Postmark](https://guides.rubyonrails.org/action_mailbox_basics.html#postmark)
 
-The first thing we need to is set our ingress for ActionMailbox in
-`config/environments/production.rb`
+There isn't a lot of code required for the Postmark setup so we can add some of
+the required code before configuring our mail servers in Postmark.
+
+The first thing we need to is set our ingress for ActionMailbox in `config/environments/production.rb`
 
 ```ruby
 # config/environments/production.rb
 config.action_mailbox.ingress = :postmark
 ```
 
-After creating a Postmark account, the next thing you'll need do is to create a
-new 'Server'.
+If you haven't already, create a new Postmark account and create a new 'Server'
+<!-- After creating a Postmark account, the next thing you'll need do is to create a -->
+<!-- new 'Server'. -->
 
 In Postmark, a server is a way to organize or group incoming or outgoing email.
-You can read more about Postmark servers [here](https://postmarkapp.com/developer/user-guide/managing-your-account/managing-servers)
+You can read more about Postmark [servers](https://postmarkapp.com/developer/user-guide/managing-your-account/managing-servers)
 
 [POSTMARK SERVER SETUP SCREENSHOT]
 
 After creating the server, you'll see 3 different 'Streams' listed on the
 dashboard.
 
-Postmark Streams Info:
-> Message Streams is how we separate different types of mail to ensure the highest deliverability for each. Pick the one that’s right for your email:
+**Postmark Streams Info:**
 
-    Transactional streams are for sending time-sensitive messages triggered for one recipient at a time.
-    Broadcasts are for messages sent to many recipients at once, like marketing campaigns or newsletters.
-    Inbound stream is a way for your application to receive email.
+<blockquote>
+    <cite>
+      Message Streams is how we separate different types of mail to ensure the highest deliverability for each. Pick the one that’s right for your email:
+    </cite>
+</blockquote>
+
+<blockquote>
+    <cite>
+      Transactional streams are for sending time-sensitive messages triggered for one recipient at a time.
+      Broadcasts are for messages sent to many recipients at once, like marketing campaigns or newsletters.
+      Inbound stream is a way for your application to receive email.
+    </cite>
+</blockquote>
+
 
 
 For configuring our ActionMailbox we'll be using the one that says 'Default

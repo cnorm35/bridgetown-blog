@@ -81,6 +81,7 @@ does.
 
 <div class="tenor-gif-embed" data-postid="10193348" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/still-gonna-send-it-gif-10193348">Still Gonna Send It GIF</a>from <a href="https://tenor.com/search/still+gonna+send+it-gifs">Still Gonna Send It GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
+
 If you're going through the Action Mailbox basics Rails guides, you could skip
 over some important peices of information.
 
@@ -115,6 +116,15 @@ inbound emails are routed asynchronously using Active Job...`
 It's really easy to gloss over those requirements and can cause some issues when
 deploying to production. I'll go into that in more detail when going over some
 of my experiences deploying to production.
+
+<div class="my-5">
+<img
+    alt="Action Mailbox Processing Flow"
+    class="position-relative mx-auto rounded w-100 shadow-lg"
+    src="/images/ActionMailboxFlow.png"
+    style="z-index: 10"
+/>
+</div>
 
 ### Getting Started
 Getting started with Action Mailbox is a pretty familiar process
