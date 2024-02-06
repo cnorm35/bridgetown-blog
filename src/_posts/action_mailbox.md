@@ -14,29 +14,20 @@ application.  It's a familiar and low friction way for users to interact with
 your app.
 
 I think leveraging email is a great example of focusing on solving problems for
-users instead of just building software.
+your users instead of just building software.
 
-Luckily, Rails has an unsung hero with ActionMailbox.  ActionMailbox gives you a
+Luckily, Rails has an unsung hero in Action Mailbox.  Action Mailbox gives you a
 familiar Rails-y way to accept and proccess inbound emails for your app.
 
 <!-- This post is going to walk through getting started with ActionMailbox, things to -->
 <!-- consider on production and my experiences. -->
 
-This post is going to walk through getting started with ActionMailbox and some
-things to watch out for along the way.
+This post will walk through getting started with Action Mailbox, how to process
+your inbound emails and things to watch out for along the way.
 
 <!-- ### What is Action Mailbox? -->
 ### ActionMailbox Background
 
-Let's face it, if you're like me, and you see some familar looking commands to
-get started at the top of a guide, I can't resist running it just to see what it
-does.
-
-<div class="tenor-gif-embed" data-postid="10193348" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/still-gonna-send-it-gif-10193348">Still Gonna Send It GIF</a>from <a href="https://tenor.com/search/still+gonna+send+it-gifs">Still Gonna Send It GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-
-
-If you're going through the Action Mailbox basics Rails guides, you could skip
-over some important peices of information.
 
 The Rails guides for the [Action Mailbox Basics](https://guides.rubyonrails.org/action_mailbox_basics.html#what-is-action-mailbox-questionmark) do a pretty good job of explaining what ActionMailbox is.  Here's how they describe what Action Mailbox is:
 
@@ -59,16 +50,15 @@ These inbound emails are routed asynchronously using Active Job to one or severa
   </cite>
 </blockquote>
 
-<!-- Breaking things down, ActionMailbox gives us an `InboundEmail` Active Record object. -->
-
 Two really important items to note are:
 
 ` storage of the original email on cloud storage via Active Storage...` and `These
 inbound emails are routed asynchronously using Active Job...`
 
-It's really easy to gloss over those requirements and can cause some issues when
-deploying to production. I'll go into that in more detail when going over some
-of my experiences deploying to production.
+It's easy to gloss over those requirements and can cause some issues when
+deploying to production. That will be covered in more detail and include my experiences deploying to production.
+
+Here's a rough breakdown of how Action Mailbox processes your inbound emails.
 
 <div class="my-5">
 <img
@@ -78,6 +68,7 @@ of my experiences deploying to production.
     style="z-index: 10"
 />
 </div>
+
 
 ### Getting Started
 Getting started with Action Mailbox is a pretty familiar process
@@ -122,10 +113,9 @@ If you've not already added ActiveStorage to your app, you'll see the required
 migrations for ActiveStorage as well.
 
 The other file that was created is our `ApplicationMailbox`.  You can think of
-the `ApplicationMailbox` like the Post Office.  Mail is delivered there, then
-sorted and delivered to the correct mailbox. This file is going
-to route the InboundEmails to a mailbox that inherits from
-`ApplicationMailbox`
+the `ApplicationMailbox` as the Post Office for your inbound emails.  Mail is delivered, sorted then delivered to the correct mailbox.
+This file is going to route the `InboundEmail` to a mailbox that inherits from
+`ApplicationMailbox`.
 
 ```ruby
 # app/mailboxes/application_mailbox.rb
@@ -140,6 +130,8 @@ end
 <!-- The `ApplicationMailbox` is where all of your inbound emails will be sent.  This -->
 <!-- file decides which mailbox to route the email to.  Like any good Rails tool, -->
 <!-- there's a task to generate a new mailbox. -->
+
+**Generating a new mailbox**
 
 Like any good Rails tool, there's a task to generate a new mailbox.
 
@@ -157,33 +149,27 @@ end
 ```
 
 As mentioned earlier, our `SupportMailbox` inherits from `ApplicationMailbox`
-and has one method `process`
+and a single method - `process`.
 
 The `process` method is where the magic happens but first, we need to direct our
-InboundEmail to the SupportMailbox.
+`InboundEmail` to the `SupportMailbox`.
 
 When your inbound email is routed to the `SupportMailbox` the `process` method
 will be called.  This is where you'll put your processing logic.
 
-But for that to happen, we need to tell our `ApplicationMailbox` how to route
+For that to happen, we need to tell our `ApplicationMailbox` how to route
 emails to this mailbox.
-
-<!-- There are a couple of options for directing the InboundEmail to the correct -->
-<!-- mailbox.  What you'll be using in production (most likely) will be matching -->
-<!-- emails that include `@replies` in the correct portion of the email address. -->
 
 The `ApplicationMailbox` has a commented out example to help get us started
 
-` # routing /something/i => :somewhere`
+```ruby
+# routing /something/i => :somewhere
+```
 
 In this commented out example, anything inbound email with a `to` address that
 matches on `something` will get routed to the `SomewhereMailbox`.
 
 The routing uses the ruby regex matcher to route emails to a mailbox.
-
-
-
-`routing(/(.+)-(.+)@subscriptions.spotsquid.com/i => :subscriptions)`
 
 When getting started with Action Mailbox, instead of spending time thinking
 about how you're going to route your emails, I've found it helpful to use the
@@ -202,14 +188,14 @@ class ApplicationMailbox < ActionMailbox::Base
 end
 ```
 
-This will route all inbound emails to the `SupportMailbox`.  The commented out
-example shows how you would route any inbound email with a `to` address
-containing `support` to the `SupportMailbox`.
-
-This lets you start focuing on the business logic of the mailbox right away and
+The above example will route all inbound emails to the `SupportMailbox`. This lets you start focuing on the processing logic of the mailbox right away and
 update the routing as your needs evolve.
 
-Now, everything is setup to forward _any_ inbound email to the `SupportMailbox` you may be wondering...
+The commented out example shows hoW you would route any inbound email with a `to` address
+containing `support` to the `SupportMailbox`.
+
+
+With everything setup to forward _any_ inbound email to the `SupportMailbox` you may be wondering...
 
 **How do I send an email to my local Rails App?**
 
@@ -217,7 +203,15 @@ Now, everything is setup to forward _any_ inbound email to the `SupportMailbox` 
 
 I would like to introduce you to the aptly named Rails Conductor.
 
-[SCREENSHOT]
+<div class="my-5">
+<img
+    alt="Rails Inbound Eamil Conductor"
+    class="position-relative mx-auto rounded w-100 shadow-lg"
+    src="/images/RailsConductorForm.png"
+    style="z-index: 10"
+/>
+</div>
+
 
 ### Sending Emails with Rails Conductor
 With your app running, you can access the Rails Conductor at the following URL
