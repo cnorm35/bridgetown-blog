@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Inbox Hero
+title:  Deploy Action Mailbox to Postmark
 date:   2024-01-23 16:54:46 -0500
 category: ruby
 excerpt: "Deploying Action Mailbox to Postmark"
