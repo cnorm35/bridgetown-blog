@@ -17,19 +17,14 @@ I think leveraging email is a great example of focusing on solving problems for
 your users instead of just building software.
 
 Luckily, Rails has an unsung hero in Action Mailbox.  Action Mailbox gives you a
-familiar Rails-y way to accept and proccess inbound emails for your app.
-
-<!-- This post is going to walk through getting started with ActionMailbox, things to -->
-<!-- consider on production and my experiences. -->
+familiar Rails-y way to accept and process inbound emails for your app.
 
 This post will walk through getting started with Action Mailbox, how to process
 your inbound emails and things to watch out for along the way.
 
-<!-- ### What is Action Mailbox? -->
-### ActionMailbox Background
+### Action Mailbox Background
 
-
-The Rails guides for the [Action Mailbox Basics](https://guides.rubyonrails.org/action_mailbox_basics.html#what-is-action-mailbox-questionmark) do a pretty good job of explaining what ActionMailbox is.  Here's how they describe what Action Mailbox is:
+The Rails guides for the [Action Mailbox Basics](https://guides.rubyonrails.org/action_mailbox_basics.html#what-is-action-mailbox-questionmark) do a pretty good job of explaining what Action Mailbox is.  Here's how they describe what Action Mailbox is:
 
 
 <blockquote>
@@ -40,7 +35,7 @@ The Rails guides for the [Action Mailbox Basics](https://guides.rubyonrails.org/
 
 <blockquote>
   <cite>
-The inbound emails are turned into InboundEmail records using Active Record and feature lifecycle tracking, storage of the original email on cloud storage via Active Storage, and responsible data handling with on-by-default incineration.
+The inbound emails are turned into `InboundEmail` records using Active Record and feature life cycle tracking, storage of the original email on cloud storage via Active Storage, and responsible data handling with on-by-default incineration.
   </cite>
 </blockquote>
 
@@ -73,14 +68,14 @@ Here's a rough breakdown of how Action Mailbox processes your inbound emails.
 ### Getting Started
 Getting started with Action Mailbox is a pretty familiar process
 
-To install ActionMailbox run the following commands
+To install Action Mailbox run the following commands
 
 ```bash
 $ bin/rails action_mailbox:install
 $ bin/rails db:migrate
 ```
 
-The install task creates a ApplicationMailbox and a new migration for the InboundEmails.
+The install task creates an `ApplicationMailbox` and a new migration for the InboundEmails.
 
 ```
  bin/rails action_mailbox:install
@@ -109,8 +104,8 @@ class CreateActionMailboxTables < ActiveRecord::Migration[6.0]
 end
 ```
 
-If you've not already added ActiveStorage to your app, you'll see the required
-migrations for ActiveStorage as well.
+If you've not already added Active Storage to your app, you'll see the required
+migrations for Active Storage as well.
 
 The other file that was created is our `ApplicationMailbox`.  You can think of
 the `ApplicationMailbox` as the Post Office for your inbound emails.  Mail is delivered, sorted then delivered to the correct mailbox.
@@ -123,13 +118,6 @@ class ApplicationMailbox < ActionMailbox::Base
   # routing /something/i => :somewhere
 end
 ```
-
-<!-- Running the migrate task and restarting your app and just like that you're able -->
-<!-- to accept inbound emails to your app.  Sort of. -->
-
-<!-- The `ApplicationMailbox` is where all of your inbound emails will be sent.  This -->
-<!-- file decides which mailbox to route the email to.  Like any good Rails tool, -->
-<!-- there's a task to generate a new mailbox. -->
 
 **Generating a new mailbox**
 
@@ -188,10 +176,10 @@ class ApplicationMailbox < ActionMailbox::Base
 end
 ```
 
-The above example will route all inbound emails to the `SupportMailbox`. This lets you start focuing on the processing logic of the mailbox right away and
+The above example will route all inbound emails to the `SupportMailbox`. This lets you start focusing on the processing logic of the mailbox right away and
 update the routing as your needs evolve.
 
-The commented out example shows hoW you would route any inbound email with a `to` address
+The commented out example shows how you would route any inbound email with a `to` address
 containing `support` to the `SupportMailbox`.
 
 
@@ -229,7 +217,7 @@ Using the form option should provide you with everything you need. The by source
 **New Inbound Email Form**
 
 The new inbound email form has some options you're probably familiar with along
-with the option to include an attchment to your inbound email.
+with the option to include an attachment to your inbound email.
 
 There's also some additional fields for setting email headers that may be useful
 in your processing of the inbound emails.
@@ -239,18 +227,18 @@ in your processing of the inbound emails.
 **In-Reply-To** - are header values taken from the Message-ID header of the original
 
 
-If you set up an `:all` route in your ApplicationMailbox to a specific inbox like the `SupportMailbox` example, submitting this form should deliver an email to that mailbox. After submitting your email, it will show as `pending` until ActiveJob sends the original inbound email to your Mailbox and processes it.  If that's successful, the InboundEmail status will be updated to `delivered`  and at some point will be incenerated.
+If you set up an `:all` route in your `ApplicationMailbox` to a specific inbox like the `SupportMailbox` example, submitting this form should deliver an email to that mailbox. After submitting your email, it will show as `pending` until Active Job sends the original inbound email to your Mailbox and processes it.  If that's successful, the `InboundEmail` status will be updated to `delivered`  and at some point will be incinerated.
 
 Now we're sending email, let's recap what's happening:
 
 - An email is sent to a specific email address.
 - Your Email provider accepts and forwards the inbound email to your Rails app.
-- Your Rails App creates an `ActtionMailbox::InboundEmail` record and updloads the email file to ActiveStorage until it can be processed.
-- ActiveJob gets the email object and sends to the Mailbox.
-- The `InboundEmail` object takes the uploaded email file from ActiveStorage, converts it to a string and creates a new `Mail` object.
+- Your Rails App creates an `ActtionMailbox::InboundEmail` record and uploads the email file to Active Storage until it can be processed.
+- Active Job gets the email object and sends to the Mailbox.
+- The `InboundEmail` object takes the uploaded email file from Active Storage, converts it to a string and creates a new `Mail` object.
 - The `process` method inside the mailbox is called on the mailbox where the email
 is delivered too.
-- The `InboundEmail` is marked for inceneration (record and raw_email attachment
+- The `InboundEmail` is marked for incineration (record and raw_email attachment
   deleted).
 
 There's a surprising amount of things happening in the background at first
@@ -266,7 +254,7 @@ inbound email is routed.
 The `ActionMailbox::InboundEmail` is that object that's delivered to the `process`
 method.  If you look at the generated migration above, there's not a lot to this
 class on the surface.  It has a status, some references and an
-ActiveStorage attachment for the original email file sent `raw_email`.
+Active Storage attachment for the original email file sent `raw_email`.
 
 ```ruby
   class InboundEmail < Record
@@ -294,9 +282,9 @@ end
 
 The different statues are:
 
-- **pending** - Email has been received and uploaded to ActiveStorage.
-- **processing** - Original email is being downloaded from ActiveStorage and
-  sent to the approiate mailbox.
+- **pending** - Email has been received and uploaded to Active Storage.
+- **processing** - Original email is being downloaded from Active Storage and
+  sent to the appropriate mailbox.
 - **delivered** - Email was successfully delivered to the mailbox with no
   exceptions or bounces.
 - **failed** - An exception was raised while the inbound email was being processed.
@@ -307,7 +295,7 @@ provided by the `Mail` object which is available with the `mail` method within t
 mailbox.
 
 The `InboundEmail` class defines a `mail` method that downloads the original
-email file from ActiveStorage and creates a new `Mail` object.
+email file from Active Storage and creates a new `Mail` object.
 
 [Ruby Mail](https://github.com/mikel/mail) is an invaluable resource for working with email in Ruby.
 
@@ -341,21 +329,21 @@ class SupportMailbox < ApplicationMailbox
 end
 ```
 
-In the example above, we're creating a new `SupportTicket` record from the infomation contained in the inbound email.
+In the example above, we're creating a new `SupportTicket` record from the information contained in the inbound email.
 
 We're pulling the `mail.from`, `mail.subject`, and `mail.body` data provided by
 the `Mail` gem and using that to create our new record.
 
 Parsing inbound email allows you to collect the same information as if you directed your user to
-a form to submit a new support request. You have all the information to create a new SupportTicket and your user had a more streamlined and familar process.
+a form to submit a new support request. You have all the information to create a new `SupportTicket` and your user had a more streamlined and familiar process.
 
 The outbound mailer that gets sent as a reply can also contain some type of
-unique identifier we can easily use to look up the original SupportTicket and
-link new responsese to the conversation.
+unique identifier we can easily use to look up the original `SupportTicket` and
+link new responses to the conversation.
 
-Let's say our SupportMailbox has a UUID field on the model, we can include that
+Let's say our `SupportMailbox` has a UUID field on the model, we can include that
 value in the email address, parse from the reply and link new responses to the
-original SupportTicket and not create a new support ticket each time there's a
+original `SupportTicket` and not create a new support ticket each time there's a
 reply.
 
 ```ruby
@@ -371,8 +359,8 @@ end
 The `(.+)` is going to return a matcher which will be that UUID included in the
 email address.
 
-That should give you all you need to target the original SupportTicket you
-created and respond, esclate, close, etc.
+That should give you all you need to target the original `SupportTicket` you
+created and respond, escalate, close, etc.
 
 That's the ruby way to link emails together but there are also some options
 available in the Mail headers.
@@ -385,7 +373,7 @@ There are a few other considerations to keep in mind when running this in
 production (bounce_with, before_processing, raising errors, catch all mailboxes, etc.) but this is the basic flow of things.
 
 
-#### Advanced Useage
+#### Advanced Usage
 
 As your logic and number of mailboxes continue to grow, there are some
 more-advanced lesser-known options that may help you on your journey.
@@ -473,7 +461,7 @@ end
 ```
 
 Here's a basic example of using a `before_processing` callback to make sure we
-can find the User before doing any additional proccessing on the email.
+can find the User before doing any additional processing on the email.
 
 Keeping your email delivery rates high and bounce rate low is an important part
 of getting your emails to actually land in people's inbox.  Taking some additional
@@ -489,17 +477,17 @@ email bounced.  It also marks the `ActionMailbox::InboundEmail` status as
 
 [source code](https://github.com/rails/rails/blob/6b93fff8af32ef5e91f4ec3cfffb081d0553faf0/actionmailbox/lib/action_mailbox/base.rb#L105)
 
-There's another similar mehtod `bounced!`.  This one silently prevents any additional processing
+There's another similar method `bounced!`.  This one silently prevents any additional processing
 without sending out an email alerting the sender of the bounce.
 
 
 This stops the email from being processed and delivers an email (of your
 choosing) to notify someone of the bounce (probably the sender)
 
-The method accepts a mailer object (is that right?) along with any additionl params the email might
+The method accepts a mailer object (is that right?) along with any additional parameters the email might
 require.
 
-This might look somehting like this:
+This might look something like this:
 
 ```ruby
 bounce_with PostRequiredMailer.missing(inbound_email)
@@ -514,19 +502,19 @@ bounce_with PostRequiredMailer.missing(inbound_email)
 <!-- something pretty much everyone knows how to do.  If they don't I'm honestly -->
 <!-- quite impressed they managed to sign up for your app. -->
 
-It's very likely people are exponentialy more familiar with their chosen email
+It's very likely people are exponentially more familiar with their chosen email
 client than they are the UI of your application. Attaching a file to an email is
 something they've probably done dozens if not hundreds of times.  Leverage this
-familiarness by allowing attachments and docuemnts to be sent and uploaded
+familiarness by allowing attachments and documents to be sent and uploaded
 through email.
 
-Let's set I need some 'attachments' or files. in this case, PDF documents from a User.  I
+Let's set I need some 'attachments' or files. For example, PDF documents from a User.  I
 could give them the steps to walk through uploading everything on their own in
 some sort of self-service portal, have them upload the required documents in a
 forma...or I could lean on what they already know how to do.
 
 In this example, We'll look at what the process would be for grabbing an
-attached PDF from an email, creating an ActiveStorage object and alerting an
+attached PDF from an email, creating an Active Storage object and alerting an
 admin that a new document is ready.
 
 ```ruby
@@ -572,8 +560,8 @@ the email subject and `email` to the first returned sender.
 Don't forget the `mail` gem returns an array of string values when calling `from` so we grab
 the first one.
 
-Assuming our `LegacyDocument` has the ActiveStorage attachment set up correctly.
-Remember, ActiveStorage is a requirement of ActionMailbox so we should already
+Assuming our `LegacyDocument` has the Active Storage attachment set up correctly.
+Remember, Active Storage is a requirement of Action Mailbox so we should already
 have everything setup and only need to add the `has_one_attached
 :imported_document` to the model.
 
@@ -582,8 +570,8 @@ have everything setup and only need to add the `has_one_attached
 has_one_attached :imported_document
 ```
 
-This is how we can create a new ActiveStorage attachment of the PDF attachment
-from the InboundEmail.
+This is how we can create a new Active Storage attachment of the PDF attachment
+from the `InboundEmail`.
 
 
 ```ruby
@@ -595,20 +583,20 @@ from the InboundEmail.
 
 
 With our object created, this code is manually creating and attaching an
-ActiveStorage::Attachment called `imported_document` on the LegacyWaiver model
+`ActiveStorage::Attachment` called `imported_document` on the `LegacyWaiver` model.
 
-https://github.com/mikel/mail?tab=readme-ov-file#testing-and-extracting-attachments
+<!-- https://github.com/mikel/mail?tab=readme-ov-file#testing-and-extracting-attachments -->
 
 `attachments` is a method from Ruby mail that returns a list of the attachments.
 
 [Extracting Attachments](https://github.com/mikel/mail?tab=readme-ov-file#testing-and-extracting-attachments)
 
 Aside from the `mail` methods for accessing data on the mail object, this code
-is mostly ActiveStorage.  `mail.attachments.first.body.decoded` will return a
-string representation of the attachment which we wrap in StringIO and send to
-ActiveStorage.
+is mostly Active Storage.  `mail.attachments.first.body.decoded` will return a
+string representation of the attachment which we wrap in `StringIO` and send to
+Active Storage.
 
-Digging into ActiveStorage is out of scope for this post but the
+Digging into Active Storage is out of scope for this post but the
 general idea is you 'manually' attach the file (imported_document) to the parent object (`LegacyWaiver`)
 
 Accepting attachments all willy-nilly like this does open yourself up to more
@@ -641,7 +629,7 @@ Postmark](/deploy_action_mailbox_with_postmark).
 
 One thing I've found helpful with deploying Action Mailbox to production is to
 bite the bullet up front and configure an external service like Amazon S3 for
-ActiveStorage.  Using the disk option can work but if you're app is not running
+Active Storage.  Using the disk option can work but if you're app is not running
 in a single process, it can potentially cause some headaches.
 
 Here's why.
@@ -649,12 +637,12 @@ Here's why.
 When your inbound mail service (like Postmark) receives the inbound email, it
 forwards it to your Rails application.
 
-After the inbound email is recieved by your app, it _uploads the original email
+After the inbound email is received by your app, it _uploads the original email
 file to Active Storage_
 
-`ActionMailbox::InboundEmail` has an ActiveStorage attachment`raw_email` that is used for storing
+`ActionMailbox::InboundEmail` has an Active Storage attachment`raw_email` that is used for storing
 the original inbound email file (`.eml`). If we look back at the `source` method, we see that
-that file is downloaded from the ActiveStorage storage service with `raw_email.download`.
+that file is downloaded from the Active Storage storage service with `raw_email.download`.
 
 ```ruby
 # rails/actionmailbox/app/models/action_mailbox/inbound_email.rb
@@ -667,21 +655,21 @@ end
 
 <!-- https://github.com/rails/rails/blob/6b93fff8af32ef5e91f4ec3cfffb081d0553faf0/actionmailbox/app/models/action_mailbox/inbound_email.rb#L40C19-L40C37 -->
 
-This process is also handled asynchronously with ActiveJob or other job service you have
+This process is also handled asynchronously with Active Job or other job service you have
 configured.
 
 Let's say you have your Rails app deployed to somewhere like Heroku or Render.
 
 On Heroku, you probably have 2 dynos.  One running your app, one running your
-background processes. If you have your ActiveStorage service set to `Disk`, that
+background processes. If you have your Active Storage service set to `Disk`, that
 will store the inbound email on your app dyno.
 
 When the worker dyno attempts to process the inbound email by downloading
-the original attachemnt, it will look on the dyno it's being executed on.
+the original attachment, it will look on the dyno it's being executed on.
 
 However, the _actual_ inbound email is stored on a different dyno.
 
-This means the `InboundEmail` will never be able to be processed becaue the
+This means the `InboundEmail` will never be able to be processed because the
 dyno running that code can't find the original attachment (it's on the
 other server)
 
@@ -700,7 +688,7 @@ Thanks Rob!
 
 #### Using a subdomain for inbound mail
 
-Another thing that I've found helpful when setting up ActionMailbox for
+Another thing that I've found helpful when setting up Action Mailbox for
 production is running all your inbound emails through a subdomain.
 
 `inbound.yourapp.com`
@@ -708,7 +696,7 @@ production is running all your inbound emails through a subdomain.
 This also helps keeping your MX records separate on DNS.  If you have internal
 email addresses for you app with something like `name@yourapp.com`  and try to
 accept inbound emails for your app at `reply-123@yourapp.com` it's pretty easy
-to accidently overwrite your current DNS settings for existing email stuff.
+to accidentally overwrite your current DNS settings for existing email stuff.
 
 <!-- Ask me how I know... -->
 I've learnt this lesson first hand...
@@ -718,11 +706,11 @@ Sometimes, mining for gems takes some diggin'.
 Action Mailbox is a wonderful example of clean and concise code handling a
 complex problem and have learned a lot reviewing the source code.
 
-I think ActionMailbox is a vastly underrated features of rails and can add
+I think Action Mailbox is a vastly underrated features of rails and can add
 powerful functionality in a way that feels very familiar to the standard Rails
 Controllers.
 
-Allowing your users to perform actions from inbound emails is a great way to add conveinience and
+Allowing your users to perform actions from inbound emails is a great way to add convenience and
 flexibility to your Rails app.  I hope this article has demystified the process
 and given you some ideas on how you can use inbound email in you Rails app.
 
