@@ -203,6 +203,13 @@ With everything setup to forward _any_ inbound email to the `SupportMailbox` you
 
 I would like to introduce you to the aptly named Rails Conductor.
 
+
+
+### Sending Emails with Rails Conductor
+With your app running, you can access the Rails Conductor at the following URL
+
+`http://localhost:3000/rails/conductor/action_mailbox/inbound_emails`
+
 <div class="my-5">
 <img
     alt="Rails Inbound Eamil Conductor"
@@ -212,80 +219,39 @@ I would like to introduce you to the aptly named Rails Conductor.
 />
 </div>
 
-
-### Sending Emails with Rails Conductor
-With your app running, you can access the Rails Conductor at the following URL
-
-http://localhost:3000/rails/conductor/action_mailbox/inbound_emails
-
-<!-- This is one of my favorite hidden gems (yeah I said it) of Rails is the ActionMailbox -->
-<!-- Conductor.  It offers a no-frills UI for sending email directly to your Rails -->
-<!-- app. The two options for creating a new email are: -->
-
-This is one of my favorite hidden gems (yeah I said it) of the Rails ecosystem.
+This is one of my favorite hidden gems (yeah I said it) of Rails.
 It offers a no-frills UI for sending email directly to your app.  You also have
-the option of creating and sending and email form the built in form or by
-uploading the source code of the email.
+the option of creating and sending and email via the built in form or by
+pasting the source code of an email.
 
-<!-- New inbound email by form -->
-
-<!-- and --> 
-
-<!-- New inbound email by source. -->
-
-<!-- If you're not sure which one you need, you'll most likely be able to have -->
-<!-- everything you need with the form option. -->
-
-<!-- Using the form option should provide you with everything you need.  The source -->
-<!-- option is handy when you're trying to re-create issues on production by -->
-<!-- downloading the email source (.eml file) and using it in your local environment. -->
-
-Using the form option should provide you with everything you need. The by source option is a bit more involved and takes an `.eml` file, or at least the code contained within the file.  This is a great option for debugging and re-creating issues from production.
+Using the form option should provide you with everything you need. The by source option is a bit more involved and takes to source code from an `.eml` file.  This is a great option for debugging and re-creating issues from production but is typically more than you need when getting started.
 
 **New Inbound Email Form**
 
-The new inbound email form has some options you're probably already familiar
-with along with some fields to set additional mail headers, `X-Original-To` and
-`In-Reply-To` (link what these do).
+The new inbound email form has some options you're probably familiar with along
+with the option to include an attchment to your inbound email.
 
-```
+There's also some additional fields for setting email headers that may be useful
+in your processing of the inbound emails.
 
-X-Original-To
-    The email address listed here is the original recipient of the email that was received.
-```
+**X-Original-To** - The email address listed here is the original recipient of the email that was received.
 
-```
-The In-Reply-To headers are taken from the Message-ID header of the original
-```
+**In-Reply-To** - are header values taken from the Message-ID header of the original
 
-There's also the option to include an attachment to your inbound email.
-
-Sending an inbound email to your app is the same process as submitting a form.
 
 If you set up an `:all` route in your ApplicationMailbox to a specific inbox like the `SupportMailbox` example, submitting this form should deliver an email to that mailbox. After submitting your email, it will show as `pending` until ActiveJob sends the original inbound email to your Mailbox and processes it.  If that's successful, the InboundEmail status will be updated to `delivered`  and at some point will be incenerated.
 
-<!-- This process closely mimics the setup of ActionMailbox in real-life. -->
-
 Now we're sending email, let's recap what's happening:
 
-- An email is sent to a specific email address
-- Your Email provider accepts and forwards the inbound email to your Rails app
-- Your Rails App creates an `ActtionMailbox::InboundEmail` record and updloads the email file to ActiveStorage until it can be processed. (pending -> processed state)
+- An email is sent to a specific email address.
+- Your Email provider accepts and forwards the inbound email to your Rails app.
+- Your Rails App creates an `ActtionMailbox::InboundEmail` record and updloads the email file to ActiveStorage until it can be processed.
 - ActiveJob gets the email object and sends to the Mailbox.
-- The `InboundEmail` object takes the uploaded email file from ActiveStorage
-converts it to a string, creates a new `Mail` object (that's where the magic is)
+- The `InboundEmail` object takes the uploaded email file from ActiveStorage, converts it to a string and creates a new `Mail` object.
 - The `process` method inside the mailbox is called on the mailbox where the email
 is delivered too.
-- The `InboundEmail` is marked for deletion (default 30 days?)
-
-
-[Info Graphic Here]
-
-<!-- There's a surprising amout of things happening in the background at first -->
-<!-- glance.  I think this is a great way of hiding the complexitly, in a good way, -->
-<!-- from everything that really happens with parsing the inbound mail so you -->
-<!-- _really_ just have to focus on _what_ to do with the inbound email once you get -->
-<!-- it. -->
+- The `InboundEmail` is marked for inceneration (record and raw_email attachment
+  deleted).
 
 There's a surprising amount of things happening in the background at first
 glace.  I think this is a great example of how Rails can handle so much for you
@@ -294,19 +260,13 @@ boilerplate on your own.
 
 #### Process inbound email in the Mailbox
 
-<!-- If everything goes according to plan, your email will be sent to the `process` -->
-<!-- method within a Mailbox. -->
-
-<!-- This is where you're going to perform your business logic (or do the thing why -->
-<!-- you created the mailbox for) -->
-
 We know that the `process` method is going to be called withing the mailbox the
 inbound email is routed.
 
-The ActionMailbox::InboundEmail is that object that's delivered to the `process`
+The `ActionMailbox::InboundEmail` is that object that's delivered to the `process`
 method.  If you look at the generated migration above, there's not a lot to this
-class on the surface.  It just has a status, some references and an
-ActiveStorage attachment for the original email file sent.
+class on the surface.  It has a status, some references and an
+ActiveStorage attachment for the original email file sent `raw_email`.
 
 ```ruby
   class InboundEmail < Record
@@ -334,30 +294,22 @@ end
 
 The different statues are:
 
-- **pending** - email has been received and uploaded to ActiveStorage
-- **processing** - the original email is being downloaded from ActiveStorage and
+- **pending** - Email has been received and uploaded to ActiveStorage.
+- **processing** - Original email is being downloaded from ActiveStorage and
   sent to the approiate mailbox.
-- **delivered** - the email was successfully delivered to the mailbox with no
+- **delivered** - Email was successfully delivered to the mailbox with no
   exceptions or bounces.
-- **failed** - an exception was raised while the inbound email was being processed.
+- **failed** - An exception was raised while the inbound email was being processed.
 - **bounced** - Mark the email as bounced using `boune_with`
 
-The bulk of your processing of the inbound mail is most likely going to happen
-with the Mail object.
-
-Most of the information you'll need to actually process the inbound email is
-provided by the Mail object which is available with the `mail` method within the
+Most of the information you'll need to process the inbound email is
+provided by the `Mail` object which is available with the `mail` method within the
 mailbox.
 
 The `InboundEmail` class defines a `mail` method that downloads the original
-email file from ActiveStorage and creates a new `Mail` object
+email file from ActiveStorage and creates a new `Mail` object.
 
-This is an invaluable resource for working with Email in Ruby.  Some of the
-things you can do with ruby mail are fetching, `to`, `from`, `subject` and
-others with ease.
-
-[Ruby Mail](https://github.com/mikel/mail)
-
+[Ruby Mail](https://github.com/mikel/mail) is an invaluable resource for working with email in Ruby.
 
 ```ruby
 mail = Mail.new do
@@ -370,20 +322,13 @@ end
 mail.to_s #=> "From: mikel@test.lindsaar.net\r\nTo: you@...
 ```
 
-It also allows us to dig deeper into things like headers, attachments, html and
+Ruby Mail also allows us to dig deeper into things like headers, attachments, html and
 text parts.
 
+What does 'processing' the email actually look like?
 
-<!-- So what would this look like in practice? -->
-
-<!-- Let's stick with the `SupportMailbox` example from above. In this scenario, a -->
-<!-- user gets a transactional email alert that someone replied to their post. We -->
-<!-- include a reply email address with some unique identifier that let's us find -->
-<!-- their reply. -->
-What does 'processing' the email actually look like?  Obviously, each case will
-be different but let's take a look at an example for parsing the body of the
+Obviously, each case will be different but let's take a look at an example for parsing the body of the
 email and creating a new support ticket.
-
 
 ```ruby
 class SupportMailbox < ApplicationMailbox
@@ -396,19 +341,13 @@ class SupportMailbox < ApplicationMailbox
 end
 ```
 
-In the above example, we're grabbing the value from the matcher and setting this
-to `post_attribute`.  This will probably be something like a uuid, slug, or id
-of your Record.
-
-In the example above, the basic idea of what's happening is we're creating a new
-`SupportTicket` record from the infomation contained in the inbound email.
+In the example above, we're creating a new `SupportTicket` record from the infomation contained in the inbound email.
 
 We're pulling the `mail.from`, `mail.subject`, and `mail.body` data provided by
 the `Mail` gem and using that to create our new record.
 
-This allows you to collect the same information as if you directed your user to
-a form to submit a new support request.  Now you have all the information to
-create a new SupportTicket and your user had a more streamlined process.
+Parsing inbound email allows you to collect the same information as if you directed your user to
+a form to submit a new support request. You have all the information to create a new SupportTicket and your user had a more streamlined and familar process.
 
 The outbound mailer that gets sent as a reply can also contain some type of
 unique identifier we can easily use to look up the original SupportTicket and
