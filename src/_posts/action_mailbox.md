@@ -620,29 +620,31 @@ type, dealing with multiple attachments with things like signatures, etc.
 
 #### Ingress Options and Production Considerations
 
-Default ingress options are:
+Default ingress options Action Mailbox provides are:
 
-Exim, Mailgun, Mandrill, Postfix, Postmark, Qmail, SendGrid.
+- Exim
+- Mailgun
+- Mandrill
+- Postfix
+- Postmark
+- Qmail
+- SendGrid.
 
-Info and more links on each on can be found in the [guides](https://guides.rubyonrails.org/action_mailbox_basics.html#configuration)
+More information for each option can be found in the [configuration section](https://guides.rubyonrails.org/action_mailbox_basics.html#configuration) of
+the Rails Guides.
 
+Postmark is my preferred email service provider from the default options Action
+Mailbox provides. I have another articles with the detail for [deploying to
+Postmark](/deploy_action_mailbox_with_postmark).
 
-<!-- You may notice, there's no default option for AWS/SES email. There is a third -->
-<!-- party ingress https://github.com/bobf/action_mailbox_amazon_ingress  I tried it -->
-<!-- at one point and no complaints about the ingress but setting up everything -->
-<!-- required on the Amazon side was as-usual, a nightmare. -->
+**Active Storage Service**
 
-<!-- Speaking of Amazon, I'm not telling you how to live your life, but you -->
-<!-- _probably_ want to set up S3 for ActiveStorage ahead of time.  We mentioned it -->
-<!-- briefly at the start of the article but this is something than can cause some -->
-<!-- headaches in production. -->
 One thing I've found helpful with deploying Action Mailbox to production is to
 bite the bullet up front and configure an external service like Amazon S3 for
 ActiveStorage.  Using the disk option can work but if you're app is not running
-in a single process, like when you have a background worker/process for
-something like Sidekiq, it can cause some headaches.
+in a single process, it can potentially cause some headaches.
 
-Here's why:
+Here's why.
 
 When your inbound mail service (like Postmark) receives the inbound email, it
 forwards it to your Rails application.
@@ -650,10 +652,9 @@ forwards it to your Rails application.
 After the inbound email is recieved by your app, it _uploads the original email
 file to Active Storage_
 
-ActionMailbox::InboundEmail has an attached `raw_email` that is used for storing
+`ActionMailbox::InboundEmail` has an ActiveStorage attachment`raw_email` that is used for storing
 the original inbound email file (`.eml`). If we look back at the `source` method, we see that
 that file is downloaded from the ActiveStorage storage service with `raw_email.download`.
-
 
 ```ruby
 # rails/actionmailbox/app/models/action_mailbox/inbound_email.rb
@@ -666,27 +667,32 @@ end
 
 <!-- https://github.com/rails/rails/blob/6b93fff8af32ef5e91f4ec3cfffb081d0553faf0/actionmailbox/app/models/action_mailbox/inbound_email.rb#L40C19-L40C37 -->
 
-This process is also handled asynchronously with ActiveJob or whatever job service you have
+This process is also handled asynchronously with ActiveJob or other job service you have
 configured.
 
 Let's say you have your Rails app deployed to somewhere like Heroku or Render.
 
 On Heroku, you probably have 2 dynos.  One running your app, one running your
-background processes. If you have your ActiveStorage service set to local, that
-will store the inbound email on your app container.
+background processes. If you have your ActiveStorage service set to `Disk`, that
+will store the inbound email on your app dyno.
 
-When the worker container attempts to process the inbound email by downloading
-the original attachemnt, it will look on the container it's being executed on.
-However, the _actual_ inbound email is stored on a different container.
+When the worker dyno attempts to process the inbound email by downloading
+the original attachemnt, it will look on the dyno it's being executed on.
 
-This means the InboundEmail will never be able to be processed becaue the
-container running that code can't find the original attachment (it's on the
+However, the _actual_ inbound email is stored on a different dyno.
+
+This means the `InboundEmail` will never be able to be processed becaue the
+dyno running that code can't find the original attachment (it's on the
 other server)
+
+This means that the `InboundEmail` record will raise an exception when trying to
+process the email since it can't find the original attachment (it's stored in
+the dyno running the app)
 
 Setting up S3 from the get-go can eliminate a lot of these headaches. It also
 has the advantage of making it easier to grab the original email file for
 debugging.  This is a great example of where the 'create email from source' in
-the Rails conductor comes in handy.
+the Rails Conductor comes in handy.
 
 Rob Zolkos has a great write up on how you can do that [here](https://world.hey.com/robzolkos/debugging-production-actionmailbox-issues-in-development-f5886579)
 
@@ -713,9 +719,6 @@ I've learnt this lesson first hand...
 <!-- I usually go with Postmark and will be posting something soon on getting -->
 <!-- ActionMailbox running live with Postmark. -->
 
-Postmark is my preferred email service provider from the default options Action
-Mailbox provides. I have another articles with the detail for deploying to
-Postmark [here](/deploy_action_mailbox_with_postmark)
 
 I think ActionMailbox is a vastly underrated features of rails and can add
 powerful functionality in a way that feels very Rails-y. Allowing your users to
