@@ -24,7 +24,7 @@ your inbound emails and things to watch out for along the way.
 
 ### Action Mailbox Background
 
-The Rails guides for the [Action Mailbox Basics](https://guides.rubyonrails.org/action_mailbox_basics.html#what-is-action-mailbox-questionmark) do a pretty good job of explaining what Action Mailbox is.  Here's how they describe what Action Mailbox is:
+The Rails guides for the [Action Mailbox Basics](https://guides.rubyonrails.org/action_mailbox_basics.html#what-is-action-mailbox-questionmark){:target="_blank"} do a pretty good job of explaining what Action Mailbox is.  Here's how they describe what Action Mailbox is:
 
 
 <blockquote>
@@ -297,7 +297,7 @@ mailbox.
 The `InboundEmail` class defines a `mail` method that downloads the original
 email file from Active Storage and creates a new `Mail` object.
 
-[Ruby Mail](https://github.com/mikel/mail) is an invaluable resource for working with email in Ruby.
+[Ruby Mail](https://github.com/mikel/mail){:target="_blank"} is an invaluable resource for working with email in Ruby.
 
 ```ruby
 mail = Mail.new do
@@ -385,7 +385,7 @@ additional tools and methods that could make your journey easier.
 Action Mailbox provides some callbacks that will be ran before, after or around
 the `process` method.
 
-Action Mailbox Callbacks [Source Code](https://github.com/rails/rails/blob/main/actionmailbox/lib/action_mailbox/callbacks.rb)
+Action Mailbox Callbacks [Source Code](https://github.com/rails/rails/blob/main/actionmailbox/lib/action_mailbox/callbacks.rb){:target="_blank"}
 
 
 ```ruby
@@ -475,7 +475,7 @@ You may have noticed another new method in the code above.  `bounce_with`
 email bounced.  It also marks the `ActionMailbox::InboundEmail` status as
 `bounced`.
 
-[source code](https://github.com/rails/rails/blob/6b93fff8af32ef5e91f4ec3cfffb081d0553faf0/actionmailbox/lib/action_mailbox/base.rb#L105)
+[source code](https://github.com/rails/rails/blob/6b93fff8af32ef5e91f4ec3cfffb081d0553faf0/actionmailbox/lib/action_mailbox/base.rb#L105){:target="_blank"}
 
 There's another similar method `bounced!`.  This one silently prevents any additional processing
 without sending out an email alerting the sender of the bounce.
@@ -589,7 +589,7 @@ With our object created, this code is manually creating and attaching an
 
 `attachments` is a method from Ruby mail that returns a list of the attachments.
 
-[Extracting Attachments](https://github.com/mikel/mail?tab=readme-ov-file#testing-and-extracting-attachments)
+[Extracting Attachments](https://github.com/mikel/mail?tab=readme-ov-file#testing-and-extracting-attachments){:target="_blank"}
 
 Aside from the `mail` methods for accessing data on the mail object, this code
 is mostly Active Storage.  `mail.attachments.first.body.decoded` will return a
@@ -618,7 +618,7 @@ Default ingress options Action Mailbox provides are:
 - Qmail
 - SendGrid.
 
-More information for each option can be found in the [configuration section](https://guides.rubyonrails.org/action_mailbox_basics.html#configuration) of
+More information for each option can be found in the [configuration section](https://guides.rubyonrails.org/action_mailbox_basics.html#configuration){:target="_blank"} of
 the Rails Guides.
 
 Postmark is my preferred email service provider from the default options Action
@@ -682,7 +682,7 @@ has the advantage of making it easier to grab the original email file for
 debugging.  This is a great example of where the 'create email from source' in
 the Rails Conductor comes in handy.
 
-Rob Zolkos has a great write up on how you can do that [here](https://world.hey.com/robzolkos/debugging-production-actionmailbox-issues-in-development-f5886579).
+Rob Zolkos has a great write up on how you can do that [here](https://world.hey.com/robzolkos/debugging-production-actionmailbox-issues-in-development-f5886579){:target="_blank"}.
 
 Thanks Rob!
 
