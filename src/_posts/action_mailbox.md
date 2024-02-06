@@ -728,18 +728,23 @@ Default ingress options are:
 
 Exim, Mailgun, Mandrill, Postfix, Postmark, Qmail, SendGrid.
 
-Info and more links on each on can be found in the guides https://guides.rubyonrails.org/action_mailbox_basics.html#configuration
+Info and more links on each on can be found in the [guides](https://guides.rubyonrails.org/action_mailbox_basics.html#configuration)
 
 
-You may notice, there's no default option for AWS/SES email. There is a third
-party ingress https://github.com/bobf/action_mailbox_amazon_ingress  I tried it
-at one point and no complaints about the ingress but setting up everything
-required on the Amazon side was as-usual, a nightmare.
+<!-- You may notice, there's no default option for AWS/SES email. There is a third -->
+<!-- party ingress https://github.com/bobf/action_mailbox_amazon_ingress  I tried it -->
+<!-- at one point and no complaints about the ingress but setting up everything -->
+<!-- required on the Amazon side was as-usual, a nightmare. -->
 
-Speaking of Amazon, I'm not telling you how to live your life, but you
-_probably_ want to set up S3 for ActiveStorage ahead of time.  We mentioned it
-briefly at the start of the article but this is something than can cause some
-headaches in production.
+<!-- Speaking of Amazon, I'm not telling you how to live your life, but you -->
+<!-- _probably_ want to set up S3 for ActiveStorage ahead of time.  We mentioned it -->
+<!-- briefly at the start of the article but this is something than can cause some -->
+<!-- headaches in production. -->
+One thing I've found helpful with deploying Action Mailbox to production is to
+bite the bullet up front and configure an external service like Amazon S3 for
+ActiveStorage.  Using the disk option can work but if you're app is not running
+in a single process, like when you have a background worker/process for
+something like Sidekiq, it can cause some headaches.
 
 Here's why:
 
@@ -747,24 +752,32 @@ When your inbound mail service (like Postmark) receives the inbound email, it
 forwards it to your Rails application.
 
 After the inbound email is recieved by your app, it _uploads the original email
-file to Active Storage_ 
+file to Active Storage_
 
 ActionMailbox::InboundEmail has an attached `raw_email` that is used for storing
-the original inbound email. If we look back at the `source` method, we see that
-that file is downloaded from the ActiveStorage storage service.
-`raw_email.download`
+the original inbound email file (`.eml`). If we look back at the `source` method, we see that
+that file is downloaded from the ActiveStorage storage service with `raw_email.download`.
 
 
-https://github.com/rails/rails/blob/6b93fff8af32ef5e91f4ec3cfffb081d0553faf0/actionmailbox/app/models/action_mailbox/inbound_email.rb#L40C19-L40C37
+```ruby
+# rails/actionmailbox/app/models/action_mailbox/inbound_email.rb
+...
 
-This process is also handled with ActiveJob or whatever job service you have
+def source
+  @source ||= raw_email.download
+end
+```
+
+<!-- https://github.com/rails/rails/blob/6b93fff8af32ef5e91f4ec3cfffb081d0553faf0/actionmailbox/app/models/action_mailbox/inbound_email.rb#L40C19-L40C37 -->
+
+This process is also handled asynchronously with ActiveJob or whatever job service you have
 configured.
 
 Let's say you have your Rails app deployed to somewhere like Heroku or Render.
 
 On Heroku, you probably have 2 dynos.  One running your app, one running your
 background processes. If you have your ActiveStorage service set to local, that
-will store the inbound email on your web container.
+will store the inbound email on your app container.
 
 When the worker container attempts to process the inbound email by downloading
 the original attachemnt, it will look on the container it's being executed on.
@@ -776,36 +789,43 @@ other server)
 
 Setting up S3 from the get-go can eliminate a lot of these headaches. It also
 has the advantage of making it easier to grab the original email file for
-debuggng.  This is a great example of where the 'create email from source' in
-the Rails conductor comes in super handy.
+debugging.  This is a great example of where the 'create email from source' in
+the Rails conductor comes in handy.
 
 Rob Zolkos has a great write up on how you can do that [here](https://world.hey.com/robzolkos/debugging-production-actionmailbox-issues-in-development-f5886579)
 
 Thanks Rob!
 
+#### Using a subdomain for inbound mail
 Another thing that I've found helpful when setting up ActionMailbox for
 production is running all your inbound emails through a subdomain.
 
 `inbound.yourapp.com`
 
-What you name your sub-domain isn't super important but it helps with making the
-matchers easier in the ApplicationMailbox since you can assume anything ending
-in `inbound.yourapp.com` needs to go _somewhere_.
+<!-- What you name your sub-domain isn't super important but it helps with making the -->
+<!-- matchers easier in the ApplicationMailbox since you can assume anything ending -->
+<!-- in `inbound.yourapp.com` needs to go _somewhere_. -->
 
-It also helps keeping your MX records separate on DNS.  If you have internal
+This also helps keeping your MX records separate on DNS.  If you have internal
 email addresses for you app with something like `name@yourapp.com`  and try to
 accept inbound emails for your app at `reply-123@yourapp.com` it's pretty easy
 to accidently overwrite your current DNS settings for existing email stuff.
 
-Ask me how I know.
+<!-- Ask me how I know... -->
+I've learnt this lesson first hand...
 
+<!-- I usually go with Postmark and will be posting something soon on getting -->
+<!-- ActionMailbox running live with Postmark. -->
 
-I usually go with Postmark and will be posting something soon on getting
-ActionMailbox running live with Postmark.
+Postmark is my preferred email service provider from the default options Action
+Mailbox provides. I have another articles with the detail for deploying to
+Postmark [here](/deploy_action_mailbox_with_postmark)
 
 I think ActionMailbox is a vastly underrated features of rails and can add
-powerful functionality in a way that feels very Rails-y.
+powerful functionality in a way that feels very Rails-y. Allowing your users to
+perform actions from inbound emails is a great way to add conveinience and
+flexibility to your Rails app.
 
-Let me know if you have any questions, keep your eye out for some more
-ActionMailbox stuff.
+Let me know if you have any questions, or spot any issues that should be
+updated.  Keep your eye out for some more ActionMailbox content coming soon!
 
