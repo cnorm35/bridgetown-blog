@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Deploy Action Mailbox to Postmark
-date:   2024-01-23 16:54:46 -0500
+date:   2024-02-28 16:54:46 -0500
 category: ruby
 excerpt: "Deploying Action Mailbox to Postmark"
 author: cody

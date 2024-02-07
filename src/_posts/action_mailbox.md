@@ -354,9 +354,19 @@ class ApplicationMailbox < ActionMailbox::Base
 end
 ```
 
-[RUBULAR SCREENSHOT]
+<div class="my-5">
+<img
+    alt="Rubular Regex Example"
+    class="position-relative mx-auto rounded w-100 shadow-lg"
+    src="/images/Rubular.png"
+    style="z-index: 10"
+/>
+</div>
 
-The `(.+)` is going to return a matcher which will be that UUID included in the
+Testing out hte commented out match statement shows we get a match for our test
+string and we have a result in our capture group
+
+The `(.+)` is going to return a match group which will be that UUID included in the
 email address.
 
 That should give you all you need to target the original `SupportTicket` you
