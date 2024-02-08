@@ -358,7 +358,7 @@ end
 />
 </div>
 
-Testing out hte commented out match statement shows we get a match for our test
+Testing out the commented out match statement shows we get a match for our test
 string and we have a result in our capture group
 
 The `(.+)` is going to return a match group which will be that UUID included in the
@@ -720,4 +720,4 @@ flexibility to your Rails app.  I hope this article has demystified the process
 and given you some ideas on how you can use inbound email in you Rails app.
 
 Let me know if you have any questions, or spot any issues that should be
-updated.  Keep your eye out for some more ActionMailbox content coming soon!
+updated.  Keep your eye out for some more Action Mailbox content coming soon!

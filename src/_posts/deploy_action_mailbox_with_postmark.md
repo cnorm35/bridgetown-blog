@@ -270,8 +270,8 @@ password `PASSWORD` (the one we generated and added to the credentials) in the
 URL.  This is how Rails confirms this is a valid request instead of being an
 open endpoint for requests.
 
-the `@example.com` is the URL for our server, as in the URL for where your app
-is deployed (not postmark)
+The `@example.com` is the URL for our server, as in the URL for where your app
+is deployed (not postmark).
 
 The final portion is the route that goes to the Action Mailbox controller for
 Postmark.
@@ -402,7 +402,7 @@ And Voila, now you have a production setup for your inbound email.
 It's pretty likely that at some point, you'll have some issues you'd like to try
 to diagnose or re-create in your local environment.
 
-Using ngrok or cloudflare's secure tunnel servive exposes your local development
+Using ngrok or cloudflare's secure tunnel service exposes your local development
 environment (localhost:3000) to a public URL.  This is great for sending
 webhooks from a 3rd party service to your local environment.
 
@@ -413,7 +413,7 @@ webhooks from 3rd party services to your local environment.
 I'll be covering how to use a secure tunnel to debug mailer issues with
 [ngrok](https://ngrok.com/){:target="_blank}.
 
-start ngrok with `ngrok http 3000`.  In this case our local Rails app is running
+Start ngrok with `ngrok http 3000`.  In this case our local Rails app is running
 on `localhost:3000`.
 
 Your screen should look something like this.  Note the URL ngrok is making your
