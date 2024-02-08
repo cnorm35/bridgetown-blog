@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  Inbox Hero
+title:  In-Depth look at Action Mailbox
 date:   2024-01-22 16:54:46 -0500
 category: ruby
-excerpt: "Getting started with Action Mailbox"
+excerpt: "Email is a powerful and flexible way to extend the capabilities of your Rails application. It’s a familiar and low friction way for users to interact with your app."
 author: cody
 ---
 
@@ -163,9 +163,6 @@ When getting started with Action Mailbox, instead of spending time thinking
 about how you're going to route your emails, I've found it helpful to use the
 `:all` option to direct _any_ inbound email to a specific mailbox.
 
-<!-- For development purposes, especially when you have a single Mailbox, I've found -->
-<!-- it helpful to use `:all` to send _any_ inbound email to the mailbox you pass it. -->
-
 `routing all: :support`
 
 ```ruby
@@ -190,8 +187,6 @@ With everything setup to forward _any_ inbound email to the `SupportMailbox` you
 <!-- It's time to have your ticket punched by the Rails Conductor -->
 
 I would like to introduce you to the aptly named Rails Conductor.
-
-
 
 ### Sending Emails with Rails Conductor
 With your app running, you can access the Rails Conductor at the following URL
@@ -246,7 +241,7 @@ glace.  I think this is a great example of how Rails can handle so much for you
 allowing you to focus on the important things without setting up a ton of
 boilerplate on your own.
 
-#### Process inbound email in the Mailbox
+### Process inbound email in the Mailbox
 
 We know that the `process` method is going to be called withing the mailbox the
 inbound email is routed.
@@ -383,7 +378,7 @@ There are a few other considerations to keep in mind when running this in
 production (bounce_with, before_processing, raising errors, catch all mailboxes, etc.) but this is the basic flow of things.
 
 
-#### Advanced Usage
+### Advanced Usage
 
 As your logic and number of mailboxes continue to grow, there are some
 more-advanced lesser-known options that may help you on your journey.
@@ -392,11 +387,11 @@ As you continue down the path of inbound email enlightenment, there are some
 additional tools and methods that could make your journey easier.
 
 **Callbacks**
+
 Action Mailbox provides some callbacks that will be ran before, after or around
 the `process` method.
 
 Action Mailbox Callbacks [Source Code](https://github.com/rails/rails/blob/main/actionmailbox/lib/action_mailbox/callbacks.rb){:target="_blank"}
-
 
 ```ruby
 # frozen_string_literal: true
@@ -504,7 +499,7 @@ bounce_with PostRequiredMailer.missing(inbound_email)
 ```
 
 
-#### Parsing Attachments
+### Parsing Attachments
 
 <!-- Parsing Attachments from E-mail.  As I've mentioned many times before, people -->
 <!-- are going to be a lot more familiar with their email than the UI of your -->
@@ -616,7 +611,7 @@ type, dealing with multiple attachments with things like signatures, etc.
 <!-- setting these limits and validations with a way to communicate the issue back to -->
 <!-- the sender if something goes wrong can help with hard to track down failures. -->
 
-#### Ingress Options and Production Considerations
+### Ingress Options and Production Considerations
 
 Default ingress options Action Mailbox provides are:
 
@@ -696,7 +691,7 @@ Rob Zolkos has a great write up on how you can do that [here](https://world.hey.
 
 Thanks Rob!
 
-#### Using a subdomain for inbound mail
+### Using a subdomain for inbound mail
 
 Another thing that I've found helpful when setting up Action Mailbox for
 production is running all your inbound emails through a subdomain.
