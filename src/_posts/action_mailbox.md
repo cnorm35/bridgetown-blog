@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  In-Depth look at Action Mailbox
-date:   2024-01-22 16:54:46 -0500
+date:   2024-02-07 16:54:46 -0500
 category: ruby
 excerpt: "Email is a powerful and flexible way to extend the capabilities of your Rails application. It’s a familiar and low friction way for users to interact with your app."
 author: cody

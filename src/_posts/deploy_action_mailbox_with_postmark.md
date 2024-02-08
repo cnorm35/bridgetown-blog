@@ -1,9 +1,10 @@
 ---
 layout: post
 title:  Deploy Action Mailbox to Postmark
-date:   2024-02-02 16:54:46 -0500
+date:   2024-02-07 16:54:46 -0500
 category: ruby
-excerpt: "Deploying Action Mailbox to Postmark"
+excerpt: "Step by Step walkthrough for configuring your Action Mailbox Rails app
+with Postmark."
 author: cody
 ---
 
