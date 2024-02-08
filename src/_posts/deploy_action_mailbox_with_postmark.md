@@ -7,9 +7,6 @@ excerpt: "Deploying Action Mailbox to Postmark"
 author: cody
 ---
 
-<!-- ref post: https://postmarkapp.com/blog/handling-inbound-emails-in-rails-using-postmark -->
-<!-- Not sure that's still needed, think that's just for their webhook stuff -->
-
 In my recent [Action Mailbox Post](/action_mailbox), I reviewed a ton of
 information on how Action Mailbox works and how you can use it.  One very
 important topic I didn't go over was how to deploy your Action Mailbox code to
@@ -40,10 +37,8 @@ Before we get started, there are a couple of things you'll need that will help
 your setup go smoother.
 
 - A Postmark Account
-- A domain to use for the mailer
-
-(can probably even leave out the domain stuff and maybe just use ngrok? not sure
-about the approval stuff)
+- A domain to use for the mailer _or_ a secure tunnel to your localhost like
+  ngrok.
 
 This post will assume your app is already deployed somewhere and won't be
 covering deploying your Rails app.  We're only focusing on connecting Postmark for your inbound
@@ -52,7 +47,7 @@ emails.
 If you're looking for some help deploying your app, I've been a long
 time customer of [Hatchbox](https://hatchbox.io/){:target="_blank"} and can't recommend them enough.
 
-With your Action Mailbox app ready to go, let's start adding the configs
+With your Action Mailbox app ready to go, let's start adding the configuration
 needed for Postmark.
 
 [Rails Guide -
@@ -61,22 +56,22 @@ Postmark](https://guides.rubyonrails.org/action_mailbox_basics.html#postmark){:t
 There isn't a lot of code required for the Postmark setup so we can add some of
 the required code before configuring our mail servers in Postmark.
 
-The first thing we need to is set our ingress for ActionMailbox in `config/environments/production.rb`
+The first thing we need to is set our ingress for Action Mailbox in `config/environments/production.rb`
 
 
-**Setting the Ingress**
+#### Setting the Ingress
 
 ```ruby
 # config/environments/production.rb
 config.action_mailbox.ingress = :postmark
 ```
 
-**Generating and setting the ingress password**
+#### Generating and setting the ingress password
 
 We also need to generate a password and set that value in our encrypted
 credentials or as an environment variable.
 
-In your Rails console, we can use SecureRandom to generate a password for us.
+In your Rails console, we can use `SecureRandom` to generate a password for us.
 
 ```ruby
 SecureRandom.alphanumeric
@@ -84,16 +79,13 @@ SecureRandom.alphanumeric
 ```
 
 
-**Encrypted Credentials Sidenote**
+**Encrypted Credentials Side Note**
 
 
-Running `bin/rails credentials:edit` note: For VSCode you may need to run `EDITOR="code --wait" bin/rails credentials:edit`.  If your using another editor besides VSCode and are seeing issues getting your encrypted credentials to open, swap `EDITOR=code` with whatever editor your using `EDITOR=sublime`
+Running `bin/rails credentials:edit` will open the main encrypted credentials file. All the credentials in this file will apply to _all_ environments unless we have a specific environment file.
 
-(find that vs code hack thing) 
+**note:** For VSCode you may need to run `EDITOR="code --wait" bin/rails credentials:edit`.  If your using another editor besides VSCode and are seeing issues getting your encrypted credentials to open, swap `EDITOR=code` with whatever editor your using `EDITOR=sublime`
 
-will open
-the main encrypted creds file. All the credentials in this file will apply to
-_all_ environments unless we have a specifc env file.
 
 <!-- VS Code credentials edit -->
 <!-- `EDITOR="code --wait" bin/rails credentials:edit` -->
@@ -103,8 +95,9 @@ In other words, these credentials are going to apply to our `development` and
 whatever that is) file.  Eventually you'll probably want to separate that out
 with different settings for different environments.  However, making the
 password available in our `development` environment is going to make it easier
-connecting this to our local environment with ngrok (or maybe that cloudflare
-one)
+connecting this to our local environment with ngrok.
+
+#### Add generated password to encrypted credentials
 
 Now we're done detouring into Rails encrypted credentials, we can the password
 we generated earlier to our credentials.
@@ -123,15 +116,12 @@ action_mailbox:
   ingress_password: 12312ddfgdfg
 ```
 
-DOUBLE CHECK THIS:
-
 That's pretty much it for the code changes we need to make.  The rest of the
 setup and configuration is going to be on Postmark.
 
-### Creating A Postmark Server
+#### Creating A Postmark Server
+
 If you haven't already, create a new Postmark account and create a new 'Server'
-<!-- After creating a Postmark account, the next thing you'll need do is to create a -->
-<!-- new 'Server'. -->
 
 In Postmark, a server is a way to organize or group incoming or outgoing email.
 You can read more about [Postmark Servers](https://postmarkapp.com/developer/user-guide/managing-your-account/managing-servers){:target="_blank"}
@@ -182,12 +172,13 @@ Your new Postmark server should have 3 different streams.
 />
 </div>
 
+#### Configuring the Default Inbound Stream
 For configuring our inbound emails, we'll be using the _Default Inbound Stream_
 option.
 
 After first clicking on the Default Inbound Stream link, you should land on the
 'Setup Instructions' page.  Right at the top, you'll see the option to get your
-servers inbound email address.  
+servers inbound email address.
 
 <div class="my-5">
 <img
@@ -198,8 +189,8 @@ servers inbound email address.
 />
 </div>
 
-Setting up production email is fraught with peril.  Well, maybe that's being a
-bit dramatic but it can still be a bumpy ride.
+Setting up production email is fraught with peril.  Well...maybe that's being a
+_tad_ dramatic but it can still be a bumpy ride.
 
 Debugging and diagnosing production issues with email can feel like trying to look inside a black box
 that has another black box inside.  In other words, there's lot of small points
@@ -209,14 +200,12 @@ For this reason, in order to preserve my time and sanity as best as
 possible, I try to do a series of small checks along the way to make sure things
 are working as expected.
 
-
-<!-- When digging into production issues, ruling out possible issues is a big part of -->
-<!-- that. -->
-
 When I'm trying to resolve production issues, I'll often start with focusing on
 things to rule-out to begin with. Performing some small checks along the way can
-give you a better idea of what things _are_ working as intented and rule them
+give you a better idea of what things _are_ working as intended and rule them
 out as possible causes.
+
+#### Sending a Test Email
 
 Just to make sure out Inbound Stream has been set up correctly and ready for
 use, we can fire off a quick email to the server's inbound email address at the
@@ -242,7 +231,7 @@ can move on to the next step.
 Speaking of checking things along the way, now would be a good time to make sure
 these changes are _deployed_ and checked to make sure the values are set.
 
-**Checking your credentials**
+#### Checking your credentials
 
 Speaking of checking things along the way, now would be a good time to check if
 your changes adding the ingress_password have been deployed to your server.
@@ -264,12 +253,14 @@ ENV["RAILS_INBOUND_EMAIL_PASSWORD"]
 => 12312ddfgdfg
 ```
 
+#### Add Webhook URL to Postmark
+
 With the password on the server, we need to setup an inbound webhook for
 Postmark.  This inbound webhook is going to receive the incoming email and send
-the data to our postmark inbound email controller ActionMailbox provides for us.
+the data to our postmark inbound email controller Action Mailbox provides for us.
 
-If you've never seen this syntax for auth in a URL like this I'm sure this looks
-weird but here's how you get your URL for the webhook to add to Postmark
+If you've never seen this syntax for authentication in a URL like this I'm sure this looks
+weird but here's how you structure your URL for the webhook to add to Postmark:
 
 `https://actionmailbox:PASSWORD@example.com/rails/action_mailbox/postmark/inbound_emails`
 
@@ -277,10 +268,6 @@ This is using HTTP basic authentication with our username `actionmailbox` and
 password `PASSWORD` (the one we generated and added to the credentials) in the
 URL.  This is how Rails confirms this is a valid request instead of being an
 open endpoint for requests.
-
-<!-- In this example from the Rails Guides, `actionmailbox` is our user -->
-<!-- (ActionMailbox handles that) and we inlcude our generated password we just added -->
-<!-- to our credentials. -->
 
 the `@example.com` is the URL for our server, as in the URL for where your app
 is deployed (not postmark)
@@ -333,9 +320,11 @@ payload'
 That's what the Rails guides were referring to so make sure that option is
 checked.
 
-With that option checked, add your webhook url (`https://actionmailbox:PASSWORD@example.com/rails/action_mailbox/postmark/inbound_emails`) to the field.
+With that option checked, add your webhook URL (`https://actionmailbox:PASSWORD@example.com/rails/action_mailbox/postmark/inbound_emails`) to the field.
 
-Now we're added new configs, it would be a good time to confirm they're working.  
+Now we're added new configs, it would be a good time to confirm they're working.
+
+**Testing The Webhook URL**
 
 After saving your Inbound webhook URL, you should see a button to check the URL confirming Postmark can correctly send
 requests to your sever.  Clicking on the button should show a loading state and if everything goes well, you'll see:
@@ -351,7 +340,7 @@ requests to your sever.  Clicking on the button should show a loading state and 
 />
 </div>
 
-If you're not seeing that, you know that there's an issuse connecting your Rails
+If you're not seeing that, you know that there's an issue connecting your Rails
 app and Postmark so gives you a good idea of where to look too (check your rails
 logs to see if the request is hitting your server and if so, if there's anything
 obvious happening)
@@ -375,6 +364,7 @@ If you're not getting a successful request to your webhook URL, checking your lo
 hit your app and any errors that may have been raised afterwards is the first
 place to look.
 
+#### Connecting a Domain
 If you'd like to connect a domain you have to handle all your inbound mailers
 (hot tip: subdomains save a ton of headache) you can read more about that
 [here](https://postmarkapp.com/developer/user-guide/inbound/inbound-domain-forwarding
@@ -411,21 +401,19 @@ And Voila, now you have a production setup for your inbound email.
 It's pretty likely that at some point, you'll have some issues you'd like to try
 to diagnose or re-create in your local environment.
 
-Using ngrok or cloudflare secure tunnel servive exposes your local development
-environment (localhost:3000) to a public URL.  This is great for testing
+Using ngrok or cloudflare's secure tunnel servive exposes your local development
+environment (localhost:3000) to a public URL.  This is great for sending
 webhooks from a 3rd party service to your local environment.
 
-Using a secure tunnel servive like ngrok or cloudflare exposes your local
+Using a secure tunnel service like ngrok or cloudflare exposes your local
 environment (localhost:3000) to a public URL.  This is a great way to test
-webhokks from 3rd party services to your local environment.
+webhooks from 3rd party services to your local environment.
 
 I'll be covering how to use a secure tunnel to debug mailer issues with
 [ngrok](https://ngrok.com/){:target="_blank}.
 
-<!-- (play around with the ngrok stuff -->
-<!-- (See if you can get this running with ngrok (update development.rb ingress) -->
-
-start ngrok with `ngrok http 3000` or `ngrok http --log=stdout 3000`
+start ngrok with `ngrok http 3000`.  In this case our local Rails app is running
+on `localhost:3000`.
 
 Your screen should look something like this.  Note the URL ngrok is making your
 app available on.  There's one change we'll need to make to access our running
@@ -448,9 +436,13 @@ to tell Rails it's ok to accept connections from this URL.
 
 You can add your specific ngrok domain with: `config.hosts << "f515c7854739.ngrok.app"`
 
-This works but without a permium ngrok account, your URL will be different each
+_or_ if you would like to allow **any domain** to access localhost you set hosts
+to `nil` with `config.hosts = nil`.  This can be handy when testing multi-tenant
+apps.
+
+Without a premium ngrok account, your URL will be different each
 time.  If you don't want to update that URL each time you start ngrok, you can
-use a regex to whitelist _any ngrok domain_.
+use a regex to whitelist _any ngrok domain.
 
 ```
  # config/environments/development.rb
@@ -470,17 +462,15 @@ is setting the ingress value in `config/environments/development.rb`.
 Re-start your server, paste your ngrok URL into your browser and make
 sure your app loads.
 
-**Update Postmark Settings for development**
+#### Update Postmark Settings for development
 
-Swap your domain name for the ngrok domain in the Webhook settings, it should
+Swap your domain name for the ngrok domain in the webhook settings, it should
 look something like this:
 
 `https://actionmailbox:PASSWORD@f515c7854739.ngrok.app/rails/action_mailbox/postmark/inbound_emails`
 
-where `f515c7854739.ngrok.app` is the URL sending traffic to my local
-environment.
+where `f515c7854739.ngrok.app` is the URL sending traffic to my local environment.
 
-<!-- (Confirm from here and below- those emails finally sent) -->
 If we hit the 'Check' button, even without saving, that should check the URL to
 make sure it's working.  You should see a request from Postmark hit your local
 environment a couple seconds after clicking the button.  If all goes well,
@@ -519,7 +509,8 @@ application](https://dev.to/joshdevhub/connecting-debugger-to-rails-applications
 
 Thanks Josh!
 
-** Plan B**
+#### Using Raw Source in development
+
 If you're unable or unwilling to get everything working with forwarding your
 emails to your local environment, you still have some options.
 
@@ -538,7 +529,7 @@ source option in the Rails Conductor should give you a pretty similar result.
 Hopefully this gives you some additional tools and methods for debugging and
 inspecting your inbound emails.
 
-### Final Thoughts
+#### Final Thoughts
 
 While these steps have been specific for Postmark, a lot of the same principles,
 including using a local tunnel like ngrok to send email to your local
