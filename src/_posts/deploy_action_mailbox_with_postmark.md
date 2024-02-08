@@ -406,10 +406,6 @@ Using ngrok or cloudflare's secure tunnel service exposes your local development
 environment (localhost:3000) to a public URL.  This is great for sending
 webhooks from a 3rd party service to your local environment.
 
-Using a secure tunnel service like ngrok or cloudflare exposes your local
-environment (localhost:3000) to a public URL.  This is a great way to test
-webhooks from 3rd party services to your local environment.
-
 I'll be covering how to use a secure tunnel to debug mailer issues with
 [ngrok](https://ngrok.com/){:target="_blank}.
 
