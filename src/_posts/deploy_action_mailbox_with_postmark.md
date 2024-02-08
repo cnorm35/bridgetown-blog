@@ -8,7 +8,7 @@ with Postmark."
 author: cody
 ---
 
-In my recent [Action Mailbox Post](/action_mailbox), I reviewed a ton of
+In my recent [Action Mailbox Post](/ruby/action_mailbox), I reviewed a ton of
 information on how Action Mailbox works and how you can use it.  One very
 important topic I didn't go over was how to deploy your Action Mailbox code to
 one of the default providers from Rails.
