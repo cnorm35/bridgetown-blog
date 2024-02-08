@@ -9,12 +9,17 @@ author: cody
 
 I wouldn't say I love email, more like I'm in love with the _idea of email_.
 
-Allowing inbound email is a powerful and flexible way to extend the capabilities of your Rails
-application.  It's a familiar and low friction way for users to interact with
-your app.
+Even though it feels like I'm barely treading water in a sea of emails, I almost
+always open and check transactional emails. It seems like I'm not alone.  Some
+estimates show most transactional emails have an open rate of 80-85% [source](https://www.mailgun.com/blog/email/email-open-rates-decoded/).
 
-I think leveraging email is a great example of focusing on solving problems for
-your users instead of just building software.
+With email being a great channel to reach your users, why not make it a two way
+street? It's a familiar and low friction way for users to interact with
+your app and a powerful way to extend the capabilities of your Rails
+application.
+
+<!-- I think leveraging email is a great example of focusing on solving problems for -->
+<!-- your users instead of just building software. -->
 
 Luckily, Rails has an unsung hero in Action Mailbox.  Action Mailbox gives you a
 familiar Rails-y way to accept and process inbound emails for your app.
@@ -148,13 +153,9 @@ will be called.  This is where you'll put your processing logic.
 For that to happen, we need to tell our `ApplicationMailbox` how to route
 emails to this mailbox.
 
-The `ApplicationMailbox` has a commented out example to help get us started
-
-```ruby
-# routing /something/i => :somewhere
-```
-
-In this commented out example, anything inbound email with a `to` address that
+<!-- The `ApplicationMailbox` has a commented out example to help get us started `# -->
+<!-- routing /something/i => :somewhere` -->
+The `ApplicationMailbox` has a commented out example to help get us started. In this commented out example, anything inbound email with a `to` address that
 matches on `something` will get routed to the `SomewhereMailbox`.
 
 The routing uses the ruby regex matcher to route emails to a mailbox.
@@ -380,9 +381,6 @@ production (bounce_with, before_processing, raising errors, catch all mailboxes,
 
 ### Advanced Usage
 
-As your logic and number of mailboxes continue to grow, there are some
-more-advanced lesser-known options that may help you on your journey.
-
 As you continue down the path of inbound email enlightenment, there are some
 additional tools and methods that could make your journey easier.
 
@@ -487,9 +485,9 @@ without sending out an email alerting the sender of the bounce.
 
 
 This stops the email from being processed and delivers an email (of your
-choosing) to notify someone of the bounce (probably the sender)
+choosing) to notify the sender of the bounce.
 
-The method accepts a mailer object (is that right?) along with any additional parameters the email might
+The method accepts an `ActionMailer::Base::Mailer` object along with any additional parameters the email might
 require.
 
 This might look something like this:
