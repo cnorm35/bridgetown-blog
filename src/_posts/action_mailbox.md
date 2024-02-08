@@ -626,7 +626,7 @@ the Rails Guides.
 
 Postmark is my preferred email service provider from the default options Action
 Mailbox provides. I have another articles with the detail for [deploying to
-Postmark](/deploy_action_mailbox_with_postmark).
+Postmark](/ruby/deploy_action_mailbox_with_postmark).
 
 **Active Storage Service**
 
