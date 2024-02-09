@@ -526,6 +526,16 @@ source option in the Rails Conductor should give you a pretty similar result.
 Hopefully this gives you some additional tools and methods for debugging and
 inspecting your inbound emails.
 
+**Other Providers**
+
+If your intersted in seeing how this same process can be accomplished with
+Postfix or SendGrid Prabin Poudel has some great articles detailing that
+process.
+
+[Setup Action Mailbox with SendGrid](https://prabinpoudel.com.np/articles/action-mailbox-with-sendgrid/)
+
+[Setup Action Mailbox with Postfix](https://prabinpoudel.com.np/articles/action-mailbox-with-postfix-part-1/)
+
 #### Final Thoughts
 
 While these steps have been specific for Postmark, a lot of the same principles,
