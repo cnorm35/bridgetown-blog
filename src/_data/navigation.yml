@@ -10,3 +10,6 @@
 - name: "Work"
   url: "/work"
   internal: true
+- name: "Mentoring"
+  url: "/mentoring"
+  internal: true
