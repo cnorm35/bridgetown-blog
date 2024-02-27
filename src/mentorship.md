@@ -8,11 +8,7 @@ I'm available for paid mentorship engagements.
 
 I specailize in ruby on rails and other stuff like that.
 
-### Monthly Options
-
-Here are some of the monthly options I have.
-
-
+<!-- ### Monthly Options -->
 
 #### Standard Mentorship Package
 
@@ -39,7 +35,7 @@ Unlimited Q&A via chat.4 calls per month Hands on support. Ride alongsCode revie
 >
 </stripe-buy-button>
 
-### Single Sessions
+<!-- ### Single Sessions -->
 
 Here are some of the single sessions options I have. You'll get instructions for
 scheduling and booking after purchasing.
@@ -60,7 +56,8 @@ scheduling and booking after purchasing.
 #### 1 hour Coaching & Mentorship Session
 
 <stripe-buy-button
-  buy-button-id="buy_btn_1OoQtJCbB8XaTQJkMx1d3Wce"
+  buy-button-id="buy_btn_1OoQzCCbB8XaTQJkDY7Bm4md"
   publishable-key="pk_live_IGh9MbBR703LQypPGaJkVOWd00dsrdLNe4"
 >
 </stripe-buy-button>
+
