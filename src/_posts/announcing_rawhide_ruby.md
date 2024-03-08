@@ -3,7 +3,7 @@ layout: post
 title:  Announcing Rawhide Ruby?
 date:   2024-03-07 16:54:46 -0500
 category: ruby
-excerpt: "This isn't really a thing yet, but it could be with your help."
+excerpt: "Come join us in the mountains of Colorado for a unique and special event."
 author: cody
 ---
 
@@ -49,7 +49,6 @@ area also offers a number of other things to do in the area
 ### When
 
 Tentative date is Summer 2025
-
 
 ### What's Next?
 
