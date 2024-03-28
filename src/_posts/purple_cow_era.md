@@ -3,8 +3,8 @@ layout: post
 title: Entering my Purple Cow Era
 date:   2024-03-27 16:54:46 -0500
 category: personal development
-excerpt: "Purple Cows are head turners.  I'm not here to talk about what a purple
-cow is, I'm here to talk about why that's the best fit for my current era."
+excerpt: "Purple Cows are head-turners.  I'm not here to talk about what a purple
+cow is, I'm here to talk about why that's the best description for my current era and how it's driving my focus."
 author: cody
 ---
 
