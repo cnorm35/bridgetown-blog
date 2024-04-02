@@ -18,9 +18,11 @@ Some of the most enjoyable parts of my job the past few years has been hiring, o
 I’ve been living in Colorado for a few years now and had some good times in Denver, but currently living in a small mountain town called Bailey located in Park county (as in South Park). Being a huge South Park fan, I've taken it upon myself to keep my little town's metions in the show up-to-date on [Wikipedia](https://en.wikipedia.org/wiki/Bailey,_Colorado#In_popular_culture){:target="_blank"}.
 
 ### Podcast Appearances
-[The Ruby on Rails Podcast Ep 473](https://www.therubyonrailspodcast.com/473){:target="_blank"}
+[The Ruby on Rails Podcast - Episode 473](https://www.therubyonrailspodcast.com/473){:target="_blank"}
 
-[The Ruby on Rails Podcast Ep 487 - Rails World App Recap](https://www.therubyonrailspodcast.com/487){:target="_blank"}
+[The Ruby on Rails Podcast - Episode 487 - Rails World App Recap](https://www.therubyonrailspodcast.com/487){:target="_blank"}
+
+[IndieRails - Episode 31](https://www.indierails.com/31){:target="_blank"}
 
 <script async data-uid="24351f7dcb" src="https://codynorman.ck.page/24351f7dcb/index.js"></script>
 <!-- In my free time I like to fly fish, work on perfecting my Carolina Style BBQ and and hunt hard to find whiskey. -->
