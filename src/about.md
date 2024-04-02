@@ -22,7 +22,7 @@ I’ve been living in Colorado for a few years now and had some good times in De
 
 [The Ruby on Rails Podcast - Episode 487 - Rails World App Recap](https://www.therubyonrailspodcast.com/487){:target="_blank"}
 
-[IndieRails - Episode 31](https://www.indierails.com/31){:target="_blank"}
+[IndieRails - Lucky Me - Episode 31](https://www.indierails.com/31){:target="_blank"}
 
 <script async data-uid="24351f7dcb" src="https://codynorman.ck.page/24351f7dcb/index.js"></script>
 <!-- In my free time I like to fly fish, work on perfecting my Carolina Style BBQ and and hunt hard to find whiskey. -->
