@@ -6,9 +6,6 @@ category: ruby
 excerpt: "ActionMailbox Pro - The perfect starting point for developers looking to incorporate email processing capabilities into their Rails applications."
 author: cody
 ---
-<!-- I'm really excited to finally share more about a project I've been working on -->
-<!-- the past couple of months. -->
-
 I'm very excited to finally share some more information on a project I've been
 working on for the past couple of months.
 
