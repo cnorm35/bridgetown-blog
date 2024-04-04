@@ -6,6 +6,10 @@ permalink: /work/
 
 Here's some of the things I'm currently working on.
 
+### Coming Soon - Action Mailbox Pro
+
+<script async data-uid="ec40bc76b7" src="https://codynorman.ck.page/ec40bc76b7/index.js"></script>
+
 ### Spot Squid
 
 Spot Squid is a software solution for tattoo artists to fill cancellations easier

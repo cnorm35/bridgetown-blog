@@ -719,3 +719,7 @@ and given you some ideas on how you can use inbound email in you Rails app.
 
 Let me know if you have any questions, or spot any issues that should be
 updated.  Keep your eye out for some more Action Mailbox content coming soon!
+
+### Coming Soon - Action Mailbox Pro
+
+<script async data-uid="ec40bc76b7" src="https://codynorman.ck.page/ec40bc76b7/index.js"></script>
