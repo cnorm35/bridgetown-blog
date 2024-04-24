@@ -25,6 +25,9 @@ eye strain, and let's face it, looks cool.
 Are you looking for some sweet dark-mode action with Tailwind and Stimulus JS but not sure where to start?
 Well, you've come to the right place.
 
+**Updated - April 2024 - Video Version of this post is now available**
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gLpBdBvXcPg?si=3smcog6OZL5kSagd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ### Inspiration
 Before we get started, I'd like to credit this [article](https://www.freecodecamp.org/news/how-to-build-a-dark-mode-switcher-with-tailwind-css-and-flowbite/)
 for the inspiration for this post. When I was looking for some resources on how
@@ -147,10 +150,12 @@ and forth depending on our fancy.
 Tailwind needs a couple of changes to know that dark-mode styles are used with
 classes instead of the user's preferences and media queries.
 
-https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
+[Tailwind - Toggling Dark Mode Manually](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually)
 
 To allow us to toggle back and forth, we'll need to update some Tailwind
 settings.  Add `darkMode: 'class'` to `tailwind.config.js`
+
+**Update as of Tailwind v3.4.1 - you should use `selector` instead of `class`
 
 Here is what my `config/tailwind.config.js` file looks like
 
@@ -158,7 +163,7 @@ Here is what my `config/tailwind.config.js` file looks like
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  darkMode: 'class',
+  darkMode: 'selector',
   content: [
     './public/*.html',
     './app/helpers/**/*.rb',
