@@ -7,25 +7,26 @@ excerpt: "Something"
 author: cody
 ---
 
-Talk a little bit about the conf overall but try to stick more to the speaking
-and prep stuff.
+<!-- Talk a little bit about the conf overall but try to stick more to the speaking -->
+<!-- and prep stuff. -->
 
-sperakerline
+<!-- sperakerline -->
 
-talk about how many proposals and conferences you didn't get accepted for.
+<!-- talk about how many proposals and conferences you didn't get accepted for. -->
 
-Talk about prep and speaking and meetups including the snow stuff
+<!-- Talk about prep and speaking and meetups including the snow stuff -->
 
-Find  the date and quote for the "I'm gonna get ready for this talk like Rocky
-4" (March 2 or 3)
+<!-- Find  the date and quote for the "I'm gonna get ready for this talk like Rocky -->
+<!-- 4" (March 2 or 3) -->
 
-Getting feedback and planning the new additions.
+<!-- Getting feedback and planning the new additions. -->
 
-Talk about all the failures and include the stuff you tried and built.
+<!-- Talk about all the failures and include the stuff you tried and built. -->
 
-Mention the things about keeping the big reveal a secret and how it went.
+<!-- Mention the things about keeping the big reveal a secret and how it went. -->
 
 
+### The Road To Rails Conf
 Last week, I had a chance to give my first conference talk at what turned out to
 be the penultimate Rails Conf.
 
@@ -39,12 +40,15 @@ conference.
 I put a lot of work into my first proposal but wasn't selected.  Honestly, that
 may have been for the best.
 
-(talk about hating losing)
+I don't consider myself a sore loser.  If I didn't get picked or make the cut for for something, it's because I didn't do a good enough job, plain and simple. That doesn't mean I'm happy about it, but I'm fine with losing.  I guess a good way to put this is I'm fine with losing, but I _hate_ the feeling, especially when it's something I've set my mind to.
 
-So before getting into this, I'm not a sore loser.  If I didn't get picked or
-make the cut for something, it's because I didn't do a good enough job, plain
-and simple.  I guess a good way to put this is I'm fine with losing, but I
-_hate_ the feeling, especially when it's something I've set my mind to.
+<!-- (talk about hating losing) -->
+
+<!-- So before getting into this, I'm not a sore loser.  If I didn't get picked or -->
+<!-- make the cut for something, it's because I didn't do a good enough job, plain -->
+<!-- and simple.  I guess a good way to put this is I'm fine with losing, but I -->
+<!-- _hate_ the feeling, especially when it's something I've set my mind to. -->
+
 
 Getting that first stinging rejection let me know I had to set my game up.  I
 started reading any article I could find on how to prepare a good conference
@@ -60,68 +64,108 @@ http://www.sarahmei.com/blog/2014/04/07/what-your-conference-proposal-is-missing
 https://noelrappin.com/blog/2014/01/conference-prompts-or-how-to-submit-proposals-and-influence-people/?ref=rubycentral.org
 
 
-Another great resource I found was Speakerline.
+Another great resource I found was [Speakerline.io](https://speakerline.io/){:target="_blank"}
 
-
-https://speakerline.io/
-
+### What does a good proposal even look like?
 
 During Rafael Franca's keynote at Rails Conf 2023 he mentioned one way he
 started getting more comfortable with contributing to Rails was that he started
-reading over every single new commit.
+reading over _every single new commit_.
 
-I loved this and decided to try something similar with conference proposal.  I
-read over every single ruby propsal at least once, some of them multiple times
-and felt like I gained a much better idea of how to put together a solid proposal.
+I loved this and decided to try something similar with conference proposals.  I
+read over every single Ruby propsal at least once, some of them multiple times.
+I started to get a much better idea of what a good (and accepted) proposal looks
+like.
 
-Having a much better idea of how to put together a good proposal, I felt much
-better prepared and was able to join my first proposal coaching session courtesy
-of the fine folks at Ruby Central.  I had a chance to get some great feedback on
-my ideas and two proposals while also seeing what some of the other attendees
-were working on.
+<!-- and felt like I gained a much better idea of how to put together a solid proposal. -->
 
-After reading dozens of proposals, getting some coaching on my specific
+<!-- Having a much better idea of how to put together a good proposal, I felt much -->
+<!-- better prepared and was able to join my first proposal coaching session courtesy -->
+<!-- of the fine folks at Ruby Central.  I had a chance to get some great feedback on -->
+<!-- my ideas and two proposals while also seeing what some of the other attendees -->
+<!-- were working on. -->
+
+<!-- Armed with my newfound knowledge on conference proposals, I felt much more prepared and joined my first proposal coaching session courtesy of the fine folks at Ruby Central.  I had a chance to get some great feedback on my ideas and two proposals while also seeing what some of the other attendees were working on. -->
+
+To round out my newfound knowledge on the proposal process, I also attended my
+first proposal coaching session courtesy of the fine folks at Ruby Central.  It
+was a great chance to get feedback my ideas and proposals while also seeing what
+others were working on.
+
+So...after reading dozens of proposals, getting some coaching on my specific
 proposals and submitting to the next conference...
 
 More rejections.
 
+<!-- After a long year, I was starting to wonder if it was something I would contiune -->
+<!-- to do.  But after a little rest over the holidays, I reclaimed that spark and -->
+<!-- decided I was going to come out swinging in 2024. -->
 
-After a long year, I was starting to wonder if it was something I would contiune
-to do.  But after a little rest over the holidays, I reclaimed that spark and
-decided I was going to come out swinging in 2024.
+### Down but not out
 
-Sometime around Jan or Feb of this year, I started compiling a list of all the
-ruby conferences I was considering submitting to along with the CFP dates.  I
-also started stockpiling some ideas for potential topics.
+After a long year, I began wondering if I should put my talk ambitions on the
+back-burner and focus on other areas. I had some time to rest up and lick my
+wounds over the holidays and after a bit of recharging, decided I wasn't done
+yet and was going to come out swinging in 2024.
 
-I also started writing some blog posts around some of my potential proposal
+Sometime around January or Febuary of this year, I started compiling a list of all the
+ruby conferences I could potentially submit to along with the Call For Proposal
+dates.
+
+<!-- I also started stockpiling ideas for potential topics. -->
+
+I started writing some blog posts around some of my potential proposal
 topics.  This was a big win because the blog content made it much easier to pull
 info an ideas from to include in the proposal.  It also gave me a chance to get
 feedback on what parts people thought were the most valueable.
+
+<!-- I really went all in on my proposal and had already scheduled two meetups to -->
+<!-- speak at with an early version of my talk.  My thinking was... -->
+I decided to go all in on what I thought was my strongest proposal and reached
+out to Boulder Ruby and speak on that topic (update this).
+
+My thinking was...
+
+If I don't get accepted, having a chance to get some more feedback would improve
+my chances in future.
+
+If I _did_ get accepted, I'd already be commited to having an early version done
+about 6 weeks before Rails Conf.
 
 Hearing the theme of this year's Rails Conf was 'building with Rails' I had some
 ideas for a talk on Action Mailbox that I thought would be a great fit.  I
 thought this was my strongest proposal and represented my best chance at being
 accepted.
 
-Thursday 2/29 @ 2:03 PM (I saved the email) I finally got my breakthrough.
+**Thursday 2/29 @ 2:03 PM** (I saved the email) I finally got my breakthrough.
 
-"Holy Shit..."
+"Holy $hit..."
 
-I had to squint and re-read the email a couple of times but there it was, the
+I had to squint and re-read the email a couple of times but there it was. The
 acceptance email I've been on the hunt for so long.
 
 ### Knocking the dust off
 
-I took the rest of the week and weekend to soak it all in and enjoy such a big
-milestone for me. But when Monday rolled around, it was time to get to work.
+<!-- I took the rest of the week and weekend to soak it all in and enjoy such a big -->
+<!-- milestone for me. But when Monday rolled around, it was time to get to work. -->
+
+I took the rest of the week to take a bit of a victory lap and enjoy hitting
+such a big personal milestone.
+
+<!-- When Monday rolled around, it was time to get to work. -->
 
 A funny line I added to my planning notes that Saturday (March 2)
 
-"What's the Rocky IV equivalent for preparing for a talk?"
+_"What's the Rocky IV equivalent for preparing for a talk?"_
+
+For those unaware, [Rocy IV](https://youtu.be/B_9FyTiq3SA?si=bRlLqS41zAfenxZK)
+has the best training montage in existience.  I will not be taking further
+questions.
 
 I didn't think I'd be able to realisticly pull that off, but thinking about what
-that would look like gave me some good ideas to think about for prep.
+that would look like, gave me some good ideas to think about for prep.
+
+When Monday rolled around, it was time to get to work.
 
 I immediately picked up a couple of Audio Books on speaking and how to craft an
 engaging and entertaining presentation.  I also thought that audiobooks might
@@ -132,20 +176,24 @@ Even though I had never given a conference talk, I thought that depending on
 books and recordings alone would be like reading a book on skydiving and
 thinking that'll be enough to help me jump out of a plane.
 
-In other words, practicing was where the majority of my focus should be and
-there's absolutely no subsititute for feeling more comfortable speaking in
+<!-- In other words...practicing was where the majority of my focus should be and -->
+<!-- there's absolutely no subsititute for feeling more comfortable speaking in -->
+<!-- public than...you guessed it, speaking in public. -->
+In other words...practicing was where the majority of my focus should be. 
+There's absolutely no subsititute for feeling more comfortable speaking in
 public than...you guessed it, speaking in public.
 
-I really went all in on this proposal and had already scheduled two meetups to
-speak at with an early version of my talk.  My thinking was...
+<!-- I really went all in on this proposal and had already scheduled two meetups to -->
+<!-- speak at with an early version of my talk.  My thinking was... -->
 
-If I don't get accepted, having a chance to get some more feedback would improve
-my chances in future.
+<!-- If I don't get accepted, having a chance to get some more feedback would improve -->
+<!-- my chances in future. -->
 
-If I _did_ get accepted, I'd already be commited to having an early version done
-about 6 weeks before Rails Conf.
+<!-- If I _did_ get accepted, I'd already be commited to having an early version done -->
+<!-- about 6 weeks before Rails Conf. -->
+<!-- (Moved above for now) -->
 
-3/12 - I had a chance to speak at the remote Philly rb meetup giving an early
+**March 12 -** I had a chance to speak at the remote Philly rb meetup giving an early
 version of the talk.  This was extra special for me since Philly.rb was the
 first meetup I ever spoke at and was the last meetup I spoke at in person back
 in 2016 before relocating to CO.  I felt like it went really well and was also
@@ -154,7 +202,7 @@ After going over some of the things he'd tweak or change, we started riffing on
 a couple of 'Big Swing' ideas.  That really set me off on the path to think
 about how I could do some fun things to make this talk very 'me'.
 
-3/13 - All week I'd been tracking a potentially record breaking blizzard that
+**March 13 -** All week I'd been tracking a potentially record breaking blizzard that
 was due to hit us in CO right around the time I was supposed to speak at the
 Boulder Ruby meetup in person.  My small mountain town is a little over an hour
 from Boulder under normal conditions and the last strech requires me heading
@@ -171,8 +219,7 @@ of my talk with tons of ideas for improvements and 6 weeks to go to Rails Conf.
 
 With no exageration do I tell you I _barely_ made it back.  We ended up with
 about 30 inches total with one area I drove through on my way home getting 36
-inches in a 24 hour period.  
-
+inches in a 24 hour period.
 
 I can't thank the organizers for both meetups enough and very grateful for
 having me.
