@@ -193,14 +193,37 @@ public than...you guessed it, speaking in public.
 <!-- about 6 weeks before Rails Conf. -->
 <!-- (Moved above for now) -->
 
-**March 12 -** I had a chance to speak at the remote Philly rb meetup giving an early
-version of the talk.  This was extra special for me since Philly.rb was the
-first meetup I ever spoke at and was the last meetup I spoke at in person back
-in 2016 before relocating to CO.  I felt like it went really well and was also
-lucky enough to get some great feedback and speaker coacking from Kevin Murphy.
+<!-- **March 12 -** I had a chance to speak at the remote Philly.rb meetup giving an early -->
+<!-- version of the talk.  
+
+This was extra special for me since Philly.rb was the -->
+<!-- first meetup I ever spoke at and was the last meetup I spoke at in person back -->
+<!-- in 2016 before relocating to CO.  I felt like it went really well and was also -->
+<!-- lucky enough to get some great feedback and speaker coacking from Kevin Murphy. -->
+<!-- After going over some of the things he'd tweak or change, we started riffing on -->
+<!-- a couple of 'Big Swing' ideas.  That really set me off on the path to think -->
+<!-- about how I could do some fun things to make this talk very 'me'. -->
+### Philly.rb
+
+**March 12 -**  I was originally slated to speak at Philly.rb in April.  I just
+so happened that their March meetup happened to be the day before I was already
+scheduled to speak at Boulder Ruby. After a bit of a scheduling mix up, I
+received a messasge asking me if I was still ready to present that night.  Since
+I was almost done with the first version of my talk, I decided to just go for
+it.  This would give me 2 chances to practice and get feedback with plenty of
+time for revisions and updates before the conference.
+
+This was extra special for me since Philly.rb was the first meetup I ever spoke at and was the last meetup I spoke at in person back
+in 2016 before relocating to CO.
+
+(Photo)
+
+I felt like it went really well and was also lucky enough to get some great feedback and speaker coaching from Kevin Murphy who was one of the organizers this year.
 After going over some of the things he'd tweak or change, we started riffing on
 a couple of 'Big Swing' ideas.  That really set me off on the path to think
 about how I could do some fun things to make this talk very 'me'.
+
+### Boulder Ruby
 
 **March 13 -** All week I'd been tracking a potentially record breaking blizzard that
 was due to hit us in CO right around the time I was supposed to speak at the
