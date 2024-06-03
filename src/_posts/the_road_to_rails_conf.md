@@ -225,7 +225,7 @@ about how I could do some fun things to make this talk very 'me'.
 
 ### Boulder Ruby
 
-**March 13 -** All week I'd been tracking a potentially record breaking blizzard that
+**March 13 -** That whole week I'd been tracking a potentially record breaking blizzard that
 was due to hit us in CO right around the time I was supposed to speak at the
 Boulder Ruby meetup in person.  My small mountain town is a little over an hour
 from Boulder under normal conditions and the last strech requires me heading
@@ -237,7 +237,7 @@ everything.  All indicatons were pointing to a rough drive home at a minimum
 with a reasonable possibility of being stranded and having to sleep in my car
 (this happens a lot in CO).  I knew it would be risky but it also represented my
 only chance to speak in person to get some practice and feedback pre-rails conf.
-I knew it would be a huge gamble, but if it payed off, would have done 2 version
+I knew it would be a huge gamble, but if it payed off, I would have done 2 version
 of my talk with tons of ideas for improvements and 6 weeks to go to Rails Conf.
 
 With no exageration do I tell you I _barely_ made it back.  We ended up with
@@ -280,7 +280,7 @@ connected and has a moble app that allows you to monitor the status and perform
 differnt actions like lock/unlock and start the vehicle.  My top idea soon
 became something along the lines of
 
-"I wonder if I could send an inbound email to start my car?"
+"I wonder if I could send an inbound email to start my truck?"
 
 Unfortunately, there wasn't a public API I could find.  However, I was fortunate
 enough to find someone who created an unoffical API wrapper with JS.
@@ -316,8 +316,12 @@ after stashing my bag post lunch.
 
 It was viewed over 10,000 times in less than two days.
 
+(Youtube video)
+
 That was wayyyyyyyy more than anything I expected and was glad to see people
 appreicated the whimsy and fun of it all.
+
+(add some stuff about refusing to say you were nervous)
 
 ### Next steps?
 
