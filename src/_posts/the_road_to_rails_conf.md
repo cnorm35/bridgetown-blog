@@ -247,22 +247,35 @@ inches in a 24 hour period.
 I can't thank the organizers for both meetups enough and very grateful for
 having me.
 
-(Include some videos)
+(Include some videos?)
 
 
 ### Big Swings
 
-One of the things that was clear from the meetups, people really enjoyed the
-examples and had never thought about using Action Mailbox in that way.
+<!-- One of the things that was clear from the meetups, people really enjoyed the -->
+<!-- examples and had never thought about using Action Mailbox in that way. -->
+One of my big takeaways from the meetups was that people really enjoyed the
+examples.  Seeing examples of some different tasks you can accomplish with
+Action Mailbox got people's wheels turning about ways they could use it in their
+applications.
 
-I started creating a list of 'practical examples' you can easily add
-with Action Mailbox. Since I had a 'practical' example section, I thought it
-would be fun to close out with an 'impractical' section.  This would be a
-handful of the weirdest, interesting but maybe not useful things built with
-Action Mailbox.  I thought this would be a great way to inject some personality
-into the talk and also throw out a wide range of things you can do with an
-inbound email in hopes people would walk away with their own ideas to add to
-their app.
+<!-- I started creating a list of 'practical examples' you can easily add -->
+<!-- with Action Mailbox. Since I had a 'practical' example section, I thought it -->
+<!-- would be fun to close out with an 'impractical' section.  This would be a -->
+<!-- handful of the weirdest, interesting but maybe not useful things built with -->
+<!-- Action Mailbox.  I thought this would be a great way to inject some personality -->
+<!-- into the talk and also throw out a wide range of things you can do with an -->
+<!-- inbound email in hopes people would walk away with their own ideas to add to -->
+<!-- their app. -->
+Armed with a couple rounds of feedback, I start working on some 'practical'
+examples you could easily add with Action Mailbox. Since I had a practical
+example section, I thought it would be fun to close out with an 'impractical'
+example section.  This would be a handful of the weirdest, interesting but
+probably not useful things built with Action Mailbox. This seemed like a great
+way to inject some personality into my talk while throwing out a wide range of
+things you can do with an inbound email.  I was hoping the broad range of ideas
+would help people walk away with their own ideas for features they could add to
+their app (and some they shouldn't)
 
 I probably have a whole post's worth of material covering all the stuff that
 _didn't_ work or at least became too much to get working on time.
@@ -310,6 +323,39 @@ My talk was right before lunch and wanted to do something that people would feel
 like they just had to ask someone if they saw it or tell them what they just
 saw.
 
+### Go Time
+
+This being the first time I spoke at a conference, I wasn't sure what to expect. 
+My talk was on the last day so I had a couple of days before I was up. One tip I
+kept hearing was
+
+"Don't let it weigh on you where you don't enjoy the conference"
+
+I tried to take that to heart and knew that I'd done everything I could do to
+prepare myself and there was nothing left but to do it.  
+
+The other thing I kept hearing was
+
+"Are you nervous?"
+
+I tried to answer every time with something like "I'm not nervous, I'm excited"
+that was very intentional.  That wasn't overconvidence, that was me trying to
+not even internalize the idea of being nervous.  I'd been endlessly visualizing
+giving a successfulk talk.  One the first day, I even popped up on the stage in
+the room I was going to be speaking in and took a picture of what it looked like
+from the podium.  I would keep referring back to that picture over the next
+couple of days thinking about what it's going to be like on stage.
+
+After all of that, I didn't even want to invite the idea of being nervous into
+my head.
+
+By the time I got on stage, I was ready to go.  If anything I was anxious to get
+to the end to see how the truck email went.
+
+Almost by some miracle, I kept the ending under wraps and got to see people
+react to it the first time in person.  That's absolutely something I'll never
+forget and couldn't think of a better closer.
+
 After the talk was done and getting to see a room full of people react to it I
 decided to post a quick tweet with the video on my my back to the conf venue
 after stashing my bag post lunch.
@@ -321,11 +367,8 @@ It was viewed over 10,000 times in less than two days.
 That was wayyyyyyyy more than anything I expected and was glad to see people
 appreicated the whimsy and fun of it all.
 
-(add some stuff about refusing to say you were nervous)
-
 ### Next steps?
 
 After getting some great feedback from the content in my talk, I have a much
 better idea of the topics that will be included in my upcoming video course on
-Action Mailbox.  I've almost finalized the outline and am hoping to have
-everything complete in early August.
+Action Mailbox.  (course link - talk about presale now)
