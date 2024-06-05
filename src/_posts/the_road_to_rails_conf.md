@@ -11,8 +11,8 @@ author: cody
 Last week, I had a chance to give my first conference talk at what turned out to
 be the penultimate Rails Conf.
 
-(That was the culmination of about 18 months of work trying to speak at a
-conference.)
+<!-- That was the culmination of about 18 months of work trying to speak at a -->
+<!-- conference.) -->
 
 Sometime early last year, I decided I was really going to start working on doing
 more public speaking and had the goal of being accepted to speak at a
@@ -28,16 +28,15 @@ started reading any article I could find on how to prepare a good conference
 proposal.  Here are some of the resources that were a big help for me (list out
 and thank everyone)
 
-https://www.youtube.com/watch?v=l9JXH7JPjR4
+[Rails Conf 2013 How to Talk to Developers by Ben Orenstein](https://www.youtube.com/watch?v=l9JXH7JPjR4){:target="_blank"}
 
-https://kevinjmurphy.com/posts/building-conference-talk-content/
+[Kevin Murphy - Building Conference Talk Content](https://kevinjmurphy.com/posts/building-conference-talk-content/){:target="_blank"}
 
-http://www.sarahmei.com/blog/2014/04/07/what-your-conference-proposal-is-missing/?ref=rubycentral.org
+[Sarah Mei - What Your Conference Proposal Is Missing](http://www.sarahmei.com/blog/2014/04/07/what-your-conference-proposal-is-missing/?ref=rubycentral.org){:target="_blank"}
 
-https://noelrappin.com/blog/2014/01/conference-prompts-or-how-to-submit-proposals-and-influence-people/?ref=rubycentral.org
+[Noel Rappin - Conference Prompts: Or How To Submit Proposals and Influence People](https://noelrappin.com/blog/2014/01/conference-prompts-or-how-to-submit-proposals-and-influence-people/?ref=rubycentral.org){:target="_blank"}
 
-
-Another great resource I found was [Speakerline.io](https://speakerline.io/){:target="_blank"}
+Another great resource I found was [Speakerline.io](https://speakerline.io/){:target="_blank"} from [Nadia Odunayo](https://nadiaodunayo.com/){:target="_blank"}
 
 ### What does a good proposal even look like?
 
