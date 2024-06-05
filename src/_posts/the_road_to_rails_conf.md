@@ -46,7 +46,7 @@ started getting more comfortable with contributing to Rails was that he started
 reading over _every single new commit_.
 
 I loved this and decided to try something similar with conference proposals.  I
-read over every single Ruby propsal at least once, some of them multiple times.
+read over every single Ruby proposal at least once, some of them multiple times.
 I started to get a much better idea of what a good (and accepted) proposal looks
 like.
 
@@ -67,14 +67,14 @@ back-burner and focus on other areas. I had some time to rest up and lick my
 wounds over the holidays and after a bit of recharging, decided I wasn't done
 yet and was going to come out swinging in 2024.
 
-Sometime around January or Febuary of this year, I started compiling a list of all the
+Sometime around January or February of this year, I started compiling a list of all the
 ruby conferences I could potentially submit to along with the Call For Proposal
 dates.
 
 I started writing some blog posts around some of my potential proposal
 topics.  This was a big win because the blog content made it much easier to pull
 info an ideas from to include in the proposal.  It also gave me a chance to get
-feedback on what parts people thought were the most valueable.
+feedback on what parts people thought were the most valuable.
 
 I decided to go all in on what I thought was my strongest proposal and reached
 out to Boulder Ruby and speak on that topic (update this).
@@ -84,7 +84,7 @@ My thinking was...
 If I don't get accepted, having a chance to get some more feedback would improve
 my chances in future.
 
-If I _did_ get accepted, I'd already be commited to having an early version done
+If I _did_ get accepted, I'd already be committed to having an early version done
 about 6 weeks before Rails Conf.
 
 Hearing the theme of this year's Rails Conf was 'building with Rails' I had some
@@ -109,11 +109,11 @@ A funny line I added to my planning notes that Saturday (March 2)
 
 _"What's the Rocky IV equivalent for preparing for a talk?"_
 
-For those unaware, [Rocy IV](https://youtu.be/B_9FyTiq3SA?si=bRlLqS41zAfenxZK)
-has the best training montage in existience.  I will not be taking further
+For those unaware, [Rocky IV](https://youtu.be/B_9FyTiq3SA?si=bRlLqS41zAfenxZK)
+has the best training montage in existence.  I will not be taking further
 questions.
 
-I didn't think I'd be able to realisticly pull that off, but thinking about what
+I didn't think I'd be able to realistically pull that off, but thinking about what
 that would look like, gave me some good ideas to think about for prep.
 
 When Monday rolled around, it was time to get to work.
@@ -128,7 +128,7 @@ books and recordings alone would be like reading a book on skydiving and
 thinking that'll be enough to help me jump out of a plane.
 
 In other words...practicing was where the majority of my focus should be. 
-There's absolutely no subsititute for feeling more comfortable speaking in
+There's absolutely no substitute for feeling more comfortable speaking in
 public than...you guessed it, speaking in public.
 
 ### Philly.rb
@@ -136,7 +136,7 @@ public than...you guessed it, speaking in public.
 **March 12 -**  I was originally slated to speak at Philly.rb in April.  I just
 so happened that their March meetup happened to be the day before I was already
 scheduled to speak at Boulder Ruby. After a bit of a scheduling mix up, I
-received a messasge asking me if I was still ready to present that night.  Since
+received a message asking me if I was still ready to present that night.  Since
 I was almost done with the first version of my talk, I decided to just go for
 it.  This would give me 2 chances to practice and get feedback with plenty of
 time for revisions and updates before the conference.
@@ -156,19 +156,19 @@ about how I could do some fun things to make this talk very 'me'.
 **March 13 -** That whole week I'd been tracking a potentially record breaking blizzard that
 was due to hit us in CO right around the time I was supposed to speak at the
 Boulder Ruby meetup in person.  My small mountain town is a little over an hour
-from Boulder under normal conditions and the last strech requires me heading
-through a moutain road that's pretty well known for people getting stranded on.
+from Boulder under normal conditions and the last stretch requires me heading
+through a mountain road that's pretty well known for people getting stranded on.
 
 I don't think I've ever prepped for heading to a meetup by throwing a sleeping
 bag and shovel into my card ahead of time but I suppose there's a first time for
-everything.  All indicatons were pointing to a rough drive home at a minimum
+everything.  All indications were pointing to a rough drive home at a minimum
 with a reasonable possibility of being stranded and having to sleep in my car
 (this happens a lot in CO).  I knew it would be risky but it also represented my
-only chance to speak in person to get some practice and feedback pre-rails conf.
+only chance to speak in person to get some practice and feedback pre Rails Conf.
 I knew it would be a huge gamble, but if it payed off, I would have done 2 version
 of my talk with tons of ideas for improvements and 6 weeks to go to Rails Conf.
 
-With no exageration do I tell you I _barely_ made it back.  We ended up with
+With no exaggeration do I tell you I _barely_ made it back.  We ended up with
 about 30 inches total with one area I drove through on my way home getting 36
 inches in a 24 hour period.
 
@@ -198,7 +198,7 @@ their app (and some they shouldn't)
 I probably have a whole post's worth of material covering all the stuff that
 _didn't_ work or at least became too much to get working on time.
 
-Seriously, the past month, my office has been littered with hotwheels tracks,
+Seriously, the past month, my office has been littered with Hotwheels tracks,
 springs, button-pushers, mouse traps, skateboard wheels and more. I'm determined
 to get at least one of those working to include in any future talks. 
 
@@ -207,14 +207,14 @@ to happen in the real world that cracked me up.
 
 One idea I had was to see if the after market remote start device I had
 installed on my truck had an API available.  The device uses LTE to stay
-connected and has a moble app that allows you to monitor the status and perform
-differnt actions like lock/unlock and start the vehicle.  My top idea soon
+connected and has a mobile app that allows you to monitor the status and perform
+different actions like lock/unlock and start the vehicle.  My top idea soon
 became something along the lines of
 
 "I wonder if I could send an inbound email to start my truck?"
 
 Unfortunately, there wasn't a public API I could find.  However, I was fortunate
-enough to find someone who created an unoffical API wrapper with JS.
+enough to find someone who created an unofficial API wrapper with JS.
 
 After skimming through the repo a bit, it seemed like it was possible and after
 getting a token, would be a pretty simple API request I could trigger in the
@@ -231,7 +231,7 @@ After a long string of failures earlier in the week, I was able to get this
 working while recording the process on Friday afternoon just a couple of days
 before traveling for Rails Conf.
 
-On Saturday, I finsihed editing the video and added it to my slides.  I could
+On Saturday, I finished editing the video and added it to my slides.  I could
 not stop laughing when I watched it and was so tempted to share it publicly but
 thought if I was able to keep this under wraps, and come out of nowhere with a
 video demo of starting an 06 Tacoma with an inbound email and a lil' bit of
@@ -257,9 +257,9 @@ The other thing I kept hearing was
 "Are you nervous?"
 
 I tried to answer every time with something like "I'm not nervous, I'm excited"
-that was very intentional.  That wasn't overconvidence, that was me trying to
+that was very intentional.  That wasn't over-confidence, that was me trying to
 not even internalize the idea of being nervous.  I'd been endlessly visualizing
-giving a successfulk talk.  One the first day, I even popped up on the stage in
+giving a successful talk.  One the first day, I even popped up on the stage in
 the room I was going to be speaking in and took a picture of what it looked like
 from the podium.  I would keep referring back to that picture over the next
 couple of days thinking about what it's going to be like on stage.
@@ -275,7 +275,7 @@ react to it the first time in person.  That's absolutely something I'll never
 forget and couldn't think of a better closer.
 
 After the talk was done and getting to see a room full of people react to it I
-decided to post a quick tweet with the video on my my back to the conf venue
+decided to post a quick tweet with the video on my my back to the conference venue
 after stashing my bag post lunch.
 
 It was viewed over 10,000 times in less than two days.
@@ -283,7 +283,7 @@ It was viewed over 10,000 times in less than two days.
 (Youtube video)
 
 That was wayyyyyyyy more than anything I expected and was glad to see people
-appreicated the whimsy and fun of it all.
+appreciated the whimsy and fun of it all.
 
 ### Next steps?
 
