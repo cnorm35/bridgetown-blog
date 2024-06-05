@@ -149,6 +149,7 @@ class="position-relative mx-auto rounded w-100 shadow-lg"
 src="/images/PhillyRb2016.jpg"
 style="z-index: 10"
 />
+(Philly.rb 2016)
 
 I felt like it went really well and was also lucky enough to get some great feedback and speaker coaching from Kevin Murphy who was one of the organizers this year.
 After going over some of the things he'd tweak or change, we started riffing on
