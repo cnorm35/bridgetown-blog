@@ -279,7 +279,7 @@ after stashing my bag post lunch.
 
 It was viewed over 10,000 times in less than two days.
 
-(Youtube video)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xC-V_aBjmnw?si=17euozQmKXpQjvQQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 That was wayyyyyyyy more than anything I expected and was glad to see people
 appreciated the whimsy and fun of it all.
