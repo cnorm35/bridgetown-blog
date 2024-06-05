@@ -1,14 +1,14 @@
 ---
 layout: post
-title: The Road To Rails Conf
-date:   2024-05-10 16:54:46 -0500
+title: The Road To Rails Conf 2024
+date:   2024-06-01 16:54:46 -0500
 category: ruby
-excerpt: "Something"
+excerpt: "Paths to important milestones are rarely straight lines.  Here's a look at the winding road I took to my first conference talk at Rails Conf 2024."
 author: cody
 ---
 
 ### The Road To Rails Conf
-Last week, I had a chance to give my first conference talk at what turned out to
+Last month, I had a chance to give my first conference talk at what turned out to
 be the penultimate Rails Conf.
 
 Sometime early last year, I decided I was going to start working on doing
