@@ -11,22 +11,20 @@ author: cody
 Last week, I had a chance to give my first conference talk at what turned out to
 be the penultimate Rails Conf.
 
-<!-- That was the culmination of about 18 months of work trying to speak at a -->
-<!-- conference.) -->
-
-Sometime early last year, I decided I was really going to start working on doing
+Sometime early last year, I decided I was going to start working on doing
 more public speaking and had the goal of being accepted to speak at a
 conference.
 
 I put a lot of work into my first proposal but wasn't selected.  Honestly, that
 may have been for the best.
 
-I don't consider myself a sore loser.  If I didn't get picked or make the cut for for something, it's because I didn't do a good enough job, plain and simple. That doesn't mean I'm happy about it, but I'm fine with losing.  I guess a good way to put this is I'm fine with losing, but I _hate_ the feeling, especially when it's something I've set my mind to.
+I don't consider myself a sore loser.  If I didn't get picked or make the cut for something, it's because I didn't do a good enough job, plain and simple. That doesn't mean I'm happy about it.  I guess a good way to put this is I'm fine with losing, but I absolutely _hate_ the feeling, especially when it's something I've set my mind to.
 
 Getting that first stinging rejection let me know I had to set my game up.  I
-started reading any article I could find on how to prepare a good conference
-proposal.  Here are some of the resources that were a big help for me (list out
-and thank everyone)
+started reading any article I could find on preparing a good conference
+proposal.  Here are some of the resources that were a big help for me.
+
+**Conference Proposal Resources**
 
 [Rails Conf 2013 How to Talk to Developers by Ben Orenstein](https://www.youtube.com/watch?v=l9JXH7JPjR4){:target="_blank"}
 
@@ -49,13 +47,13 @@ read over every single Ruby proposal at least once, some of them multiple times.
 I started to get a much better idea of what a good (and accepted) proposal looks
 like.
 
-To round out my newfound knowledge on the proposal process, I also attended my
+To round out my newfound knowledge of the proposal process, I also attended my
 first proposal coaching session courtesy of the fine folks at Ruby Central.  It
 was a great chance to get feedback my ideas and proposals while also seeing what
 others were working on.
 
 So...after reading dozens of proposals, getting some coaching on my specific
-proposals and submitting to the next conference...
+proposals and submitting them to the next conference...
 
 More rejections.
 
@@ -72,31 +70,28 @@ dates.
 
 I started writing some blog posts around some of my potential proposal
 topics.  This was a big win because the blog content made it much easier to pull
-info an ideas from to include in the proposal.  It also gave me a chance to get
+info an ideas from to include in the proposal.  It also allowed me to get
 feedback on what parts people thought were the most valuable.
 
 I decided to go all in on what I thought was my strongest proposal and reached
-out to Boulder Ruby and speak on that topic (update this).
+out to Boulder Ruby to speak on that topic.
 
-My thinking was...
-
-If I don't get accepted, having a chance to get some more feedback would improve
-my chances in future.
+My thinking was...If I don't get accepted, having a chance to get some more feedback would improve
+my chances in the future.
 
 If I _did_ get accepted, I'd already be committed to having an early version done
 about 6 weeks before Rails Conf.
 
 Hearing the theme of this year's Rails Conf was 'building with Rails' I had some
 ideas for a talk on Action Mailbox that I thought would be a great fit.  I
-thought this was my strongest proposal and represented my best chance at being
+thought this was my strongest proposal and represented my best chance of being
 accepted.
 
 **Thursday 2/29 @ 2:03 PM** (I saved the email) I finally got my breakthrough.
 
-"Holy $hit..."
-(not sure)
+"Wait, What?!...."
 
-I had to squint and re-read the email a couple of times but there it was. The
+I had to squint and re-read the email a couple times but there it was. The
 acceptance email I've been on the hunt for so long.
 
 ### Knocking the dust off
@@ -108,8 +103,7 @@ A funny line I added to my planning notes that Saturday (March 2)
 
 _"What's the Rocky IV equivalent for preparing for a talk?"_
 
-For those unaware, [Rocky IV](https://youtu.be/B_9FyTiq3SA?si=bRlLqS41zAfenxZK)
-has the best training montage in existence.  I will not be taking further
+For those unaware, [Rocky IV](https://youtu.be/B_9FyTiq3SA?si=bRlLqS41zAfenxZK) has the best training montage in existence.  I will not be taking further
 questions.
 
 I didn't think I'd be able to realistically pull that off, but thinking about what
@@ -119,7 +113,7 @@ When Monday rolled around, it was time to get to work.
 
 I immediately picked up a couple of Audio Books on speaking and how to craft an
 engaging and entertaining presentation.  I also thought that audiobooks might
-have the advantage of being able to _hear_ the examples instead of just reading
+have the advantage of allowing me to _hear_ the examples instead of just reading
 which I thought would be a big help.
 
 Even though I had never given a conference talk, I thought that depending on
@@ -151,15 +145,13 @@ style="z-index: 10"
 />
 (Philly.rb 2016)
 
-I felt like it went really well and was also lucky enough to get some great feedback and speaker coaching from Kevin Murphy who was one of the organizers this year.
-After going over some of the things he'd tweak or change, we started riffing on
-a couple of 'Big Swing' ideas.  That really set me off on the path to think
-about how I could do some fun things to make this talk very 'me'.
+I felt like it went really well and was also lucky enough to get some great feedback and speaker coaching from Kevin Murphy who was on the program committee this year.
+After going over some of the things he'd tweak or change, we started riffing on a couple of 'Big Swing' ideas.  That really set me off on the path to think about how I could do some fun things to make this talk very 'me'.
 
 ### Boulder Ruby
 
-**March 13 -** That whole week I'd been tracking a potentially record breaking blizzard that
-was due to hit us in CO right around the time I was supposed to speak at the
+**March 13 -** That whole week I'd been tracking a potentially record-breaking blizzard that
+was due to hit us in Colorado right around the time I was supposed to speak at the
 Boulder Ruby meetup in person.  My small mountain town is a little over an hour
 from Boulder under normal conditions and the last stretch requires me heading
 through a mountain road that's pretty well known for people getting stranded on.
@@ -168,20 +160,20 @@ I don't think I've ever prepped for heading to a meetup by throwing a sleeping
 bag and shovel into my card ahead of time but I suppose there's a first time for
 everything.  All indications were pointing to a rough drive home at a minimum
 with a reasonable possibility of being stranded and having to sleep in my car
-(this happens a lot in CO).  I knew it would be risky but it also represented my
-only chance to speak in person to get some practice and feedback pre Rails Conf.
-I knew it would be a huge gamble, but if it payed off, I would have done 2 version
+(this happens a lot in Colorado).  I knew it would be risky but it also represented my
+only chance to speak in person to get some practice and feedback before Rails Conf.
+
+I knew it would be a huge gamble, but if it paid off, I would have done 2 version
 of my talk with tons of ideas for improvements and 6 weeks to go to Rails Conf.
 
-With no exaggeration do I tell you I _barely_ made it back.  We ended up with
+With no exaggeration do I tell you I _barely_ made it home.  We ended up with
 about 30 inches total with one area I drove through on my way home getting 36
-inches in a 24 hour period.
+inches in a 24-hour period.
 
-I can't thank the organizers for both meetups enough and very grateful for
+I can't thank the organizers for both meetups enough and incredibly grateful for
 having me.
 
-(Include some videos?)
-
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="en" dir="ltr">Here&#39;s a quick clip from one of the worst sections last night. Luckily I was only a couple cars back from the plow, probably passed a dozen cars stuck by this point. <a href="https://t.co/pe8vHXa8uq">pic.twitter.com/pe8vHXa8uq</a></p>&mdash; Cody Norman (@cnorm35) <a href="https://twitter.com/cnorm35/status/1768305308504367506?ref_src=twsrc%5Etfw">March 14, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ### Big Swings
 
@@ -190,7 +182,7 @@ examples.  Seeing examples of some different tasks you can accomplish with
 Action Mailbox got people's wheels turning about ways they could use it in their
 applications.
 
-With a couple rounds of feedback, I start working on some 'practical'
+With a couple of rounds of feedback, I start working on some 'practical'
 examples you could easily add with Action Mailbox. Since I had a practical
 example section, I thought it would be fun to close out with an 'impractical'
 example section.  This would be a handful of the weirdest, interesting but
@@ -200,8 +192,7 @@ things you can do with an inbound email.  I was hoping the broad range of ideas
 would help people walk away with their own ideas for features they could add to
 their app (and some they shouldn't)
 
-I probably have a whole post's worth of material covering all the stuff that
-_didn't_ work or at least became too much to get working on time.
+I probably have a whole post's worth of material covering all the stuff that _didn't_ work or at least became too much to get working on time.
 
 Seriously, the past month, my office has been littered with Hotwheels tracks,
 springs, button-pushers, mouse traps, skateboard wheels and more. I'm determined
@@ -210,7 +201,7 @@ to get at least one of those working to include in any future talks.
 There was just something about the idea of sending an inbound email that triggered stuff
 to happen in the real world that cracked me up.
 
-One idea I had was to see if the after market remote start device I had
+One idea was to see if the after-market remote start device I had
 installed on my truck had an API available.  The device uses LTE to stay
 connected and has a mobile app that allows you to monitor the status and perform
 different actions like lock/unlock and start the vehicle.  My top idea soon
@@ -225,25 +216,25 @@ After skimming through the repo a bit, it seemed like it was possible and after
 getting a token, would be a pretty simple API request I could trigger in the
 mailbox.
 
-https://github.com/Hacksore/drone-mobile/tree/main
+[Drone Mobile Node API](https://github.com/Hacksore/drone-mobile/tree/main){:target="_blank"}
 
 I had casually floated out this idea a couple of times over the past couple of
 months and got some chuckles but it was clear that it would be tough to convey
 just how goofy this is through slides. I knew I had to record some kind of video
 demoing this for people to really get it.
 
-After a long string of failures earlier in the week, I was able to get this
-working while recording the process on Friday afternoon just a couple of days
+After a long string of failures earlier in the week, I was able to get things
+working and recorded the process on Friday afternoon, just a couple of days
 before traveling for Rails Conf.
 
 On Saturday, I finished editing the video and added it to my slides.  I could
 not stop laughing when I watched it and was so tempted to share it publicly but
-thought if I was able to keep this under wraps, and come out of nowhere with a
-video demo of starting an 06 Tacoma with an inbound email and a lil' bit of
+thought that if I was able to keep this under wraps and come out of nowhere with a
+video demo of starting a 2006 Tacoma with an inbound email and a lil' bit of
 Rails code.
 
 My talk was right before lunch and wanted to do something that people would feel
-like they just had to ask someone if they saw it or tell them what they just
+like they just _had_ to ask someone if they saw it or tell them what they just
 saw.
 
 ### Go Time
@@ -262,26 +253,24 @@ The other thing I kept hearing was
 "Are you nervous?"
 
 I tried to answer every time with something like "I'm not nervous, I'm excited"
-that was very intentional.  That wasn't over-confidence, that was me trying to
-not even internalize the idea of being nervous.  I'd been endlessly visualizing
-giving a successful talk.  One the first day, I even popped up on the stage in
-the room I was going to be speaking in and took a picture of what it looked like
+which was very intentional.  That wasn't over-confidence, that was me trying to
+not even begin to internalize the idea of being nervous.  I'd been endlessly visualizing
+giving a successful talk.
+
+On the first day, I even popped up on the stage in the room I was going to be speaking in and took a picture of what it looked like
 from the podium.  I would keep referring back to that picture over the next
 couple of days thinking about what it's going to be like on stage.
 
-After all of that, I didn't even want to invite the idea of being nervous into
-my head.
-
-By the time I got on stage, I was ready to go.  If anything I was anxious to get
+By the time I got on stage, I was ready to go.  If anything, I was anxious to get
 to the end to see how the truck email went.
 
-Almost by some miracle, I kept the ending under wraps and got to see people
-react to it the first time in person.  That's absolutely something I'll never
+Almost by some miracle, I kept the ending under wraps and was able to see people
+react to it for the first time in person.  That's absolutely something I'll never
 forget and couldn't think of a better closer.
 
 After the talk was done and getting to see a room full of people react to it I
-decided to post a quick tweet with the video on my my back to the conference venue
-after stashing my bag post lunch.
+decided to post a quick tweet with the video on my way back to the conference venue
+after stashing my bag at the hotel.
 
 It was viewed over 10,000 times in less than two days.
 
@@ -295,7 +284,7 @@ appreciated the whimsy and fun of it all.
 ### Next steps?
 
 After getting some great feedback from the content in my talk, I've started
-working on a video course on Action Mailbox. Pre-sale is available now and the
+work on a video course on Action Mailbox. Pre-sale is available now and the
 course is expected to be completed in August.
 
 [Action Mailbox Pro](https://store.codynorman.com/action-mailbox-pro){:target="_blank"}
