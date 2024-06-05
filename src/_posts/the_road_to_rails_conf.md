@@ -141,9 +141,14 @@ it.  This would give me 2 chances to practice and get feedback with plenty of
 time for revisions and updates before the conference.
 
 This was extra special for me since Philly.rb was the first meetup I ever spoke at and was the last meetup I spoke at in person back
-in 2016 before relocating to CO.
+in 2016 before relocating to Colorado.
 
-(Photo)
+<img
+alt="Person holding a laptop with a code editor open"
+class="position-relative mx-auto rounded w-100 shadow-lg"
+src="/images/PhillyRb2016.jpg"
+style="z-index: 10"
+/>
 
 I felt like it went really well and was also lucky enough to get some great feedback and speaker coaching from Kevin Murphy who was one of the organizers this year.
 After going over some of the things he'd tweak or change, we started riffing on
@@ -288,6 +293,10 @@ appreciated the whimsy and fun of it all.
 
 ### Next steps?
 
-After getting some great feedback from the content in my talk, I have a much
-better idea of the topics that will be included in my upcoming video course on
-Action Mailbox.  (course link - talk about presale now)
+After getting some great feedback from the content in my talk, I've started
+working on a video course on Action Mailbox. Pre-sale is available now and the
+course is expected to be completed in August.
+
+[Action Mailbox Pro](https://store.codynorman.com/action-mailbox-pro){:target="_blank"}
+
+If you're interested in me speaking at your conference or meetup, please reach out!
