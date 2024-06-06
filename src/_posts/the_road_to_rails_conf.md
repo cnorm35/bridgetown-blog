@@ -175,6 +175,11 @@ having me.
 
 <blockquote class="twitter-tweet" data-media-max-width="560"><p lang="en" dir="ltr">Here&#39;s a quick clip from one of the worst sections last night. Luckily I was only a couple cars back from the plow, probably passed a dozen cars stuck by this point. <a href="https://t.co/pe8vHXa8uq">pic.twitter.com/pe8vHXa8uq</a></p>&mdash; Cody Norman (@cnorm35) <a href="https://twitter.com/cnorm35/status/1768305308504367506?ref_src=twsrc%5Etfw">March 14, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+Here are the slides from the Boulder and Philly Ruby meetups to give a better
+idea of what my first version looked like. You can compare them to the Rails Conf version to see how they evolved.
+
+[Attraction Mailbox Slides - Meetup Version](https://speakerdeck.com/codynorman/boulder-ruby-attraction-mailbox-why-i-love-action-mailbox){:target="_blank"}
+
 ### Big Swings
 
 One of my big takeaways from the meetups was that people really enjoyed the
@@ -280,6 +285,10 @@ It was viewed over 10,000 times in less than two days.
 
 That was wayyyyyyyy more than anything I expected and was glad to see people
 appreciated the whimsy and fun of it all.
+
+
+If you're interested in the slides from my Rails Conf talk, you can find them
+[Attraction Mailbox Slides - Rails Conf Version](https://speakerdeck.com/codynorman/attraction-mailbox-why-i-love-action-mailbox){:target="_blank"}
 
 ### Next steps?
 
