@@ -20,7 +20,7 @@ may have been for the best.
 
 I don't consider myself a sore loser.  If I didn't get picked or make the cut for something, it's because I didn't do a good enough job, plain and simple. That doesn't mean I'm happy about it.  I guess a good way to put this is I'm fine with losing, but I absolutely _hate_ the feeling, especially when it's something I've set my mind to.
 
-Getting that first stinging rejection let me know I had to set my game up.  I
+Getting that first stinging rejection let me know I had to step my game up.  I
 started reading any article I could find on preparing a good conference
 proposal.  Here are some of the resources that were a big help for me.
 
@@ -157,13 +157,13 @@ from Boulder under normal conditions and the last stretch requires me heading
 through a mountain road that's pretty well known for people getting stranded on.
 
 I don't think I've ever prepped for heading to a meetup by throwing a sleeping
-bag and shovel into my card ahead of time but I suppose there's a first time for
+bag and shovel into my car ahead of time but I suppose there's a first time for
 everything.  All indications were pointing to a rough drive home at a minimum
 with a reasonable possibility of being stranded and having to sleep in my car
 (this happens a lot in Colorado).  I knew it would be risky but it also represented my
 only chance to speak in person to get some practice and feedback before Rails Conf.
 
-I knew it would be a huge gamble, but if it paid off, I would have done 2 version
+I knew it would be a huge gamble, but if it paid off, I would have done 2 versions
 of my talk with tons of ideas for improvements and 6 weeks to go to Rails Conf.
 
 With no exaggeration do I tell you I _barely_ made it home.  We ended up with
