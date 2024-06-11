@@ -53,6 +53,11 @@ add pre-processed variants
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
 
+  (not sure if I need this since I'm only using the thumb in the view)
+
+  (maybe make a qr_code (image maybe?) or something attachment to hold the QR image before the
+  composite?)
+
 
 # and in the view
 
