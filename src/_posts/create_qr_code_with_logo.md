@@ -17,7 +17,7 @@ To say QR codes are a dime a dozen would be an understatement.  Creating a
 composite QR code with a logo is a great way to help your code stand out and add
 some additional branding and feel to your app.
 
-Being able to generate a custom QR code overlayed with a logo, while still being
+Being able to generate a custom QR code overlaid with a logo, while still being
 scannable is pretty easy with Rails.
 
 This post will walk through setting up a simple standalone QR with logo app.
@@ -299,6 +299,8 @@ Here's what the final method looks like in the `QrCode` model.
   end
 ```
 
+(add something about requiring minimagick))
+
 In the same way we called `generate_qr_code!` after saving the record, we can call `generate_combined_image!` to create the composite image with the logo from the Rails console on an existing record that has a logo and QR code attached.
 
 The last step is to call the `generate_combined_image!` method after the QR code has been generated and saved.
@@ -323,11 +325,35 @@ The last step is to call the `generate_combined_image!` method after the QR code
   end
 ```
 
+Display the combined image on the show page for the QR code record to see the final result.
+
+`<%= image_tag qr_code.combined_image %>`
+`app/views/qr_codes/_qr_code.html.erb`
+
+```ruby
+<div id="<%= dom_id qr_code %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Url:</strong>
+    <%= qr_code.url %>
+    <%= image_tag qr_code.logo %>
+    <%= image_tag qr_code.original_image %>
+    <%= image_tag qr_code.combined_image %>
+  </p>
+</div>
+
+
 If all goes as planned, you should be re-directed to the show page for the newly
 created QR Code record and see if all the logos are correct.
 
-(screenshot and example QR)
-<!-- (https://israilsdead.com/) -->
+<div class="my-5">
+<img
+    alt="Combined QR Code with Logo"
+    class="position-relative mx-auto rounded w-100 shadow-lg"
+    src="/images/CombinedQRCodeExample.png"
+    style="z-index: 10"
+/>
+</div>
+
 
 And with that, you've created a simple tool too add some style and flair to your
 QR codes.
