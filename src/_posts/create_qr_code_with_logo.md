@@ -327,6 +327,7 @@ If all goes as planned, you should be re-directed to the show page for the newly
 created QR Code record and see if all the logos are correct.
 
 (screenshot and example QR)
+<!-- (https://israilsdead.com/) -->
 
 And with that, you've created a simple tool too add some style and flair to your
 QR codes.
