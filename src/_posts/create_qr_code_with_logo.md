@@ -359,3 +359,6 @@ And with that, you've created a simple tool too add some style and flair to your
 QR codes.
 
 This is a pretty simple example and there are a lot of ways to improve and expand on this feature.  You could add more options for the QR code generation, add more image processing options, or even add a background color to the QR code for some additional flair.
+
+You can view the full code for this example on
+[GitHub](https://github.com/cnorm35/qr_code_generator){:target="_blank"}.
