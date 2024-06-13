@@ -6,11 +6,6 @@ category: ruby
 excerpt: "Creating a QR code with a logo is a great way to brand your QR codes and make them stand out.  This post will go over how to create a QR code with a logo using Ruby on Rails."
 author: cody
 ---
-
-<!-- use the montibus labs png -->
-
-<!-- After Commit hook and on logo or URL update? -->
-
 QR codes are a great way to share links or infomation easily with your users,
 unless you're a resturant, in which case you should really consider a paper menu
 please.
@@ -33,31 +28,27 @@ composite image with the logo.
 
 ### Getting started
 
-Create a new Rails app with Tailwind (optional).
-
-
-```ruby
-rails new qr_code_generator --css=tailwind
-```
-
-cd into the directory for the app and commit your changes.
-
-Our QR logo app is going to have a single model `QRCode`
+The app is going to have a single model `QRCode`
 
 It will have a string field for the URL and 3 attached active storage images.
 
 3 might be a bit overkill but this will store the logo updloaded by a user, the
 QR code without the logo and finally the combined QR code image with the logo.
 
-We'll keep things simple by scaffolding the `QRCode` model
+Create a new Rails app with Tailwind by running the following command in your
+terminal.
 
+```bash
+rails new qr_code_generator --css=tailwind
+```
+
+We'll keep things simple by scaffolding the `QRCode` resources
 
 ```
 bin/rails generate scaffold QrCode url:string
 ```
 
-One last thing to update before moving on is to set our root route to the QRCode
-index
+Since this is a simple app, we'll set the root route to the QRCode index page.
 
 ```ruby
   # config/routes.rb
@@ -72,7 +63,7 @@ If you look in your `Gemfile`, you should already see the `image_processing` gem
 commented out. You can uncomment the gem and run `bundle install`
 
 With the image processing gem installed and ready to go, the next step is to
-install ActiveStorage and run the cooresponding migrations.
+install Active Storage and run the cooresponding migrations.
 
 ```
 bin/rails active_storage:install
@@ -81,17 +72,14 @@ bin/rails db:migrate
 
 With Active Storage installed, we can add our attachments we'll be using.
 
+`app/models/qr_code.rb`
 ```ruby
-# qr_code.rb
 class QrCode < ApplicationRecord
-
   has_one_attached :combined_image
   has_one_attached :logo
   has_one_attached :original_image
-  ...
 end
 ```
-
 
 We'll be generating the `combined_imgae` and the `original_image` based on
 inputs from the user, including a `logo` file.
@@ -101,18 +89,22 @@ Updating the form and adding the file attributes to the params in the controller
 will allow us to start storing the uploaded logo and and URL attached to the QR
 code.
 
-Add the file input for the logo to the form
+Add the file input for the logo to the form.
+
+I'm also limiting the file type to PNG for simplicity.  Or QR codes are going to be PNGs, so it makes sense to limit the logo to the same format. Accepting PNGs with transparent backgrounds also makes it easier to overlay the logo on the QR code after some processing.
+
+This is by no means a foolproof way to ensure the file is a PNG, but it's a good start. If you find yourself needing more, you can look into validating the file type in the model before saving.
 
 `app/views/qr_codes/_form.html.erb`
 
 ```ruby
   <div class="my-5">
     <%= form.label :logo %>
-    <%= form.file_field :logo, class: "" %>
+    <%= form.file_field :logo, accept: "image/png" %>
   </div>
 ```
 
-Whitelist the logo in the controller
+Add `logo` to the strong params in the controller.
 
 `app/controllers/qr_codes_controller.rb`
 ```ruby
@@ -121,12 +113,12 @@ Whitelist the logo in the controller
     end
 ```
 
-
 Adding the logo to the show page will give us an easy way to reference the image
 we uploaded.
 
 `app/views/qr_codes/_qr_code.html.erb`
-```
+
+```ruby
 <div id="<%= dom_id qr_code %>">
   <p class="my-5">
     <strong class="block font-medium mb-1">Url:</strong>
@@ -136,63 +128,99 @@ we uploaded.
 </div>
 ```
 
-
-If you haven't started the server, now would be a good time to start everything
+If you haven't started the server yet, now would be a good time to start everything
 up and make sure it's working.
 
 If things are good to go, you should land directly on the QrCodes index page.
-Clicking the New QR Code button, filling out the URL, (validations?) and
-uploading a logo.
+Clicking the New QR Code button, filling out the URL, and uploading a logo.
 
 ### QR codes.
 
-We'll be using the rqrcode gem to generate QR codes as a PNG and saving as an
-ActiveStorage attchment.
+We'll be using the [rqrcode](https://github.com/whomwah/rqrcode){:target="_blank"} gem to generate QR codes as a PNG and saving as an
+Active Storage attchment.
 
-https://github.com/whomwah/rqrcode
-
-Add the gem to the gemfile
+Add it to the Gemfile with::
 
 ```ruby
 gem "rqrcode", "~> 2.0"
 ```
-
 and install the gem with `bundle install`
 
+To keep a lot of the image processing logic out of the controller, we'll create a method on the model to generate the QR code and save it as an attachment.
+
+`app/models/qr_code.rb`
+
 ```ruby
-code to create and save a QR code
-
-put in a method on the model?
-
-    qrcode = RQRCode::QRCode.new(url)
-    original_qr = qrcode.as_png(size: 400,
+  def generate_qr_code!
+    qr = RQRCode::QRCode.new(url)
+    original_qr = qr.as_png(size: 400,
       bit_depth: 1,
       border_modules: 4,
       color_mode: ChunkyPNG::COLOR_GRAYSCALE,
       color: "black",
       file: nil,
       fill: "white")
+    original_image.attach(io: StringIO.new(original_qr.to_s),
+                          filename: "original_qr.png",
+                          content_type: "image/png")
+    save!
+  end
+```
 
-original_image.attach(
-  filename: "qr_code",
-  io: StringIO.new(original_qr.to_s),
-  content_type: "image/png"
-)
-original_image.save
-    logo_image = MiniMagick::Image.read(logo.download)
-    qr_code_image = MiniMagick::Image.read(original_image.download)
+<!-- This method will generate a QR code based on the URL and save it as an attachment.  You can read more about the available options for the QR code generation in the RQRCode [documentation](https://github.com/whomwah/rqrcode?tab=readme-ov-file#as_png){:target="_blank"} -->
+This method will generate a QR code based on the URL and save it as an attachment.
 
-    # add white background to png
-    updated_logo_image = ImageProcessing::MiniMagick.source(logo_image).resize_and_pad!(100, 100, background: "white")
+Another advantage of having the QR code generation on the model is that we can
+test and diagnose issues in our Rails console without needing to go through the
+controller.
 
-        composite_qr_code = ImageProcessing::Vips.source(qr_code_image).composite(updated_logo_image, offset: [150,150]).call
-    combined_image.attach(filename: "combined_qr_code.jpg",
-                          io: File.open(composite_qr_code),
-                          content_type: "image/jpg")
+calling `qr_code.generate_qr_code!` in the console (or anywhere) should generate a QR code
+from the URL and save it as an attachment.
 
+Calling this method after we've successfully saved the `QrCode` record will create the QR code and save it as an attachment.
+
+`app/controllers/qr_codes_controller.rb`
+
+```ruby
+  def create
+    @qr_code = QrCode.new(qr_code_params)
+
+    respond_to do |format|
+      if @qr_code.save
+        @qr_code.generate_qr_code!
+        format.html { redirect_to qr_code_url(@qr_code), notice: "Qr code was successfully created." }
+        format.json { render :show, status: :created, location: @qr_code }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @qr_code.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
 ```
 
+So we can make sure the image was created an attached, we can also disply on the
+details page.
+
+`<%= image_tag qr_code.original_image %>`
+
+`app/views/qr_codes/_qr_code.html.erb`
+
+```ruby
+<div id="<%= dom_id qr_code %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Url:</strong>
+    <%= qr_code.url %>
+    <%= image_tag qr_code.logo %>
+    <%= image_tag qr_code.original_image %>
+  </p>
+</div>
+```
+
+If everything is working as expected, you should see the QR code image on the show page for the QR code record.
+To check to make sure everything is working as expected, you can call
+`generate_qr_code!` on an existing record in the Rails console or create a new record through the form.
+(Screenshot of the QR code on the show page - Use real URLs)
 
 ### Going Further
 
@@ -203,38 +231,95 @@ logo, this will be the `combined_image` attachment.
 I'm not claiming this is the easiest or the most performant way but the best way
 to get a good answer on the internet is to publicaly proclaim a wrong one.
 
-This started out as a fun feature I was exploring and wanted to get a proof of
-concept working.  I didn't end up using the feature, but thought it was a really
-cool feature.
+<!-- This started out as a fun feature I was exploring and wanted to get a proof of -->
+<!-- concept working.  I didn't end up using the feature, but thought it was a really -->
+<!-- cool feature. -->
 
 At this point, there are 2 attached image to the QR code model, `original_image`
-and `logo`
+and `logo`.
 
-We're now going to use MiniMagick to do a bit of formatting and create a
-composite image
+We're now going to use [MiniMagick](https://github.com/minimagick/minimagick){:target="_blank"} to do a bit of formatting and create a
+composite image.
 
-To start, we create a MiniMagick::Image for the `logo` and `original_image` qr
-code.
+The combined logo will be using the same approach as the original QR code,
+meaning this code will be added to a method in the `QrCode` model.
 
-The first step is to resize the logo image and add a white background to help
-our logo stand out. 
+To start, we create a `MiniMagick::Image` for the `logo` and `original_image` qr code.
 
+<!-- The first step is to resize the logo image and add a white background to help -->
+<!-- our logo stand out. -->
+
+Before attempting to combine the images, we'll need to do some processing on the
+logo image.  This will include resizing the image and adding a white background to make the logo stand out from the QR code.
 
 ```ruby
-    logo_image = MiniMagick::Image.read(logo.download)
-    qr_code_image = MiniMagick::Image.read(original_image.download)
+logo_image = MiniMagick::Image.open(@qr_code.logo)
+qr_code_image = MiniMagick::Image.open(@qr_code.original_image)
 
-    # add white background to png
-    updated_logo_image = ImageProcessing::MiniMagick.source(logo_image).resize_and_pad!(100, 100, background: "white")
+updated_logo_image = ImageProcessing::MiniMagick.source(logo_image)
+  .resize_and_pad!(100, 100, background: "white")
 ```
 
-Then create the composite image and store as an Active Storage attachment.
+The next step is to create a composite image with the QR code and the updated logo image.
 
 ```ruby
-    composite_qr_code = ImageProcessing::Vips.source(qr_code_image).composite(updated_logo_image, offset: [150,150]).call
-    combined_image.attach(filename: "combined_qr_code.jpg",
+composite_qr_code = ImageProcessing::Vips.source(qr_code_image)
+  .composite(updated_logo_image, offset: [150,150]).call
+```
+
+Finally, we'll attach the composite image to the `combined_image` attachment.
+
+```ruby
+@qr_code.combined_image.attach(filename: "combined_qr_code.png",
+                io: File.open(composite_qr_code),
+                content_type: "image/png")
+
+```
+
+Then create the composite image and stores it as an Active Storage attachment.
+
+Here's what the final method looks like in the `QrCode` model.
+
+```ruby
+  def generate_combined_image!
+    logo_image = MiniMagick::Image.open(logo)
+    qr_code_image = MiniMagick::Image.open(original_image)
+
+    updated_logo_image = ImageProcessing::MiniMagick.source(logo_image)
+      .resize_and_pad!(100, 100, background: "white")
+
+    composite_qr_code = ImageProcessing::Vips.source(qr_code_image)
+      .composite(updated_logo_image, offset: [150,150]).call
+
+    combined_image.attach(filename: "combined_qr_code.png",
                           io: File.open(composite_qr_code),
-                          content_type: "image/jpg")
+                          content_type: "image/png")
+    save!
+  end
+```
+
+In the same way we called `generate_qr_code!` after saving the record, we can call `generate_combined_image!` to create the composite image with the logo from the Rails console on an existing record that has a logo and QR code attached.
+
+The last step is to call the `generate_combined_image!` method after the QR code has been generated and saved.
+
+
+`app/controllers/qr_codes_controller.rb`
+```ruby
+  def create
+    @qr_code = QrCode.new(qr_code_params)
+
+    respond_to do |format|
+      if @qr_code.save
+        @qr_code.generate_qr_code!
+        @qr_code.generate_combined_image!
+        format.html { redirect_to qr_code_url(@qr_code), notice: "Qr code was successfully created." }
+        format.json { render :show, status: :created, location: @qr_code }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @qr_code.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 ```
 
 If all goes as planned, you should be re-directed to the show page for the newly
@@ -242,8 +327,7 @@ created QR Code record and see if all the logos are correct
 
 (screenshot and example QR)
 
-
 And with that, you've created a simple tool too add some style and flair to your
 QR codes.
 
-
+This is a pretty simple example and there are a lot of ways to improve and expand on this feature.  You could add more options for the QR code generation, add more image processing options, or even add a background color to the QR code for some additional flair.
