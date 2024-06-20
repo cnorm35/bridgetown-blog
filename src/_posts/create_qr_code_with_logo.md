@@ -229,13 +229,6 @@ To check to make sure everything is working as expected, you can call
 Adding a bit of flair to things, we're ready to start combining the uploaded
 logo, this will be the `combined_image` attachment.
 
-<!-- I'm not claiming this is the easiest or the most performant way but the best way -->
-<!-- to get a good answer on the internet is to publicly proclaim a wrong one. -->
-
-<!-- This started out as a fun feature I was exploring and wanted to get a proof of -->
-<!-- concept working.  I didn't end up using the feature, but thought it was a really -->
-<!-- cool feature. -->
-
 At this point, there are 2 attached image to the QR code model, `original_image`
 and `logo`.
 
@@ -247,35 +240,69 @@ meaning this code will be added to a method in the `QrCode` model.
 
 To start, we create a `MiniMagick::Image` for the `logo` and `original_image` qr code.
 
-<!-- The first step is to resize the logo image and add a white background to help -->
-<!-- our logo stand out. -->
-
 Before attempting to combine the images, we'll need to do some processing on the
 logo image.  This will include resizing the image and adding a white background to make the logo stand out from the QR code.
 
-```ruby
-logo_image = MiniMagick::Image.open(@qr_code.logo)
-qr_code_image = MiniMagick::Image.open(@qr_code.original_image)
+Since we're going to be doing some image processing, we'll need to require the `mini_magick` gem in the `QrCode` model.
 
+First, we create a `MiniMagick::Image` object for the logo image.
+
+```ruby
+logo_image = MiniMagick::Image.open(logo)
+```
+Then we do the same for the QR code image.
+
+```ruby
+qr_code_image = MiniMagick::Image.open(original_image)
+```
+
+Next, we'll resize the logo image and add a white background to help the logo stand out.
+
+```ruby
 updated_logo_image = ImageProcessing::MiniMagick.source(logo_image)
-  .resize_and_pad!(100, 100, background: "white")
+  .resize_and_pad(100, 100, background: "white").call
 ```
 
-The next step is to create a composite image with the QR code and the updated logo image.
+After creating the updated logo image, we can create a composite image with the QR code and logo.
 
 ```ruby
-composite_qr_code = ImageProcessing::Vips.source(qr_code_image)
-  .composite(updated_logo_image, offset: [150,150]).call
+composite_qr_code = qr_code_image.composite(updated_logo_image) do |c|
+  c.compose "Over"
+  c.gravity "center"
+  c.colorspace "sRGB"
+end
 ```
+
+The `composite` method is used to overlay the updated logo image on top of the QR code image.  The `compose` option is set to "Over" to overlay the logo on top of the QR code.  The `gravity` option is set to "center" to center the logo on the QR code.  The `colorspace` option is set to "sRGB" to ensure the colors are displayed correctly.
 
 Finally, we'll attach the composite image to the `combined_image` attachment.
 
 ```ruby
-@qr_code.combined_image.attach(filename: "combined_qr_code.png",
+qr_code.combined_image.attach(filename: "combined_qr_code.png",
                 io: File.open(composite_qr_code),
                 content_type: "image/png")
 
 ```
+
+<!-- Rails console example -->
+
+<!-- ``` -->
+<!-- qr_code = QrCode.last -->
+<!-- logo_image = MiniMagick::Image.open(qr_code.logo) -->
+<!-- qr_code_image = MiniMagick::Image.open(qr_code.original_image) -->
+<!-- updated_logo_image = ImageProcessing::MiniMagick.source(logo_image) -->
+<!--   .resize_and_pad(100, 100, background: "white").call -->
+<!-- composite_qr_code = qr_code_image.composite(updated_logo_image) do |c| -->
+<!--   c.compose "Over" -->
+<!--   c.gravity "center" -->
+<!--   c.colorspace "sRGB" -->
+<!-- end -->
+<!-- combined_image.attach(filename: "combined_qr_code.png", -->
+<!--                         io: File.open(composite_qr_code), -->
+<!--                         content_type: "image/png") -->
+<!-- qr_code.save! -->
+<!-- ``` -->
+
 
 Then create the composite image and stores it as an Active Storage attachment.
 
@@ -286,20 +313,43 @@ Here's what the final method looks like in the `QrCode` model.
     logo_image = MiniMagick::Image.open(logo)
     qr_code_image = MiniMagick::Image.open(original_image)
 
-    updated_logo_image = ImageProcessing::MiniMagick.source(logo_image)
-      .resize_and_pad!(100, 100, background: "white")
+    updated_logo_image = ImageProcessing::MiniMagick.source(logo_image).resize_and_pad(100, 100, background: "white").call
 
-    composite_qr_code = ImageProcessing::Vips.source(qr_code_image)
-      .composite(updated_logo_image, offset: [150,150]).call
+    composite_qr_code = qr_code_image.composite(updated_logo_image) do |c|
+      c.compose "Over"
+      c.gravity "center"
+      c.colorspace "sRGB"
+    end
 
     combined_image.attach(filename: "combined_qr_code.png",
-                          io: File.open(composite_qr_code),
+                          io: File.open(composite_qr_code.path),
                           content_type: "image/png")
     save!
   end
+
 ```
 
-(add something about requiring minimagick))
+If you'd like to break this down into smaller steps, you can call each method individually in the Rails console.  Here's an example of how you could call each method individually in the Rails console to create the composite image and save it as an attachment.
+
+``` ruby
+# in the Rails console
+require "mini_magick"
+qr_code = QrCode.last
+logo_image = MiniMagick::Image.open(qr_code.logo)
+qr_code_image = MiniMagick::Image.open(qr_code.original_image)
+updated_logo_image = ImageProcessing::MiniMagick.source(logo_image)
+  .resize_and_pad(100, 100, background: "white").call
+composite_qr_code = qr_code_image.composite(updated_logo_image) do |c|
+  c.compose "Over"
+  c.gravity "center"
+  c.colorspace "sRGB"
+end
+qr_code.combined_image.attach(filename: "combined_qr_code.png",
+                        io: File.open(composite_qr_code.path),
+                        content_type: "image/png")
+qr_code.save!
+```
+
 
 In the same way we called `generate_qr_code!` after saving the record, we can call `generate_combined_image!` to create the composite image with the logo from the Rails console on an existing record that has a logo and QR code attached.
 
@@ -307,6 +357,7 @@ The last step is to call the `generate_combined_image!` method after the QR code
 
 
 `app/controllers/qr_codes_controller.rb`
+
 ```ruby
   def create
     @qr_code = QrCode.new(qr_code_params)
@@ -328,6 +379,7 @@ The last step is to call the `generate_combined_image!` method after the QR code
 Display the combined image on the show page for the QR code record to see the final result.
 
 `<%= image_tag qr_code.combined_image %>`
+
 `app/views/qr_codes/_qr_code.html.erb`
 
 ```ruby
@@ -340,6 +392,7 @@ Display the combined image on the show page for the QR code record to see the fi
     <%= image_tag qr_code.combined_image %>
   </p>
 </div>
+```
 
 
 If all goes as planned, you should be re-directed to the show page for the newly
