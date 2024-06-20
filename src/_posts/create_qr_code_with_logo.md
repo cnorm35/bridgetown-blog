@@ -61,7 +61,14 @@ With a simple model for the QR code, the next step is to add the image
 processing gem and install active storage for the images that will be attached.
 
 If you look in the `Gemfile`, you should already see the `image_processing` gem
-commented out. You can uncomment the gem and run `bundle install`
+in your `Gemfile`
+
+```ruby
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
+```
+
+You can uncomment the gem and run `bundle install`
 
 With the image processing gem installed and ready to go, the next step is to
 install Active Storage and run the corresponding migrations.
