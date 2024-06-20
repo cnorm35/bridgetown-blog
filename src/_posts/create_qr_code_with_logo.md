@@ -376,6 +376,24 @@ The last step is to call the `generate_combined_image!` method after the QR code
   end
 ```
 
+We'll also include this in the update action so that the combined image is updated whenever the QR code is updated.
+
+```ruby
+  def update
+    respond_to do |format|
+      if @qr_code.update(qr_code_params)
+        @qr_code.generate_qr_code!
+        @qr_code.generate_combined_image!
+        format.html { redirect_to qr_code_url(@qr_code), notice: "Qr code was successfully updated." }
+        format.json { render :show, status: :ok, location: @qr_code }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @qr_code.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+```
+
 Display the combined image on the show page for the QR code record to see the final result.
 
 `<%= image_tag qr_code.combined_image %>`
@@ -414,4 +432,4 @@ QR codes.
 This is a pretty simple example and there are a lot of ways to improve and expand on this feature.  You could add more options for the QR code generation, add more image processing options, or even add a background color to the QR code for some additional flair.
 
 You can view the full code for this example on
-[GitHub](https://github.com/cnorm35/qr_code_generator){:target="_blank"}.
+[GitHub](https://github.com/cnorm35/qr_code_generator_example){:target="_blank"}.
