@@ -76,9 +76,9 @@ With Active Storage installed, we can add our attachments we'll be using.
 `app/models/qr_code.rb`
 ```ruby
 class QrCode < ApplicationRecord
-  has_one_attached :combined_image
   has_one_attached :logo
   has_one_attached :original_image
+  has_one_attached :combined_image
 end
 ```
 
