@@ -25,6 +25,10 @@ This post will walk through setting up a simple standalone QR with logo app.
 We'll be using MiniMagick and RQRCode to create a PNG of the qr code, then create a
 composite image with the logo.
 
+If you'd like to see everything in action, I have a video that goes through
+things in a little more detail
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/i9EcMnrXuq8?si=UX6mhPoxk8GhV7wQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Getting started
 
