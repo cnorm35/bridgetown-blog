@@ -176,14 +176,13 @@ To keep a lot of the image processing logic out of the controller, we'll create 
   end
 ```
 
-<!-- This method will generate a QR code based on the URL and save it as an attachment.  You can read more about the available options for the QR code generation in the RQRCode [documentation](https://github.com/whomwah/rqrcode?tab=readme-ov-file#as_png){:target="_blank"} -->
 This method will generate a QR code based on the URL and save it as an attachment.
 
 Another advantage of having the QR code generation on the model is that we can
 test and diagnose issues in our Rails console without needing to go through the
 controller.
 
-calling `qr_code.generate_qr_code!` in the console (or anywhere) should generate a QR code
+Running `qr_code.generate_qr_code!` in the console (or anywhere) should generate a QR code
 from the URL and save it as an attachment.
 
 Calling this method after we've successfully saved the `QrCode` record will create the QR code and save it as an attachment.
@@ -290,26 +289,6 @@ qr_code.combined_image.attach(filename: "combined_qr_code.png",
                 content_type: "image/png")
 
 ```
-
-<!-- Rails console example -->
-
-<!-- ``` -->
-<!-- qr_code = QrCode.last -->
-<!-- logo_image = MiniMagick::Image.open(qr_code.logo) -->
-<!-- qr_code_image = MiniMagick::Image.open(qr_code.original_image) -->
-<!-- updated_logo_image = ImageProcessing::MiniMagick.source(logo_image) -->
-<!--   .resize_and_pad(100, 100, background: "white").call -->
-<!-- composite_qr_code = qr_code_image.composite(updated_logo_image) do |c| -->
-<!--   c.compose "Over" -->
-<!--   c.gravity "center" -->
-<!--   c.colorspace "sRGB" -->
-<!-- end -->
-<!-- combined_image.attach(filename: "combined_qr_code.png", -->
-<!--                         io: File.open(composite_qr_code), -->
-<!--                         content_type: "image/png") -->
-<!-- qr_code.save! -->
-<!-- ``` -->
-
 
 Then create the composite image and stores it as an Active Storage attachment.
 
