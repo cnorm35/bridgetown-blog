@@ -93,7 +93,7 @@ class QrCode < ApplicationRecord
 end
 ```
 
-We'll be generating the `combined_imgae` and the `original_image` based on
+We'll be generating the `combined_image` and the `original_image` based on
 inputs from the user, including a `logo` file.
 
 
