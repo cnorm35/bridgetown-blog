@@ -24,7 +24,20 @@ I’ve been living in Colorado for a few years now and had some good times in De
 
 [IndieRails - Lucky Me - Episode 31](https://www.indierails.com/31){:target="_blank"}
 
-<script async data-uid="24351f7dcb" src="https://codynorman.ck.page/24351f7dcb/index.js"></script>
+
+### Speaking
+<iframe width="560" height="315" src="https://www.youtube.com/embed/i-RwxAVMP-k?si=82DMLkcxEThrOMJV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### Videos
+[YouTube Channel](https://youtube.com/@coloradocodes?si=rViwMcfn8oGVY-q2){:target="_blank"}
+
+[Dark Mode for Rails with Tailwind and Stimulus](https://youtu.be/gLpBdBvXcPg?si=W87dxILAriMACFB_){:target="_blank"}
+
+[Starting a Truck with an Email](https://youtu.be/xC-V_aBjmnw?si=uogljJ2w8eLQew8X){:target="_blank"}
+
+[Generate Custom QR Codes with Ruby on Rails](https://youtu.be/i9EcMnrXuq8?si=s2xU1ZuINpnryyr_){:target="_blank"}
+
 <!-- In my free time I like to fly fish, work on perfecting my Carolina Style BBQ and and hunt hard to find whiskey. -->
 
 <!-- If you want to know anything else, just ask! -->
+<script async data-uid="24351f7dcb" src="https://codynorman.ck.page/24351f7dcb/index.js"></script>
