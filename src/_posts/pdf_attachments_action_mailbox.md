@@ -212,3 +212,19 @@ inbound_email.route
 If your `debugger` statement is still in the `process` method of the `PdfMailbox`, you'll see the debugger open in the terminal where the Rails console is running.
 
 (Screenshot of debugger in Rails console)
+
+Step 1 - Happy Path
+
+Step 2 - Check for User
+
+Step 3 - Add letter_opener_web
+
+Step 4 - Generate Mailers to respond with
+
+Step 5 - Mark inbound email as bounced when User not found
+
+Step 6 - Check for an attachment
+
+Step 7 - Check for a PDF attachment
+
+Step 8 - Reply on success
