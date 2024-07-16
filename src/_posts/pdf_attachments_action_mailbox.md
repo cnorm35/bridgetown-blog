@@ -153,21 +153,62 @@ When working on a new mailbox in development, I typically use the `all:` option
 to route _any_ inbound email to the specified mailbox.  This rules out any
 potential routing issues and lets you focus on the processing in the mailbox.
 
-Notes on next steps:
-Send example inbound email in Rails conductor, show that it’s been delivered.
+As a quick check to confirm everything is working, we can send an email through
+the Rails Conductor and see that it's been delivered.
 
-Add `debugger` to `PdfMailbox`
 
-restart server
+With your Rails server running, open the Rails Conductor by visiting http://localhost:3000/rails/conductor/action_mailbox/inbound_emails
 
-click the ‘Route Again’ button and show how the debugger is called and you can inspect stuff.
+and click the Form option (double check this)
+(Screenshot)
 
-In the Rails console show how you can do that manually
+Since we're using the `all:` routing option, we don't have to worry about the
+correct address to send the email to.  Just fill in to and from fields and
+submit the form.
 
-```json
+After submitting the form, you'll land on the detail page for that Inbound Email
+record.  Refresh the page and you should see the status change from `processing`
+to `delivered`.  This means the email was successfully processed by the PdfMailbox so everything is working as expected.
+
+If something went wrong and you don't see the status change to `delivered`, the
+Rails conductor provides an easy button to re-route and deliver the email again.
+
+This time, I'll add a debugger statement to the `process` method of the `PdfMailbox` to show how you can inspect the inbound email and attachments or investigate any issues.
+
+<!-- I'll also add a `debugger` statement with `ruby-debug` inside the `process` method of the `PdfMailbox` to show how you can inspect the inbound email and attachments. -->
+
+```ruby
+# app/mailboxes/pdf_mailbox.rb
+class PdfMailbox < ApplicationMailbox
+  def process
+    debugger
+  end
+end
+```
+
+After adding the `debugger` statement, restart your Rails server and click the `Route Again` button on the Inbound Email detail page.
+
+Since this app is only running with `rails server` and not using any Procfile,
+we'll see the debugger open in the terminal where the server is running.  If
+you're using a Procfile and with something like Overmind[LINK], you can connect
+to the debugger with `overmind connect web`. or `overmind connect worker`
+depending on your specific setup.
+
+(Screenshot of debugger with calling some Mail methods)
+
+[LINK Ruby Mail somewhere]
+
+Since we're embracing the BYOV philosophy, we can also use the Rails console to
+accomplish the same task.
+
+Inside your Rails console, you can find the last Inbound Email record, update it's status to `pending!`, and route the email to the PdfMailbox.
+
+```ruby
 inbound_email = ActionMailbox::InboundEmail.last
 inbound_email.pending!
 inbound_email.route
-
-(opens debugger)
 ```
+
+If your `debugger` statement is still in the `process` method of the `PdfMailbox`, you'll see the debugger open in the terminal where the Rails console is running.
+
+(Screenshot of debugger in Rails console)
