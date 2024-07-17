@@ -7,6 +7,8 @@ excerpt: "Create Active Storage attachments from attached files in emails."
 author: cody
 ---
 
+[Github Example App]
+
 Uploading files is a common task you'll encounter in web applications. In this
 post, we'll look at how to create PDF attachments from files attached to
 incoming emails using Action Mailbox in Rails.
