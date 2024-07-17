@@ -213,18 +213,323 @@ If your `debugger` statement is still in the `process` method of the `PdfMailbox
 
 (Screenshot of debugger in Rails console)
 
-Step 1 - Happy Path
+### The Happy Path
 
-Step 2 - Check for User
+To get things working, I'll first be focusing on the happy path.  This means
+we'll just focus on creating the PDF attachment from the inbound email and
+saving it to the `ImportDocument` model. In the later steps, we'll add some
+error handling to handle edge cases and reply with emails alerting the sender of
+the import status.
 
-Step 3 - Add letter_opener_web
+Before getting started, if you've not already done so, be sure to remove the
+`debugger` statement from earlier.
 
-Step 4 - Generate Mailers to respond with
+Inside the `process` method of the `PdfMailbox`, we'll start be initializing a
+new `ImportDocument` record and setting the `user` to the the first User record.
+For this to work, you'll need to have a User record in your database (snippet
+for that above. After setting the `user`, we'll set the `name` to the subject of
+the email so be sure to include a subject when sending the email with the Rails
+Conductor.
 
-Step 5 - Mark inbound email as bounced when User not found
+```ruby
+# app/mailboxes/pdf_mailbox.rb
+  def process
+    import_document = ImportDocument.new(
+      user_id: User.first.id,
+      name: mail.subject
+    )
+```
 
-Step 6 - Check for an attachment
+After initializing the `ImportDocument`, we'll attach the PDF file from the
+inbound email to the `pdf` attribute of the `ImportDocument`.
 
-Step 7 - Check for a PDF attachment
+```ruby
+# app/mailboxes/pdf_mailbox.rb
+  def process
+    import_document = ImportDocument.new(
+      user_id: User.first.id,
+      name: mail.subject
+    )
 
-Step 8 - Reply on success
+    import_document.pdf.attach(
+      io: StringIO.new(mail.attachments.first.body.decoded),
+      filename: mail.attachments.first.filename
+    )
+  end
+```
+
+This code is also assuming your inbound email has a PDF attachment. We'll worry
+about the file type in a later step.
+
+The last step in the happy path is to save the `ImportDocument` record.
+
+```ruby
+# app/mailboxes/pdf_mailbox.rb
+  def process
+    import_document = ImportDocument.new(
+      user_id: User.first.id,
+      name: mail.subject
+    )
+
+    import_document.pdf.attach(
+      io: StringIO.new(mail.attachments.first.body.decoded),
+      filename: mail.attachments.first.filename
+    )
+  end
+
+  import_document.save!
+```
+
+Submitting the email through the Rails Conductor with all the required fields
+should now create a new `ImportDocument` record with the PDF attachment from the
+inbound email.
+
+
+### Checking for an existing User
+
+Anything live on the internet is only going to last a few days at best before it
+starts getting inbound spam.  You may not want to try to create a new Impoprt
+Document from some spammers email signature.  To prevent this, we can check if a
+User record exists for the sender of the email. If the User is found, we move on
+to processing the email. If the User is not found, we'll mark the email as
+bounced and send a reply to the sender.
+
+Action Mailbox provides some methods to make this easy.  We'll use the `before_processing` callback to check for the User and the `bounce_with` method to mark the email as bounced. The `bounced_with` method take a mail object as an argument to send the bounce email to the sender.
+
+```ruby
+# app/mailboxes/pdf_mailbox.rb
+class PdfMailbox < ApplicationMailbox
+  before_processing :ensure_user
+
+  def process
+    import_document = ImportDocument.new(
+      user_id: User.first.id,
+      name: mail.subject
+    )
+
+    import_document.pdf.attach(
+      io: StringIO.new(mail.attachments.first.body.decoded),
+      filename: mail.attachments.first.filename
+    )
+
+    import_document.save!
+  end
+
+  private
+
+  def ensure_user
+    user = User.find_by(email: mail.from.first)
+    unless user
+        # bounce_with 
+    end
+  end
+end
+```
+
+Inside the `ensure_user` method, we'll check if a User record exists for the email address of the sender. If a User is not found, we'll use the `bounce_with` method to mark the email as bounced and send a reply to the sender.
+
+The `bounce_with` method requires a mailer object, we'll need to generate a new mailer to respond with.  There will be a few other types of emails used in the later steps so we'll create a new mailer for all of them at once.
+
+### Generate Mailers to respond with
+
+
+```sh
+$ bin/rails generate mailer Pdf user_not_found missing_attachment bad_attachment_format import_complete
+```
+
+This will generate a new mailer with the methods `user_not_found`, `missing_attachment`, `bad_attachment_format`, and `import_complete`.
+
+I won't be covering updating any of the mailer views, but you'll need to make a
+couple of changes to each of the generated methods in the `PdfMailer`
+
+```ruby
+# app/mailers/pdf_mailer.rb
+  def user_not_found
+    @greeting = "User Not Found"
+    @to = params[:to]
+
+    mail to: @to
+  end
+```
+
+Updating `@greeting` is optional, but you will to update the value passed to
+`mail to:` to use the `to` value passed in the `params` hash. This is how we're
+going to pass the email address of the sender to the mailer.
+
+Bonus Step: Install `letter_opener_web` to view the _outbound_ emails easily in
+your browser. There's more detailed information on that in the included video.
+
+#### Wrapping up the User Not Found check
+
+With our mailers created and updated, we can now pass that to the `bounce_with`
+method.
+
+```ruby
+# app/mailboxes/pdf_mailbox.rb
+
+
+def ensure_user
+  user = User.find_by(email: mail.from.first)
+  unless user
+    bounce_with PdfMailer.with(to: mail.from.first).user_not_found
+  end
+end
+```
+
+`PdfMailer` is the mailer we generated earlier.  The `with` method is used to
+pass params to the mailer.  `mail.from` is an array of email addresses that the
+email was sent from.  We're using `mail.from.first` to get the first email
+address (the same one we used to find the User record) and passing that as the
+`to` value to the mailer.  The last part, `user_not_found`, is the mailer method
+we're going to be sending.
+
+If you re-start your Rails server and send an email from an email address that
+does not match a User in your local database, you should see the email marked as
+bounced and a reply sent to the sender.
+
+(Bounced Screenshot)
+
+Now, you're Action Mailbox app won't be trying to process documents and
+attachments all willy-nilly.
+
+Another one of the assumptions from the Happy Path is that the inbound email has
+a PDF attachment.  In the next step, we'll add some error handling to check for
+an attachment and reply to the sender if one is missing.
+
+### Checking for an attachment
+
+To check for an attachment before we attempt to process the email, we'll be
+using another `before_processing` callback.  This time, we'll be checking if the
+email has an attachment.  This portion won't be convered that it's a PDF file,
+just that there is an attachment.  Letting the sender know they may have forgot
+to attach the file is a better experience than getting a more generic error.
+
+```ruby
+# app/mailboxes/pdf_mailbox.rb
+before_processing :ensure_attachment
+
+  def ensure_attachment
+    if mail.attachments.empty?
+        # repy to sender
+    end
+  end
+```
+
+Next, we need to send a reply to the sender _and_ make sure we don't attempt to
+process the email.  The main difference between this and the `bounce_with`
+method is that the `bounce_with` upates the `status` of the
+`ActionMailbox::InboundEmail` record to `bounced` instead of something like
+`failed` or `delivered`.  In this situation, the sender was a valid User sending
+to the correct email address so it's not really like it bounced.
+
+If you followed the steps above for generating the mailers, you should have a `missing_attachment` method in the `PdfMailer` that we can use to reply to the sender.
+
+```ruby
+  def ensure_attachment
+    if mail.attachments.empty?
+      PdfMailer.with(to: mail.from.first).missing_attachment.deliver_later
+    end
+  end
+```
+
+This mailer is setup and called the same as the one passed to `bounce_with`
+except for adding `deliver_later` to send the email asynchronously.
+
+Our final step is to call `:abort` to stop the email from being processed.
+
+```ruby
+  def ensure_attachment
+    if mail.attachments.empty?
+      PdfMailer.with(to: mail.from.first).missing_attachment.deliver_later
+      :abort
+    end
+  end
+```
+
+This ensures that we exit and don't attempt to process the email if there are no
+attachments.
+
+### Checking for a PDF attachment
+
+Now we've confirmed the inbound email has at least one attachment, another
+additional check we can add is to confirm the attachment is a PDF file.
+
+```ruby
+# app/mailboxes/pdf_mailbox.rb
+  before_processing :ensure_attachment_format
+
+
+  def ensure_attachment_format
+    unless mail.attachments.first.content_type.start_with?("application/pdf")
+      # send email and exit
+    end
+  end
+```
+
+For this approach, we'll be using another `before_processing` callback to check
+the content type of the attachment.
+
+Note:Outside of the scope of a tutorial, you may
+want to combine or refactor some of the callbacks to suit your needs.  I wanted
+to keep them separate to show easy ways we can add some incremental
+improvements.
+
+Inside our `ensure_attachment_format` method, we'll check if the content type of the first attachment starts with `application/pdf`.  If it does not, we'll send a reply to the sender and exit the processing of the email.
+
+Now you know what to check for, we can re-use the same approach we used for the `ensure_attachment` callback to send a reply to the sender and exit the processing of the email.
+
+```ruby
+  def ensure_attachment_format
+    unless mail.attachments.first.content_type.start_with?("application/pdf")
+      PdfMailer.with(to: mail.from.first).bad_attachment_format.deliver_later
+      :abort
+    end
+  end
+```
+### Reply on success
+
+One last bit of polish we can add is to send a reply to the sender when the PDF
+has been successfully saved. 
+
+```ruby
+# app/mailboxes/pdf_mailbox.rb
+  def process
+    import_document = ImportDocument.new(
+      user_id: User.first.id,
+      name: mail.subject
+    )
+
+    import_document.pdf.attach(
+      io: StringIO.new(mail.attachments.first.body.decoded),
+      filename: mail.attachments.first.filename
+    )
+
+    if import_document.save!
+      PdfMailer.with(to: mail.from.first).import_complete.deliver_later
+    end
+
+  end
+```
+
+Now, if the `ImportDocument` is saved successfully, we'll send a reply to the
+sender with the `import_complete` mailer method.
+
+### Wrapping up
+
+Within the context of the `PdfMailbox`, we've moved the common task of uploading
+and processing files to email.  We've also added some error handling and UX
+improvemenets to let the sender know if something went wrong or when it's
+successful.
+
+As an added perk, creating and processing the attachments via email with Action
+Mailbox will perform the processing in the background whenever the
+`ActionMailbox::InboundEmail` is processed.  This is a great way to handle large
+files without tying up your web server.
+
+The included video is a free preview from my upcoming course on Action Mailbox
+where I'll be covering more advanced topics and edge cases.  If you'd like to
+learn how to create more freatures like this one, the course is available for
+pre-sale now.
+
+[MAILBOX COURSE LINK]
+
