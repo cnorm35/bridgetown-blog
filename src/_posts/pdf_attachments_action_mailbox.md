@@ -7,7 +7,7 @@ excerpt: "Create Active Storage attachments from attached files in emails."
 author: cody
 ---
 
-[Github Example App]
+[Source Code](https://github.com/cnorm35/PdfMailboxExampleApp)
 
 Uploading files is a common task you'll encounter in web applications. In this
 post, we'll look at how to create PDF attachments from files attached to
