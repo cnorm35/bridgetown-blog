@@ -22,8 +22,6 @@ sender of the email matches a User record in our application and use the
 `bounce_with` method to mark the email as bounced and notify the sender of the
 bounce.
 
-<!-- We'll also add some error handling to notify the sender if the attachment is -->
-<!-- missing or not a PDF file. -->
 In addition to handling bounces, we'll also add some error handling to notify
 the sender if the attachment is missing or not a PDF file.
 
@@ -147,7 +145,7 @@ end
 ```
 
 I'm including a commented out line that shows how you could route emails that
-contain `pdf` in the `to` address of the inbound email.  In otherwords, sending
+contain `pdf` in the `to` address of the inbound email.  In other words, sending
 an inbound email to `pdf@inbound.yousite.con` would route the email to the pdf
 mailbox.
 
@@ -192,8 +190,8 @@ After adding the `debugger` statement, restart your Rails server and click the `
 
 Since this app is only running with `rails server` and not using any Procfile,
 we'll see the debugger open in the terminal where the server is running.  If
-you're using a Procfile and with something like Overmind[LINK], you can connect
-to the debugger with `overmind connect web`. or `overmind connect worker`
+you're using a Procfile and with something like [Overmind](https://github.com/DarthSim/overmind), you can connect
+to the debugger with `overmind connect web` or `overmind connect worker`
 depending on your specific setup.
 
 (Screenshot of debugger with calling some Mail methods)
@@ -227,7 +225,7 @@ Before getting started, if you've not already done so, be sure to remove the
 `debugger` statement from earlier.
 
 Inside the `process` method of the `PdfMailbox`, we'll start be initializing a
-new `ImportDocument` record and setting the `user` to the the first User record.
+new `ImportDocument` record and setting the `user` to the first User record.
 For this to work, you'll need to have a User record in your database (snippet
 for that above. After setting the `user`, we'll set the `name` to the subject of
 the email so be sure to include a subject when sending the email with the Rails
@@ -290,7 +288,7 @@ inbound email.
 ### Checking for an existing User
 
 Anything live on the internet is only going to last a few days at best before it
-starts getting inbound spam.  You may not want to try to create a new Impoprt
+starts getting inbound spam.  You may not want to try to create a new Import
 Document from some spammers email signature.  To prevent this, we can check if a
 User record exists for the sender of the email. If the User is found, we move on
 to processing the email. If the User is not found, we'll mark the email as
@@ -402,7 +400,7 @@ an attachment and reply to the sender if one is missing.
 
 To check for an attachment before we attempt to process the email, we'll be
 using another `before_processing` callback.  This time, we'll be checking if the
-email has an attachment.  This portion won't be convered that it's a PDF file,
+email has an attachment.  This portion won't be checking that it's a PDF file,
 just that there is an attachment.  Letting the sender know they may have forgot
 to attach the file is a better experience than getting a more generic error.
 
@@ -419,7 +417,7 @@ before_processing :ensure_attachment
 
 Next, we need to send a reply to the sender _and_ make sure we don't attempt to
 process the email.  The main difference between this and the `bounce_with`
-method is that the `bounce_with` upates the `status` of the
+method is that the `bounce_with` updates the `status` of the
 `ActionMailbox::InboundEmail` record to `bounced` instead of something like
 `failed` or `delivered`.  In this situation, the sender was a valid User sending
 to the correct email address so it's not really like it bounced.
@@ -520,7 +518,7 @@ sender with the `import_complete` mailer method.
 
 Within the context of the `PdfMailbox`, we've moved the common task of uploading
 and processing files to email.  We've also added some error handling and UX
-improvemenets to let the sender know if something went wrong or when it's
+improvements to let the sender know if something went wrong or when it's
 successful.
 
 As an added perk, creating and processing the attachments via email with Action
@@ -530,8 +528,8 @@ files without tying up your web server.
 
 The included video is a free preview from my upcoming course on Action Mailbox
 where I'll be covering more advanced topics and edge cases.  If you'd like to
-learn how to create more freatures like this one, the course is available for
+learn how to create more features like this one, the course is available for
 pre-sale now.
 
 [MAILBOX COURSE LINK]
-
+https://store.codynorman.com/action-mailbox-pro
