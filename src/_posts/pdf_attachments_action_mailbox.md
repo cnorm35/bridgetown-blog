@@ -9,25 +9,21 @@ author: cody
 
 [Source Code](https://github.com/cnorm35/PdfMailboxExampleApp)
 
-Uploading files is a common task you'll encounter in web applications. In this
-post, we'll look at how to create PDF attachments from files attached to
-incoming emails using Action Mailbox in Rails.
+<!-- Uploading files and attachments is a common task in web applications. In this -->
+<!-- post, we'll look at how to use Action Mailbox to create PDF attachments from an attachment in an inbound email. -->
 
-We'll extract the PDF attachment from the inbound email and create a Active Storage
-attachment from the attached file.
+<!-- We'll extract the PDF attachment from the inbound email and create a Active Storage -->
+<!-- attachment from the attached file. -->
 
+<!-- I'll also be demonstrating some ways to leverage the `before_processing` callback to confirm the -->
+<!-- sender of the email matches a User record in our application then use the -->
+<!-- `bounce_with` method to mark the email as bounced and notify the sender of the -->
+<!-- bounce. -->
 
-We'll take a look at using the `before_processing` callback to confirm the
-sender of the email matches a User record in our application and use the
-`bounce_with` method to mark the email as bounced and notify the sender of the
-bounce.
+<!-- In addition to handling bounces, we'll also add some error handling to notify -->
+<!-- the sender if the attachment is missing or not a PDF file. -->
 
-In addition to handling bounces, we'll also add some error handling to notify
-the sender if the attachment is missing or not a PDF file.
-
-
-
-From Video
+<!-- From Video -->
 Today, I’m going to show you how to save a PDF attachment from an inbound email using Action Mailbox.  This is a great example of a common task in an application that we can accomplish with email. This is going to allow your users to be able to perform tasks without even having to open your app.
 
  I’ll cover how to handle various edge cases, like checking for a valid user and handling missing or incorrect attachments.
@@ -55,13 +51,13 @@ $ bundle install
 $ rails generate devise:install
 ```
 
-You'll see some output from the Devise generator that mentions the views and
+You'll see some output from the Devise generator that mentions some changes to the views and
 routes.  To keep things simple, I'll be skipping the User views and routes to
-keep things focused on Action Mailbox. 
+keep things focused on Action Mailbox.
 
 
-Since we'll be sending outbound emails to the sender to update them on the
-status on the import, we do need to add one of the suggested changes from
+Since we'll be sending _outbound_ emails to the sender to update them on the
+status on the import, we need to add one of the suggested changes from
 Devise.
 
 Open the `config/environments/development.rb` file and add the following line
@@ -79,7 +75,7 @@ $ bin/rails db:migrate
 ```
 
 Since this app will be BYOV (Bring Your Own Views - I realize spelling it out
-doesn't really save any time but I like the acronym), we can create a User in
+doesn't really save any time but I like the acronym), we can create a `User` in
 our Rails console to test with.
 
 ```ruby
@@ -93,7 +89,7 @@ Next, we'll create a simple model to store the PDF attachments.
 $ bin/rails g model ImportDocument user:references name:string
 ```
 
-This creates a new model `ImportDocument` that belongs to a User and has a name
+This creates a new model `ImportDocument` that belongs to a `User` and has a `name`
 value.  `name` will store the subject of the email to help reference the import
 a little easier.
 
@@ -103,7 +99,7 @@ If you haven't already, you'll also need to install Action Mailbox.
 $ bin/rails action_mailbox:install
 ```
 
-One final change to make before running our migrations to to add the
+One final change to make before running the migrations is to add the
 `has_one_attached` method to the `ImportDocument` model.
 
 ```ruby
@@ -121,20 +117,20 @@ model and the tables needed for Action Mailbox, which includes Active Storage
 $ bin/rails db:migrate
 ```
 
-This is all the setup we need to do to get started with Action Mailbox.  Next,
-we'll create a new Mailbox to handle the inbound emails and save the PDF.
-
-```sh
-$ bin/rails generate mailbox Pdf
-```
+This is all the setup we need to do to get started with Action Mailbox.  Now,
+we can create a new Mailbox to handle the inbound emails and save the PDF.
 
 I've found that keeping your mailboxes small and focused on a single task helps
 keep things organized.  This mailbox will be responsible for saving the PDF
 attachment from the email. If you decide to add different attachment types to
 the `ImportDocument` model, you could create a new mailbox for each type.
 
-Before processing the inbound email, we need to route the email to the correct
-mailbox.  
+```sh
+$ bin/rails generate mailbox Pdf
+```
+
+Before processing the inbound email, we first need to route the email to the correct
+mailbox.
 
 ```ruby
 # app/mailboxes/application_mailbox.rb
@@ -145,37 +141,34 @@ end
 ```
 
 I'm including a commented out line that shows how you could route emails that
-contain `pdf` in the `to` address of the inbound email.  In other words, sending
-an inbound email to `pdf@inbound.yousite.con` would route the email to the pdf
-mailbox.
+contain `pdf` in the to address of the inbound email.  In other words, sending
+an inbound email to `pdf@inbound.yousite.com` or
+`pdf-import@inbound,yoursite.com` would route the email to the pdf mailbox.
 
 When working on a new mailbox in development, I typically use the `all:` option
 to route _any_ inbound email to the specified mailbox.  This rules out any
 potential routing issues and lets you focus on the processing in the mailbox.
 
-As a quick check to confirm everything is working, we can send an email through
-the Rails Conductor and see that it's been delivered.
+To confirm everything is working, we can send an email through the Rails Conductor and see that it's been delivered.
 
+With your Rails server running, open the Rails Conductor by visiting `http://localhost:3000/rails/conductor/action_mailbox/inbound_emails`
 
-With your Rails server running, open the Rails Conductor by visiting http://localhost:3000/rails/conductor/action_mailbox/inbound_emails
-
-and click the Form option (double check this)
+and click the 'Form' option (double check this)
 (Screenshot)
 
 Since we're using the `all:` routing option, we don't have to worry about the
-correct address to send the email to.  Just fill in to and from fields and
+correct address to send the email to.  Just fill in the 'to' and 'from' fields and
 submit the form.
 
 After submitting the form, you'll land on the detail page for that Inbound Email
 record.  Refresh the page and you should see the status change from `processing`
-to `delivered`.  This means the email was successfully processed by the PdfMailbox so everything is working as expected.
+to `delivered`.  This means the email was successfully processed by the `PdfMailbox` and everything is working as expected.
 
 If something went wrong and you don't see the status change to `delivered`, the
 Rails conductor provides an easy button to re-route and deliver the email again.
 
-This time, I'll add a debugger statement to the `process` method of the `PdfMailbox` to show how you can inspect the inbound email and attachments or investigate any issues.
-
-<!-- I'll also add a `debugger` statement with `ruby-debug` inside the `process` method of the `PdfMailbox` to show how you can inspect the inbound email and attachments. -->
+I'm also going to add a `debugger` statement to the `process` method of the `PdfMailbox` to show how you can inspect the inbound email and attachments or investigate any issues.
+[RUBY DEBUG LINK]
 
 ```ruby
 # app/mailboxes/pdf_mailbox.rb
@@ -186,7 +179,7 @@ class PdfMailbox < ApplicationMailbox
 end
 ```
 
-After adding the `debugger` statement, restart your Rails server and click the `Route Again` button on the Inbound Email detail page.
+After adding the `debugger` statement, restart your Rails server and click the 'Route Again' button on the Inbound Email detail page.
 
 Since this app is only running with `rails server` and not using any Procfile,
 we'll see the debugger open in the terminal where the server is running.  If
@@ -201,7 +194,7 @@ depending on your specific setup.
 Since we're embracing the BYOV philosophy, we can also use the Rails console to
 accomplish the same task.
 
-Inside your Rails console, you can find the last Inbound Email record, update it's status to `pending!`, and route the email to the PdfMailbox.
+Inside your Rails console, you can find the last Inbound Email record, update it's status to `pending!`, then route the email to the PdfMailbox.
 
 ```ruby
 inbound_email = ActionMailbox::InboundEmail.last
