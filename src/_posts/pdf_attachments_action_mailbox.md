@@ -7,7 +7,7 @@ excerpt: "Create Active Storage attachments from attached files in emails."
 author: cody
 ---
 
-[Source Code](https://github.com/cnorm35/PdfMailboxExampleApp)
+[Source Code](https://github.com/cnorm35/PdfMailboxExampleApp){:target="_blank"}
 
 <!-- Uploading files and attachments is a common task in web applications. In this -->
 <!-- post, we'll look at how to use Action Mailbox to create PDF attachments from an attachment in an inbound email. -->
@@ -201,7 +201,7 @@ After adding the `debugger` statement, restart your Rails server and click the '
 
 Since this app is only running with `rails server` and not using any Procfile,
 we'll see the debugger open in the terminal where the server is running.  If
-you're using a Procfile and with something like [Overmind](https://github.com/DarthSim/overmind), you can connect
+you're using a Procfile and with something like [Overmind](https://github.com/DarthSim/overmind){:target="_blank"}, you can connect
 to the debugger with `overmind connect web` or `overmind connect worker`
 depending on your specific setup.
 
@@ -215,7 +215,7 @@ depending on your specific setup.
 </div>
 
 In the above example, I'm interacting with the Ruby Mail gem to parse
-information from the inbound email. [Ruby Mail](https://github.com/mikel/mail)
+information from the inbound email. [Ruby Mail](https://github.com/mikel/mail){:target="_blank"}
 
 Since we're embracing the BYOV philosophy, we can also use the Rails console to
 accomplish the same task.
