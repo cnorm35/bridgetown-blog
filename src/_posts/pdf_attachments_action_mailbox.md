@@ -153,16 +153,34 @@ To confirm everything is working, we can send an email through the Rails Conduct
 
 With your Rails server running, open the Rails Conductor by visiting `http://localhost:3000/rails/conductor/action_mailbox/inbound_emails`
 
-and click the 'Form' option (double check this)
-(Screenshot)
+and click the 'New inbound email by form' option or visit `http://localhost:3000/rails/conductor/action_mailbox/inbound_emails/new`
 
 Since we're using the `all:` routing option, we don't have to worry about the
 correct address to send the email to.  Just fill in the 'to' and 'from' fields and
 submit the form.
 
+<div class="my-5">
+<img
+    alt="Action Mailbox Rails Conductor"
+    class="position-relative mx-auto rounded w-100 shadow-lg"
+    src="/images/PdfRailsConductor.png"
+    style="z-index: 10"
+/>
+</div>
+
+
 After submitting the form, you'll land on the detail page for that Inbound Email
 record.  Refresh the page and you should see the status change from `processing`
 to `delivered`.  This means the email was successfully processed by the `PdfMailbox` and everything is working as expected.
+
+<div class="my-5">
+<img
+    alt="Action Mailbox Rails Conductor Detail"
+    class="position-relative mx-auto rounded w-100 shadow-lg"
+    src="/images/DeliveredRailsConductor.png"
+    style="z-index: 10"
+/>
+</div>
 
 If something went wrong and you don't see the status change to `delivered`, the
 Rails conductor provides an easy button to re-route and deliver the email again.
@@ -187,9 +205,17 @@ you're using a Procfile and with something like [Overmind](https://github.com/Da
 to the debugger with `overmind connect web` or `overmind connect worker`
 depending on your specific setup.
 
-(Screenshot of debugger with calling some Mail methods)
+<div class="my-5">
+<img
+    alt="Action Mailbox debugger in mailbox"
+    class="position-relative mx-auto rounded w-100 shadow-lg"
+    src="/images/MailboxDebugger.png"
+    style="z-index: 10"
+/>
+</div>
 
-[LINK Ruby Mail somewhere]
+In the above example, I'm interacting with the Ruby Mail gem to parse
+information from the inbound email. [Ruby Mail](https://github.com/mikel/mail)
 
 Since we're embracing the BYOV philosophy, we can also use the Rails console to
 accomplish the same task.
@@ -197,6 +223,7 @@ accomplish the same task.
 Inside your Rails console, you can find the last Inbound Email record, update it's status to `pending!`, then route the email to the PdfMailbox.
 
 ```ruby
+# In the Rails Console
 inbound_email = ActionMailbox::InboundEmail.last
 inbound_email.pending!
 inbound_email.route
@@ -204,7 +231,14 @@ inbound_email.route
 
 If your `debugger` statement is still in the `process` method of the `PdfMailbox`, you'll see the debugger open in the terminal where the Rails console is running.
 
-(Screenshot of debugger in Rails console)
+<div class="my-5">
+<img
+    alt="Action Mailbox debugger in Rails console"
+    class="position-relative mx-auto rounded w-100 shadow-lg"
+    src="/images/ConsoleMailboxDebugger.png"
+    style="z-index: 10"
+/>
+</div>
 
 ### The Happy Path
 
@@ -380,7 +414,15 @@ If you re-start your Rails server and send an email from an email address that
 does not match a User in your local database, you should see the email marked as
 bounced and a reply sent to the sender.
 
-(Bounced Screenshot)
+<div class="my-5">
+<img
+    alt="Bounced Email in Rails Conductor"
+    class="position-relative mx-auto rounded w-100 shadow-lg"
+    src="/images/RailsConductorBounced.png"
+    style="z-index: 10"
+/>
+</div>
+
 
 Now, you're Action Mailbox app won't be trying to process documents and
 attachments all willy-nilly.
@@ -524,5 +566,4 @@ where I'll be covering more advanced topics and edge cases.  If you'd like to
 learn how to create more features like this one, the course is available for
 pre-sale now.
 
-[MAILBOX COURSE LINK]
-https://store.codynorman.com/action-mailbox-pro
+[Action Mailbox Pro](https://store.codynorman.com/action-mailbox-pro)
