@@ -24,40 +24,49 @@ author: cody
 <!-- the sender if the attachment is missing or not a PDF file. -->
 
 <!-- From Video -->
-Today, I’m going to show you how to save a PDF attachment from an inbound email using Action Mailbox.  This is a great example of a common task in an application that we can accomplish with email. This is going to allow your users to be able to perform tasks without even having to open your app.
+Today, I’m going to show you how to save a PDF attachment from an inbound email using Action Mailbox a Ruby on Rails application.  I think this is a great example of a common feature that we can accomplish with email. This is going to allow your users to be able to perform tasks without even having to open your app.
 
- I’ll cover how to handle various edge cases, like checking for a valid user and handling missing or incorrect attachments.
+ I’ll cover how to handle edge cases like checking for a valid user and handling missing or incorrect attachments.
 
 This post will cover creating a new Rails app and adding Devise for a User model
-to check against the sender of the email. I'll also be installing Action Mailbox
-but everything after that initial setup should apply to an existing app you're
+to check against the sender of the email. Since this will be a new app, I'll also be installing Action Mailbox. Everything after that initial setup should apply to an existing app you're
 trying to add this feature to.
 
+If you'll be adding this feature to an existing app, you can skip over most of
+that setup.
 
-Let's get started by creating a new Rails app with a User model and Devise installed.
+
+### Create your Rails app with Devise
+
+Let's get started by creating a new Rails app and installing Devise for the User model.
 
 ```sh
 $ rails new pdf_attachments_action_mailbox
 ```
-After the new app is created, we'll add Devise to the Gemfile and run the Devise generator to create a User model.
+
+Once the new app is created, move into the directory that was created and open
+the project to add the Devise gem.
 
 ```ruby
 # Gemfile
 gem 'devise'
 ```
 
+Once Devise is added to the `Gemfile` you can `bundle install` and run the
+Devise install generators.
+
 ```sh
 $ bundle install
 $ rails generate devise:install
 ```
 
-You'll see some output from the Devise generator that mentions some changes to the views and
+After running the Devise install generator, you'll see some output that mentions some changes to the views and
 routes.  To keep things simple, I'll be skipping the User views and routes to
 keep things focused on Action Mailbox.
 
 
 Since we'll be sending _outbound_ emails to the sender to update them on the
-status on the import, we need to add one of the suggested changes from
+status on the import, there is one change we need to add from
 Devise.
 
 Open the `config/environments/development.rb` file and add the following line
@@ -75,7 +84,7 @@ $ bin/rails db:migrate
 ```
 
 Since this app will be BYOV (Bring Your Own Views - I realize spelling it out
-doesn't really save any time but I like the acronym), we can create a `User` in
+doesn't really save time but I think it's neat), we can create a `User` in
 our Rails console to test with.
 
 ```ruby
@@ -83,17 +92,18 @@ irb> user = User.create(email: 'user@actionmailbox.pro', password: 'youvegotmail
 ```
 
 
-Next, we'll create a simple model to store the PDF attachments.
+Next, we'll create a simple model to store the PDF attachments using Active Storage.
 
 ```sh
 $ bin/rails g model ImportDocument user:references name:string
 ```
 
 This creates a new model `ImportDocument` that belongs to a `User` and has a `name`
-value.  `name` will store the subject of the email to help reference the import
-a little easier.
+value.  `name` will store the subject of the email to make it easier to reference the import.
 
-If you haven't already, you'll also need to install Action Mailbox.
+### Installing Action Mailbox
+
+If you haven't already done so, you'll also need to install Action Mailbox.
 
 ```sh
 $ bin/rails action_mailbox:install
@@ -111,23 +121,26 @@ end
 ```
 
 Now, running the migrations will create the tables for the `ImportDocument`
-model and the tables needed for Action Mailbox, which includes Active Storage
+model and the tables needed for Action Mailbox, which includes Active Storage.
 
 ```sh
 $ bin/rails db:migrate
 ```
 
-This is all the setup we need to do to get started with Action Mailbox.  Now,
-we can create a new Mailbox to handle the inbound emails and save the PDF.
+This is all the setup we need to do to get started with the Action Mailbox side of things.  
 
-I've found that keeping your mailboxes small and focused on a single task helps
+Sidenote: I've found that keeping your mailboxes small and focused on a single task helps
 keep things organized.  This mailbox will be responsible for saving the PDF
 attachment from the email. If you decide to add different attachment types to
 the `ImportDocument` model, you could create a new mailbox for each type.
 
+To get started, we can create a new Mailbox to handle the inbound emails and save the PDF.
+
 ```sh
 $ bin/rails generate mailbox Pdf
 ```
+
+### Routing the email
 
 Before processing the inbound email, we first need to route the email to the correct
 mailbox.
@@ -140,20 +153,28 @@ class ApplicationMailbox
 end
 ```
 
-I'm including a commented out line that shows how you could route emails that
-contain `pdf` in the to address of the inbound email.  In other words, sending
-an inbound email to `pdf@inbound.yousite.com` or
-`pdf-import@inbound,yoursite.com` would route the email to the pdf mailbox.
+<!-- I'm including a commented out line that shows how you could route emails that -->
+<!-- contain `pdf` in the to address of the inbound email.  In other words, sending -->
+<!-- an inbound email to `pdf@inbound.yousite.com` or -->
+<!-- `pdf-import@inbound,yoursite.com` would route the email to the pdf mailbox. -->
+
+I've included a commented out line that gives a better idea of how you may want
+to route this email outside of your development environment. This example would route emails that
+contain `pdf` in the to address of the inbound email. In other words, sending an email to `pdf@inbound.yousite.com` or `pdf-import@inbound,yoursite.com` would route the email to the pdf mailbox.
 
 When working on a new mailbox in development, I typically use the `all:` option
 to route _any_ inbound email to the specified mailbox.  This rules out any
 potential routing issues and lets you focus on the processing in the mailbox.
 
-To confirm everything is working, we can send an email through the Rails Conductor and see that it's been delivered.
+To confirm everything is working, we can send an email through the Rails Conductor and confirm it's been delivered.
 
-With your Rails server running, open the Rails Conductor by visiting `http://localhost:3000/rails/conductor/action_mailbox/inbound_emails`
+With your Rails server running, open the Rails Conductor by visiting
 
-and click the 'New inbound email by form' option or visit `http://localhost:3000/rails/conductor/action_mailbox/inbound_emails/new`
+`http://localhost:3000/rails/conductor/action_mailbox/inbound_emails`
+
+and click the 'New inbound email by form' option or head there directly by going to
+
+`http://localhost:3000/rails/conductor/action_mailbox/inbound_emails/new`
 
 Since we're using the `all:` routing option, we don't have to worry about the
 correct address to send the email to.  Just fill in the 'to' and 'from' fields and
@@ -169,8 +190,7 @@ submit the form.
 </div>
 
 
-After submitting the form, you'll land on the detail page for that Inbound Email
-record.  Refresh the page and you should see the status change from `processing`
+After submitting the form, you'll land on the detail page for the `ActionMailbox::InboundEmail` record that was created from the form. Refresh the page and you should see the status change from `processing`
 to `delivered`.  This means the email was successfully processed by the `PdfMailbox` and everything is working as expected.
 
 <div class="my-5">
@@ -182,11 +202,12 @@ to `delivered`.  This means the email was successfully processed by the `PdfMail
 />
 </div>
 
-If something went wrong and you don't see the status change to `delivered`, the
+### Re-routing and Debugging
+
+If something went wrong and the status didn't update to `delivered`, the
 Rails conductor provides an easy button to re-route and deliver the email again.
 
-I'm also going to add a `debugger` statement to the `process` method of the `PdfMailbox` to show how you can inspect the inbound email and attachments or investigate any issues.
-[RUBY DEBUG LINK]
+I'm also going to add a `debugger` statement using [ruby debug](https://github.com/ruby/debug){:target="_blank"} to the `process` method of the `PdfMailbox` to show how you can inspect the inbound email and attachments or investigate any issues.
 
 ```ruby
 # app/mailboxes/pdf_mailbox.rb
@@ -197,13 +218,11 @@ class PdfMailbox < ApplicationMailbox
 end
 ```
 
-After adding the `debugger` statement, restart your Rails server and click the 'Route Again' button on the Inbound Email detail page.
+After adding the `debugger` statement, restart your Rails server and click the 'Route again' button on the Inbound Email detail page.
 
-Since this app is only running with `rails server` and not using any Procfile,
-we'll see the debugger open in the terminal where the server is running.  If
+Note: Since this app is only running with `rails server` and not using a Procfile, you'll see the debugger open in the terminal where the server is running.  If
 you're using a Procfile and with something like [Overmind](https://github.com/DarthSim/overmind){:target="_blank"}, you can connect
-to the debugger with `overmind connect web` or `overmind connect worker`
-depending on your specific setup.
+to the debugger with `overmind connect web` or `overmind connect worker` depending on your specific setup.
 
 <div class="my-5">
 <img
@@ -214,13 +233,13 @@ depending on your specific setup.
 />
 </div>
 
-In the above example, I'm interacting with the Ruby Mail gem to parse
-information from the inbound email. [Ruby Mail](https://github.com/mikel/mail){:target="_blank"}
+In the above example, I'm interacting with the [Ruby Mail](https://github.com/mikel/mail){:target="_blank"} gem to parse
+information from the inbound email. 
 
-Since we're embracing the BYOV philosophy, we can also use the Rails console to
+Since we're fully embracing the BYOV philosophy, you can also use the Rails console to
 accomplish the same task.
 
-Inside your Rails console, you can find the last Inbound Email record, update it's status to `pending!`, then route the email to the PdfMailbox.
+Inside the Rails console, you can get the last `ActionMailbox::InboundEmail` record, update it's status to `pending`, then route the email to the `PdfMailbox`.
 
 ```ruby
 # In the Rails Console
@@ -565,5 +584,7 @@ The included video is a free preview from my upcoming course on Action Mailbox
 where I'll be covering more advanced topics and edge cases.  If you'd like to
 learn how to create more features like this one, the course is available for
 pre-sale now.
+
+Mailing List Form
 
 [Action Mailbox Pro](https://store.codynorman.com/action-mailbox-pro)
