@@ -3,7 +3,11 @@ layout: post
 title:  Create PDF attachments from email with Action Mailbox
 date:   2024-07-14 16:54:46 -0500
 category: ruby
-excerpt: "Create Active Storage attachments from attached files in emails."
+excerpt: "Your users likely spend more time on their email than on your app.
+This is a huge opportunity to create tools and features that integrate
+with what they're already familiar with. In this post, I'll show you how to
+parse inbound email attachments and save them in your application using Action
+Mailbox and Active Storage."
 author: cody
 ---
 
