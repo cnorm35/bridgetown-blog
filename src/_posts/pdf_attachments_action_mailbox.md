@@ -24,6 +24,9 @@ trying to add this feature to.
 If you'll be adding this feature to an existing app, you can skip over most of
 that setup.
 
+There's also a video version of this post with some more detail.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dDrNOpNvKEI?si=sxcyXjSzv_zlk6VS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Create your Rails app with Devise
 
