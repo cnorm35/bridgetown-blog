@@ -304,3 +304,7 @@ to production.
 I wouldn't say I _love_ all of the upgrading I've been doing but I will say it's
 been a huge help in keeping my apps up to date and finding ways to help myself
 and others keep theirs updated as well.
+
+
+### Video 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eYTCpvrYjFI?si=Ek4i4orMPwjTmJT2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
