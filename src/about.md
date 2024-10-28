@@ -24,6 +24,9 @@ I’ve been living in Colorado for a few years now and had some good times in De
 
 [IndieRails - Lucky Me - Episode 31](https://www.indierails.com/31){:target="_blank"}
 
+[Ode To RailsConf - Episode 7](https://www.odetorailsconf.com/2363110/episodes/15448565-cody-norman){:target="_blank"}
+
+[Code and the Coding Coders who Code it - Episode 42](https://podcast.drbragg.dev/episodes/episode-42-cody-norman/){:target=""}
 
 ### Speaking
 <iframe width="560" height="315" src="https://www.youtube.com/embed/i-RwxAVMP-k?si=82DMLkcxEThrOMJV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
