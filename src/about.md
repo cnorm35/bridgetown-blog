@@ -29,7 +29,12 @@ I’ve been living in Colorado for a few years now and had some good times in De
 [Code and the Coding Coders who Code it - Episode 42](https://podcast.drbragg.dev/episodes/episode-42-cody-norman/){:target=""}
 
 ### Speaking
+
+#### RailsConf 2024
 <iframe width="560" height="315" src="https://www.youtube.com/embed/i-RwxAVMP-k?si=82DMLkcxEThrOMJV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+#### Rocky Mountain Ruby 2024
+<iframe width="560" height="315" src="https://www.youtube.com/embed/t4RwECVtZ3E?si=vnXKerZ0cab9spWe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Videos
 [YouTube Channel](https://youtube.com/@coloradocodes?si=rViwMcfn8oGVY-q2){:target="_blank"}
